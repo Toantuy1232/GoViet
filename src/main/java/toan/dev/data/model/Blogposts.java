@@ -20,6 +20,17 @@ public class Blogposts {
         this.created_at = created_at;
     }
 
+    public Blogposts(int id, int postId, int authorId, String title, String content, String coverImage, Timestamp createdAt) {
+        super();
+        this.author_id = id;
+        this.post_id = postId;
+        this.author_id = authorId;
+        this.title = title;
+        this.content = content;
+        this.cover_image = coverImage;
+        this.created_at = createdAt;
+    }
+
     public int getPost_id() {
         return post_id;
     }
