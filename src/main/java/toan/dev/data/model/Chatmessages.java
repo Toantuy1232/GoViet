@@ -2,7 +2,7 @@ package toan.dev.data.model;
 
 import java.sql.Timestamp;
 
-public class Bookings {
+public class Chatmessages {
     public int booking_id;
     public int user_id;
     public int tour_id;
@@ -10,17 +10,6 @@ public class Bookings {
     public int number_of_people;
     public double total_price;
     public String payment_status;
-
-    public Bookings(int booking_id, int user_id, int tour_id, Timestamp booking_date, int number_of_people, double total_price, String payment_status) {
-        super();
-        this.booking_id = booking_id;
-        this.user_id = user_id;
-        this.tour_id = tour_id;
-        this.booking_date = booking_date;
-        this.number_of_people = number_of_people;
-        this.total_price = total_price;
-        this.payment_status = payment_status;
-    }
 
     public int getBooking_id() {
         return booking_id;
@@ -75,6 +64,17 @@ public class Bookings {
     }
 
     public void setPayment_status(String payment_status) {
+        this.payment_status = payment_status;
+    }
+
+    public Chatmessages(int booking_id, int user_id, int tour_id, Timestamp booking_date, int number_of_people, double total_price, String payment_status) {
+        super();
+        this.booking_id = booking_id;
+        this.user_id = user_id;
+        this.tour_id = tour_id;
+        this.booking_date = booking_date;
+        this.number_of_people = number_of_people;
+        this.total_price = total_price;
         this.payment_status = payment_status;
     }
 }
