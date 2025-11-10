@@ -9,5 +9,6 @@ public interface UsersDao {
     public boolean update(Users users);
     public boolean delete(int id);
     public Users find(int id);
+    public Users find(String email,  String password_hash);
     public List<Users> findAll();
 }
