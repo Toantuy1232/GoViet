@@ -11,6 +11,17 @@ public class Category {
     public Boolean status;
     public Timestamp created_at;
 
+    public Category(int id, String name, String slug, String description, int parentId, Timestamp createdAt, boolean status) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.slug = slug;
+        this.description = description;
+        this.parent_id = parentId;
+        this.created_at = createdAt;
+        this.status = status;
+    }
+
     public int getId() {
         return id;
     }

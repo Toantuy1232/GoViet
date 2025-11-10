@@ -16,14 +16,14 @@ public class UserImpl implements UsersDao {
         try (Connection conn = DatabaseDao.getDriver().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
         ){
-        stmt.setInt(1, users.getUser_id());
-        stmt.setString(2, users.getFullname());
-        stmt.setString(3, users.getEmail());
-        stmt.setString(4, users.getPassword());
-        stmt.setString(5, users.getPhone());
-        stmt.setString(6, users.getAvatar_url());
-        stmt.setString(7, users.getRole());
-        stmt.setTimestamp(8, users.getCreated_at());
+        stmt.setInt(1, users.user_id);
+        stmt.setString(2, users.fullname);
+        stmt.setString(3, users.email);
+        stmt.setString(4, users.password);
+        stmt.setString(5, users.phone);
+        stmt.setString(6, users.avatar_url);
+        stmt.setString(7, users.role);
+        stmt.setTimestamp(8, users.created_at);
         stmt.executeUpdate();
         return true;
 
@@ -39,14 +39,14 @@ public class UserImpl implements UsersDao {
         try (Connection conn = DatabaseDao.getDriver().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
         ){
-            stmt.setString(1, users.getFullname());
-            stmt.setString(2, users.getEmail());
-            stmt.setString(3, users.getPassword());
-            stmt.setString(4, users.getPhone());
-            stmt.setString(5, users.getAvatar_url());
-            stmt.setString(6, users.getRole());
-            stmt.setTimestamp(7, users.getCreated_at());
-            stmt.setInt(8, users.getUser_id());
+            stmt.setString(1, users.fullname);
+            stmt.setString(2, users.email);
+            stmt.setString(3, users.password);
+            stmt.setString(4, users.phone);
+            stmt.setString(5, users.avatar_url);
+            stmt.setString(6, users.role);
+            stmt.setTimestamp(7, users.created_at);
+            stmt.setInt(8, users.user_id);
 
             int rows = stmt.executeUpdate();
             return rows > 0;
