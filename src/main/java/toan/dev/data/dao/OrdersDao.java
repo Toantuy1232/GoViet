@@ -11,4 +11,6 @@ public interface OrdersDao {
     public boolean delete(int id);
     public Orders find(int id);
     public List<Orders> findAll();
+    public Orders findByCode(String code);
+    public List<Orders> findByUserId(int userId);
 }

@@ -12,6 +12,7 @@ public class Orders {
     public String payment_method;
     public int payment_id;
     public String note;
+    public String code;
     public Timestamp created_at;
     public Timestamp updated_at;
 
@@ -102,8 +103,16 @@ public class Orders {
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
     }
+    public String getCode() {
+        return code;
+    }
 
-    public Orders(int order_id, int user_id, Timestamp order_date, double total_amount, String status, String shipping_address, String payment_method, int payment_id, String note, Timestamp created_at, Timestamp updated_at) {
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Orders(int order_id, int user_id, Timestamp order_date, double total_amount, String status, String shipping_address, String payment_method, int payment_id, String note, Timestamp created_at, Timestamp updated_at,
+                  String code) {
         super();
         this.order_id = order_id;
         this.user_id = user_id;
@@ -116,5 +125,6 @@ public class Orders {
         this.note = note;
         this.created_at = created_at;
         this.updated_at = updated_at;
+        this.code = code;
     }
 }
