@@ -11,4 +11,6 @@ public interface NotificationsDao {
     public boolean delete(int id);
     public Notifications find(int id);
     public List<Notifications> findAll();
+
+    List<Notifications> findByUser(int userId);
 }

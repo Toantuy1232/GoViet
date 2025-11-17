@@ -11,4 +11,6 @@ public interface HotelsDao {
     public boolean delete(int id);
     public Hotels find(int id);
     public List<Hotels> findAll();
+
+    List<Hotels> findByDestination(int destinationId);
 }
