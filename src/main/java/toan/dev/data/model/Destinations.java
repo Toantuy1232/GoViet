@@ -11,6 +11,18 @@ public class Destinations {
     public String best_time_to_visit;
     public Timestamp created_at;
 
+    public Destinations(int id, int destinationId, String name, String description, String location, String imageUrl, String bestTimeToVisit, Timestamp createdAt) {
+        super();
+        this.destination_id = destinationId;
+        this.name = name;
+        this.description = description;
+        this.location = location;
+        this.image_url = imageUrl;
+        this.best_time_to_visit = bestTimeToVisit;
+        this.created_at = createdAt;
+
+    }
+
     public int getDestination_id() {
         return destination_id;
     }
