@@ -1,4 +1,24 @@
 package toan.dev;
 
-public class HomeServlet {
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+public class HomeServlet extends BaseServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Sử dụng interface DataProvider để truyền dữ liệu
+        setDataAttributes(request);
+        // Forward đến index.jsp
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Handle POST requests - chuyển về GET
+        doGet(request, response);
+    }
 }
