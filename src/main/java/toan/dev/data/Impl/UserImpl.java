@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserImpl implements UsersDao {
+public abstract class UserImpl implements UsersDao {
     @Override
     public boolean insert(Users users) {
         String sql = "insert into users(user_id, full_name, email, password_hash, phone, avatar_url, role, created_at) values(?,?,?,?,?,?,?,?)";
@@ -71,6 +71,8 @@ public class UserImpl implements UsersDao {
             return false;
         }
     }
+
+    public abstract Users find(String email);
 
     @Override
     public Users find(int id) {
