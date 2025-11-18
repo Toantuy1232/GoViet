@@ -12,6 +12,14 @@ public class Users {
     public String role;
     public Timestamp created_at;
 
+    public Users(int id, String email, String hashedPassword, String role) {
+        super();
+        this.user_id = id;
+        this.email = email;
+        this.password = hashedPassword;
+        this.role = role;
+    }
+
     public int getUser_id() {
         return user_id;
     }
