@@ -11,4 +11,5 @@ public interface ProductsDao {
     public boolean delete(int id);
     public Products find(int id);
     public List<Products> findAll();
+    public List<Products> findAllByCategoryId(int categoryId);
 }
