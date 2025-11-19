@@ -20,6 +20,13 @@ public class Users {
         this.role = role;
     }
 
+    public Users(String email, String hashedPassword, String role) {
+        super();
+        this.email = email;
+        this.password = hashedPassword;
+        this.role = role;
+    }
+
     public int getUser_id() {
         return user_id;
     }

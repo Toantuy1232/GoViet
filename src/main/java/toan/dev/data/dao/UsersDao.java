@@ -11,4 +11,6 @@ public interface UsersDao {
     public Users find(int id);
     public Users find(String email,  String password_hash);
     public List<Users> findAll();
+    Users findByEmail(String email);
+    Users findByPhone(String phone);
 }
