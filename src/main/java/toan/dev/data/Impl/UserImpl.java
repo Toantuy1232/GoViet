@@ -1,7 +1,7 @@
 package toan.dev.data.Impl;
 
 import org.mindrot.jbcrypt.BCrypt;
-import toan.dev.data.DatabaseDao;
+import toan.dev.data.dao.DatabaseDao;
 import toan.dev.data.dao.UsersDao;
 import toan.dev.data.model.Users;
 
@@ -13,7 +13,7 @@ public abstract class UserImpl implements UsersDao {
     @Override
     public boolean insert(Users users) {
         String sql = "insert into users(user_id, full_name, email, password_hash, phone, avatar_url, role, created_at) values(?,?,?,?,?,?,?,?)";
-        try (Connection conn = DatabaseDao.getDriver().getConnection();
+        try (Connection conn = toan.dev.data.dao.DatabaseDao.getDriver().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
         ){
         stmt.setInt(1, users.user_id);
@@ -73,6 +73,35 @@ public abstract class UserImpl implements UsersDao {
     }
 
     public abstract Users find(String email);
+
+    @Override
+    public Users findByPhone(String phone) {
+        Users users = null;
+        String sql = "SELECT * FROM `users` WHERE phone = ?";
+        try (Connection conn = DatabaseDao.getDriver().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+        ){
+            stmt.setString(1, phone);
+            try(ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    users = new Users(
+                            rs.getInt("user_id"),
+                            rs.getString("full_name"),
+                            rs.getString("email"),
+                            rs.getString("password_hash"),
+                            rs.getString("phone"),
+                            rs.getString("avatar_url"),
+                            rs.getString("role"),
+                            rs.getTimestamp("created_at")
+                    );
+                }
+            }
+
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
 
     @Override
     public Users find(int id) {
