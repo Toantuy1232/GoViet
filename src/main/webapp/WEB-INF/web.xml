@@ -35,6 +35,26 @@
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>toan.dev.HomeServlet</servlet-class>
     </servlet>
+
+
+    <!--Cấu hình admin-->
+    <!--cấu hình admin banner-->
+    <servlet>
+        <servlet-name>CreateBannerServlet</servlet-name>
+        <servlet-class>toan.dev.admin.banners.CreateBannerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteBannerServlet</servlet-name>
+        <servlet-class>toan.dev.admin.banners.DeleteBannerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditBannerServlet</servlet-name>
+        <servlet-class>toan.dev.admin.banners.EditBannerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IndexBannerServlet</servlet-name>
+        <servlet-class>toan.dev.admin.banners.IndexBannerServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/</url-pattern>
@@ -44,6 +64,23 @@
         <url-pattern>/HomeServlet</url-pattern>
     </servlet-mapping>
 
+     <!--cấu hình admin banner-->
+    <servlet-mapping>
+        <servlet-name>CreateBannerServlet</servlet-name>
+        <url-pattern>/CreateBannerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteBannerServlet</servlet-name>
+        <url-pattern>/DeleteBannerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditBannerServlet</servlet-name>
+        <url-pattern>/EditBannerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IndexBannerServlet</servlet-name>
+        <url-pattern>/IndexBannerServlet</url-pattern>
+    </servlet-mapping>
 
     <!-- Let default servlet serve static resources under /assets/* -->
     <servlet-mapping>
