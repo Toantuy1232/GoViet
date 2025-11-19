@@ -12,15 +12,16 @@ public class CategoryImpl implements CategoryDao {
 
     @Override
     public boolean insert(Category category) {
-        String sql = "INSERT INTO categories(name, slug, description, parent_id, status, created_at) VAVLUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO categories(name, slug, description,thumbnail, parent_id, status, created_at) VAVLUES(?,?,?,?,?,?)";
         try (Connection conn = DatabaseDao.getDriver().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
         ){
             stmt.setString(1, category.name);
             stmt.setString(2, category.slug);
             stmt.setString(3, category.description);
-            stmt.setBoolean(4, category.status);
-            stmt.setTimestamp(5, category.created_at);
+            stmt.setString(4, category.thumbnail);
+            stmt.setBoolean(5, category.status);
+            stmt.setTimestamp(6, category.created_at);
             stmt.executeUpdate();
             return true;
 
@@ -39,9 +40,10 @@ public class CategoryImpl implements CategoryDao {
             stmt.setString(1, category.name);
             stmt.setString(2, category.slug);
             stmt.setString(3, category.description);
-            stmt.setInt(4, category.parent_id);
-            stmt.setBoolean(5, category.status);
-            stmt.setTimestamp(6, category.created_at);
+            stmt.setString(4, category.thumbnail);
+            stmt.setInt(5, category.parent_id);
+            stmt.setBoolean(6, category.status);
+            stmt.setTimestamp(7, category.created_at);
             stmt.executeUpdate();
             return true;
 
@@ -79,10 +81,11 @@ public class CategoryImpl implements CategoryDao {
                     String name = rs.getString("name");
                     String slug = rs.getString("slug");
                     String description = rs.getString("description");
+                    String thumbnail = rs.getString("thumbnail");
                     int parent_id = rs.getInt("parent_id");
                     boolean status = rs.getBoolean("status");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-                    return new Category(id, name, slug, description, parent_id, createdAt, status);
+                    return new Category(id, name, slug, description,thumbnail, parent_id, createdAt, status);
                 }
             }
 
@@ -104,10 +107,11 @@ public class CategoryImpl implements CategoryDao {
             String name = rs.getString("name");
             String slug = rs.getString("slug");
             String description = rs.getString("description");
+            String thumbnail = rs.getString("thumbnail");
             int parent_id = rs.getInt("parent_id");
             boolean status = rs.getBoolean("status");
             Timestamp createdAt = rs.getTimestamp("created_at");
-            categoryList.add(new Category(id, name, slug, description, parent_id, status, createdAt));
+            categoryList.add(new Category(id, name, slug, description, thumbnail, parent_id, status, createdAt));
         }catch(SQLException e) {
             e.printStackTrace();
         }

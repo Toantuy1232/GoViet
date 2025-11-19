@@ -7,19 +7,48 @@ public class Category {
     public String name;
     public String slug;
     public String description;
+    public String thumbnail;
     public int parent_id;
     public Boolean status;
     public Timestamp created_at;
 
-    public Category(int id, String name, String slug, String description, int parentId, Timestamp createdAt, boolean status) {
+    public Category(int id, String name, String slug, String description, String thumbnail, int parentId, Timestamp createdAt, boolean status) {
         super();
         this.id = id;
         this.name = name;
         this.slug = slug;
         this.description = description;
+        this.thumbnail = thumbnail;
         this.parent_id = parentId;
         this.created_at = createdAt;
         this.status = status;
+    }
+
+    public Category(int id, String name, String slug, String description, String thumbnail, int parentId, boolean status, Timestamp createdAt) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.slug = slug;
+        this.description = description;
+        this.thumbnail = thumbnail;
+        this.parent_id = parentId;
+        this.created_at = createdAt;
+        this.status = status;
+    }
+
+    public Category(String name, String thumbnail, boolean status) {
+        super();
+        this.name = name;
+        this.thumbnail = thumbnail;
+        this.status = status;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 
     public int getId() {
