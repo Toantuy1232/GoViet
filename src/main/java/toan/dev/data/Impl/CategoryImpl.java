@@ -103,15 +103,17 @@ public class CategoryImpl implements CategoryDao {
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
         ){
-            int id = rs.getInt("id");
-            String name = rs.getString("name");
-            String slug = rs.getString("slug");
-            String description = rs.getString("description");
-            String thumbnail = rs.getString("thumbnail");
-            int parent_id = rs.getInt("parent_id");
-            boolean status = rs.getBoolean("status");
-            Timestamp createdAt = rs.getTimestamp("created_at");
-            categoryList.add(new Category(id, name, slug, description, thumbnail, parent_id, status, createdAt));
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String slug = rs.getString("slug");
+                String description = rs.getString("description");
+                String thumbnail = rs.getString("thumbnail");
+                int parent_id = rs.getInt("parent_id");
+                boolean status = rs.getBoolean("status");
+                Timestamp createdAt = rs.getTimestamp("created_at");
+                categoryList.add(new Category(id, name, slug, description, thumbnail, parent_id, createdAt, status));
+            }
         }catch(SQLException e) {
             e.printStackTrace();
         }

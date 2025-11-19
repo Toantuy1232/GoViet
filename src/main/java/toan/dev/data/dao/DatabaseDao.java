@@ -1,10 +1,7 @@
 package toan.dev.data.dao;
 
 import org.mindrot.jbcrypt.BCrypt;
-import toan.dev.data.Impl.BannerImpl;
-import toan.dev.data.Impl.CategoryImpl;
-import toan.dev.data.Impl.ProductImpl;
-import toan.dev.data.Impl.UserImpl;
+import toan.dev.data.Impl.*;
 import toan.dev.data.driver.MySQLDriver;
 import toan.dev.data.model.Users;
 
@@ -19,11 +16,13 @@ public class DatabaseDao {
     private CategoryDao categoryDao;
     private ProductsDao productDao;
     private BannerDao bannerDao;
+    private BlogpostsDao blogDao;
     private UsersDao usersDao;
     private DatabaseDao() {
         categoryDao = new CategoryImpl();
         productDao = new ProductImpl();
         bannerDao = new BannerImpl();
+        blogDao = new BlogpostsImpl();
         usersDao = new UserImpl() {
 
             @Override
@@ -147,5 +146,8 @@ public class DatabaseDao {
 
     public BannerDao getBannerDao() {
         return bannerDao;
+    }
+    public BlogpostsDao getBlogDao() {
+        return blogDao;
     }
 }

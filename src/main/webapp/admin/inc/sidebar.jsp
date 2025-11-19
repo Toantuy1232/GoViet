@@ -38,13 +38,21 @@
                         </div>
                     </div>
 
-                       <div class="nav-item dropdown">
-                                            <a href="${pageContext.request.contextPath}/IndexBannerServlet" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-layer-group me-2"></i>Banners</a>
-                                            <div class="dropdown-menu bg-transparent border-0">
-                                                <a href="${pageContext.request.contextPath}/IndexBannerServlet" class="dropdown-item">All</a>
-                                                <a href="${pageContext.request.contextPath}/CreateBannerServlet" class="dropdown-item">Add</a>
-                                            </div>
-                                        </div>
+                    <div class="nav-item dropdown">
+                        <a href="${pageContext.request.contextPath}/IndexBannerServlet" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-image me-2"></i>Banners</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="${pageContext.request.contextPath}/IndexBannerServlet" class="dropdown-item">All</a>
+                            <a href="${pageContext.request.contextPath}/CreateBannerServlet" class="dropdown-item">Add</a>
+                        </div>
+                    </div>
+
+                    <div class="nav-item dropdown">
+                        <a href="${pageContext.request.contextPath}/IndexBlogServlet" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-blog me-2"></i>Blogs</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="${pageContext.request.contextPath}/IndexBlogServlet" class="dropdown-item">All</a>
+                            <a href="${pageContext.request.contextPath}/CreateBlogServlet" class="dropdown-item">Add</a>
+                        </div>
+                    </div>
 
                     <div class="nav-item dropdown">
                      <a href="${pageContext.request.contextPath}/IndexProductsServlet" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-shopping-cart me-2"></i>Products</a>

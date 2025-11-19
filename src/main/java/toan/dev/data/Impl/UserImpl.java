@@ -75,6 +75,35 @@ public abstract class UserImpl implements UsersDao {
     public abstract Users find(String email);
 
     @Override
+    public Users findByEmail(String email) {
+        Users users = null;
+        String sql = "SELECT * FROM `users` WHERE email = ?";
+        try (Connection conn = DatabaseDao.getDriver().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+        ){
+            stmt.setString(1, email);
+            try(ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    users = new Users(
+                            rs.getInt("user_id"),
+                            rs.getString("full_name"),
+                            rs.getString("email"),
+                            rs.getString("password_hash"),
+                            rs.getString("phone"),
+                            rs.getString("avatar_url"),
+                            rs.getString("role"),
+                            rs.getTimestamp("created_at")
+                    );
+                }
+            }
+
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    @Override
     public Users findByPhone(String phone) {
         Users users = null;
         String sql = "SELECT * FROM `users` WHERE phone = ?";

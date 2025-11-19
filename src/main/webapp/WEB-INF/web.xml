@@ -36,7 +36,6 @@
         <servlet-class>toan.dev.HomeServlet</servlet-class>
     </servlet>
 
-
     <!--Cấu hình admin-->
     <!--cấu hình admin banner-->
     <servlet>
@@ -71,6 +70,27 @@
     <servlet>
         <servlet-name>CreateCategoryServlet</servlet-name>
         <servlet-class>toan.dev.admin.category.CreateCategoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DashboardServlet</servlet-name>
+        <servlet-class>toan.dev.admin.DashboardServlet</servlet-class>
+    </servlet>
+    <!--Cấu hình admin blog-->
+    <servlet>
+        <servlet-name>IndexBlogServlet</servlet-name>
+        <servlet-class>toan.dev.admin.Blogs.IndexBlogServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateBlogServlet</servlet-name>
+        <servlet-class>toan.dev.admin.Blogs.CreateBlogServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditBlogServlet</servlet-name>
+        <servlet-class>toan.dev.admin.Blogs.EditBlogServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteBlogServlet</servlet-name>
+        <servlet-class>toan.dev.admin.Blogs.DeleteBlogServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
@@ -115,6 +135,27 @@
     <servlet-mapping>
         <servlet-name>CreateCategoryServlet</servlet-name>
         <url-pattern>/CreateCategoryServlet</url-pattern>
+    </servlet-mapping>
+    <!--Cấu hình admin blog-->
+    <servlet-mapping>
+        <servlet-name>IndexBlogServlet</servlet-name>
+        <url-pattern>/IndexBlogServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateBlogServlet</servlet-name>
+        <url-pattern>/CreateBlogServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditBlogServlet</servlet-name>
+        <url-pattern>/EditBlogServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteBlogServlet</servlet-name>
+        <url-pattern>/DeleteBlogServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DashboardServlet</servlet-name>
+        <url-pattern>/DashboardServlet</url-pattern>
     </servlet-mapping>
 
     <!-- Let default servlet serve static resources under /assets/* -->
