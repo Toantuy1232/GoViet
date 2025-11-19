@@ -1,6 +1,7 @@
 package toan.dev;
 
 import toan.dev.data.model.Banner;
+import toan.dev.data.model.Blogposts;
 import toan.dev.data.model.Category;
 import toan.dev.data.model.Products;
 
@@ -41,4 +42,10 @@ public interface DataProvider {
      * @return List<Category>
      */
     List<Category> getHotCategories();
+
+    /**
+     * Lấy danh sách bài viết
+     * @return List<Blogs>
+     */
+    List<Blogposts> getBlog();
 }

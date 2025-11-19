@@ -39,7 +39,7 @@
                     <div class="card shadow border-0">
                         <div class="card-body p-4 p-lg-5">
                             <h3 class="mb-4 text-center text-primary">Đăng nhập</h3>
-                            <form method="post" action="${pageContext.request.contextPath}/login">
+                            <form method="post" action="${pageContext.request.contextPath}/LoginServlet">
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
                                     <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
@@ -60,7 +60,7 @@
                                 <button type="submit" class="btn btn-primary w-100 rounded-pill py-2">Đăng nhập</button>
                             </form>
                             <hr class="my-4">
-                            <p class="mb-0 text-center">Chưa có tài khoản? <a href="${pageContext.request.contextPath}/resgister.jsp">Đăng ký ngay</a></p>
+                            <p class="mb-0 text-center">Chưa có tài khoản? <a href="${pageContext.request.contextPath}/RegisterServlet">Đăng ký ngay</a></p>
                         </div>
                     </div>
                 </div>

@@ -1,10 +1,8 @@
 package toan.dev;
 
-import toan.dev.data.dao.BannerDao;
-import toan.dev.data.dao.CategoryDao;
-import toan.dev.data.dao.DatabaseDao;
-import toan.dev.data.dao.ProductsDao;
+import toan.dev.data.dao.*;
 import toan.dev.data.model.Banner;
+import toan.dev.data.model.Blogposts;
 import toan.dev.data.model.Category;
 import toan.dev.data.model.Products;
 
@@ -20,6 +18,7 @@ public abstract class BaseServlet extends HttpServlet implements DataProvider {
     protected CategoryDao categoryDao;
     protected ProductsDao productsDao;
     protected BannerDao bannerDao;
+    protected BlogpostsDao blogpostsDao;
 
     @Override
     public void init() throws ServletException {
@@ -28,6 +27,7 @@ public abstract class BaseServlet extends HttpServlet implements DataProvider {
         categoryDao = databaseDao.getCategoryDao();
         productsDao = databaseDao.getProductDao();
         bannerDao = databaseDao.getBannerDao();
+        blogpostsDao = databaseDao.getBlogDao();
     }
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -88,6 +88,14 @@ public abstract class BaseServlet extends HttpServlet implements DataProvider {
             return null;
         }
     }
+    @Override
+    public List<Blogposts> getBlog() {
+        try {
+            return blogpostsDao.findAll();
+        } catch (Exception e) {
+            return null;
+        }
+    }
     protected void setDataAttributes(HttpServletRequest request) {
         request.setAttribute("categoryList", getCategories());
         request.setAttribute("productList", getProducts());
@@ -95,6 +103,7 @@ public abstract class BaseServlet extends HttpServlet implements DataProvider {
         request.setAttribute("newProductsList", getNewProducts());
         request.setAttribute("hotcategoryList", getHotCategories());
         request.setAttribute("bannerList", getBanners());
+        request.setAttribute("blogpostsList", getBlog());
     }
 
     protected abstract void doGet(javax.servlet.http.HttpServletRequest request, HttpServletResponse response)

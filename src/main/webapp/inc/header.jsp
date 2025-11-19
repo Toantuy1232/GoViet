@@ -13,16 +13,45 @@
                 </div>
                 <div class="col-lg-4 text-center text-lg-end">
                     <div class="d-inline-flex align-items-center" style="height: 45px;">
-                        <a href="${pageContext.request.contextPath}/resgister.jsp"><small class="me-3 text-light"><i class="fa fa-user me-2"></i>Register</small></a>
-                        <a href="${pageContext.request.contextPath}/login.jsp"><small class="me-3 text-light"><i class="fa fa-sign-in-alt me-2"></i>Login</small></a>
                         <div class="dropdown">
-                            <a href="#" class="dropdown-toggle text-light" data-bs-toggle="dropdown"><small><i class="fa fa-home me-2"></i> My Dashboard</small></a>
+                            <%
+                              toan.dev.data.model.Users currentUser = (toan.dev.data.model.Users) session.getAttribute("user");
+                              boolean isAdmin = (currentUser != null && "admin".equals(currentUser.getRole()));
+                              String displayName = (currentUser != null && currentUser.getFullname() != null && !currentUser.getFullname().trim().isEmpty())
+                                      ? currentUser.getFullname() : (currentUser != null ? currentUser.getEmail() : null);
+                            %>
+                            <a href="#" class="dropdown-toggle text-light" data-bs-toggle="dropdown"><small>
+                                <i class="fa fa-user me-2"></i>
+                                <%= (displayName != null) ? displayName : "Tài khoản" %>
+                            </small></a>
                             <div class="dropdown-menu rounded">
-                                <a href="#" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> My Profile</a>
-                                <a href="#" class="dropdown-item"><i class="fas fa-comment-alt me-2"></i> Inbox</a>
-                                <a href="#" class="dropdown-item"><i class="fas fa-bell me-2"></i> Notifications</a>
-                                <a href="#" class="dropdown-item"><i class="fas fa-cog me-2"></i> Account Settings</a>
-                                <a href="#" class="dropdown-item"><i class="fas fa-power-off me-2"></i> Log Out</a>
+                              <%
+                                if (currentUser == null) {
+                              %>
+                                <a href="${pageContext.request.contextPath}/LoginServlet" class="dropdown-item">Đăng nhập</a>
+                                <a href="${pageContext.request.contextPath}/RegisterServlet" class="dropdown-item">Đăng ký</a>
+                              <%
+                                } else {
+                              %>
+                                <span class="dropdown-item-text"><strong><%= displayName %></strong></span>
+                                <span class="dropdown-item-text text-muted"><%= currentUser.getEmail() %></span>
+                                <div class="dropdown-divider"></div>
+                                <a href="#" class="dropdown-item">Danh sách yêu thích</a>
+                                <a href="${pageContext.request.contextPath}/CartServlet" class="dropdown-item">Giỏ hàng của tôi</a>
+                                <a href="${pageContext.request.contextPath}/UserServlet" class="dropdown-item">Cài đặt tài khoản</a>
+                                <a href="${pageContext.request.contextPath}/ProfileServlet" class="dropdown-item">Tài khoản của tôi</a>
+                                <%
+                                  if (isAdmin) {
+                                %>
+                                  <a href="${pageContext.request.contextPath}/DashboardServlet" class="dropdown-item">Trang quản trị</a>
+                                <%
+                                  }
+                                %>
+                                <div class="dropdown-divider"></div>
+                                <a href="${pageContext.request.contextPath}/LogoutServlet" class="dropdown-item">Đăng xuất</a>
+                              <%
+                                }
+                              %>
                             </div>
                         </div>
                     </div>
@@ -35,7 +64,7 @@
         <div class="container-fluid position-relative p-0">
             <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
                 <a href="" class="navbar-brand p-0">
-                    <h1 class="m-0"><i class="fa fa-map-marker-alt me-3"></i>Travela</h1>
+                    <h1 class="m-0"><i class="fa fa-map-marker-alt me-3"></i>GoViet</h1>
                     <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -70,53 +99,39 @@
             <div class="carousel-header">
                 <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
                     <ol class="carousel-indicators">
-                        <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active"></li>
-                        <li data-bs-target="#carouselId" data-bs-slide-to="1"></li>
-                        <li data-bs-target="#carouselId" data-bs-slide-to="2"></li>
+                        <%
+                            java.util.List<toan.dev.data.model.Banner> bannerList =
+                                (java.util.List<toan.dev.data.model.Banner>) request.getAttribute("bannerList");
+                            int count = 0;
+                            if (bannerList != null) {
+                              for (toan.dev.data.model.Banner banner : bannerList) {
+                                if (count >= 10) break; // lấy tối đa 10 ảnh banner
+                        %>
+                        <li data-bs-target="#carouselId" data-bs-slide-to="<%= count %>" class="<%= count == 0 ? "active" : "" %>"></li>
+                        <%
+                                count++;
+                              }
+                            }
+                        %>
                     </ol>
                     <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item active">
-                            <img src="img/carousel-2.jpg" class="img-fluid" alt="Image">
-                            <div class="carousel-caption">
-                                <div class="p-3" style="max-width: 900px;">
-                                    <h4 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;">Explore The World</h4>
-                                    <h1 class="display-2 text-capitalize text-white mb-4">Let's The World Together!</h1>
-                                    <p class="mb-5 fs-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                    </p>
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <a class="btn-hover-bg btn btn-primary rounded-pill text-white py-3 px-5" href="#">Discover Now</a>
-                                    </div>
-                                </div>
-                            </div>
+                        <%
+                            count = 0;
+                            boolean first = true;
+                            if (bannerList != null) {
+                              for (toan.dev.data.model.Banner banner : bannerList) {
+                                if (count >= 10) break; // lấy tối đa 10 ảnh banner
+                        %>
+                        <div class="carousel-item <%= first ? "active" : "" %>">
+                            <img src="${pageContext.request.contextPath}/img/<%= banner.getImage() %>" class="img-fluid" alt="<%= banner.getTitle() %>">
+            
                         </div>
-                        <div class="carousel-item">
-                            <img src="img/carousel-1.jpg" class="img-fluid" alt="Image">
-                            <div class="carousel-caption">
-                                <div class="p-3" style="max-width: 900px;">
-                                    <h4 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;">Explore The World</h4>
-                                    <h1 class="display-2 text-capitalize text-white mb-4">Find Your Perfect Tour At Travel</h1>
-                                    <p class="mb-5 fs-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                    </p>
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <a class="btn-hover-bg btn btn-primary rounded-pill text-white py-3 px-5" href="#">Discover Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="img/carousel-3.jpg" class="img-fluid" alt="Image">
-                            <div class="carousel-caption">
-                                <div class="p-3" style="max-width: 900px;">
-                                    <h4 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;">Explore The World</h4>
-                                    <h1 class="display-2 text-capitalize text-white mb-4">You Like To Go?</h1>
-                                    <p class="mb-5 fs-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                    </p>
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <a class="btn-hover-bg btn btn-primary rounded-pill text-white py-3 px-5" href="#">Discover Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <%
+                                first = false;
+                                count++;
+                              }
+                            }
+                        %>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon btn bg-primary" aria-hidden="false"></span>
