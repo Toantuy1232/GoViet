@@ -21,6 +21,7 @@ public class CreateTourServlet extends BaseAdminServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setAttribute("categoryList", DatabaseDao.getInstance().getCategoryDao().findAll());
         request.getRequestDispatcher("admin/tour/create.jsp").forward(request, response);
     }
 
@@ -32,8 +33,24 @@ public class CreateTourServlet extends BaseAdminServlet {
         double price = Double.parseDouble(request.getParameter("price"));
         double price_old = Double.parseDouble(request.getParameter("price_old"));
         int duration_days = Integer.parseInt(request.getParameter("duration_days"));
-        Timestamp start_date = Timestamp.valueOf(request.getParameter("start_date"));
-        Timestamp end_date = Timestamp.valueOf(request.getParameter("end_date"));
+        int category_id = Integer.parseInt(request.getParameter("category_id"));
+
+        String startRaw = request.getParameter("start_date");
+        String endRaw = request.getParameter("end_date");
+        if (startRaw != null && startRaw.contains("T")) {
+            startRaw = startRaw.replace('T', ' ');
+            if (startRaw.length() == 16) {
+                startRaw = startRaw + ":00";
+            }
+        }
+        if (endRaw != null && endRaw.contains("T")) {
+            endRaw = endRaw.replace('T', ' ');
+            if (endRaw.length() == 16) {
+                endRaw = endRaw + ":00";
+            }
+        }
+        Timestamp start_date = Timestamp.valueOf(startRaw);
+        Timestamp end_date = Timestamp.valueOf(endRaw);
         int available_slots = Integer.parseInt(request.getParameter("available_slots"));
         String mainImage = null;
 
@@ -50,7 +67,9 @@ public class CreateTourServlet extends BaseAdminServlet {
         }
 
         java.sql.Timestamp now = new java.sql.Timestamp(System.currentTimeMillis());
-        Tours tours = new Tours(0, 0, title, description, price, price_old, duration_days, start_date, end_date, available_slots, mainImage,now);
+        Tours tours = new Tours(0, category_id, title, description, price, price_old,
+                duration_days, start_date, end_date, available_slots, mainImage, now);
+        tours.setDestination_id(1);
 
         DatabaseDao.getInstance().getTourDao().insert(tours);
         response.sendRedirect("IndexTourServlet");

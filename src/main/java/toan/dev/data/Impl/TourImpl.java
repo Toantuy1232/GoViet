@@ -12,22 +12,23 @@ import java.util.List;
 public class TourImpl implements TourDao {
     @Override
     public boolean insert(Tours tours) {
-        String sql = "INSERT INTO tours(tour_id, destination_id, title, description, price, price_old, duration_days, start_date, end_date, available_slots, main_image, created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO tours(tour_id, destination_id, category_id, title, description, price, price_old, duration_days, start_date, end_date, available_slots, main_image, created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try (Connection conn = DatabaseDao.getDriver().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
         ){
             stmt.setInt(1, tours.tour_id);
             stmt.setInt(2, tours.destination_id);
-            stmt.setString(3, tours.title);
-            stmt.setString(4, tours.description);
-            stmt.setDouble(5, tours.price);
-            stmt.setDouble(6, tours.price_old);
-            stmt.setInt(7, tours.duration_days);
-            stmt.setTimestamp(8, tours.start_date);
-            stmt.setTimestamp(9, tours.end_date);
-            stmt.setInt(10, tours.available_slots);
-            stmt.setString(11, tours.main_image);
-            stmt.setTimestamp(12, tours.created_at);
+            stmt.setInt(3, tours.category_id);
+            stmt.setString(4, tours.title);
+            stmt.setString(5, tours.description);
+            stmt.setDouble(6, tours.price);
+            stmt.setDouble(7, tours.price_old);
+            stmt.setInt(8, tours.duration_days);
+            stmt.setTimestamp(9, tours.start_date);
+            stmt.setTimestamp(10, tours.end_date);
+            stmt.setInt(11, tours.available_slots);
+            stmt.setString(12, tours.main_image);
+            stmt.setTimestamp(13, tours.created_at);
             stmt.executeUpdate();
             return true;
 
@@ -39,21 +40,23 @@ public class TourImpl implements TourDao {
 
     @Override
     public boolean update(Tours tours) {
-        String sql = "UPDATE tours SET destination_id = ?, title = ?, description = ?, price = ?, price_old = ?, duration_days = ?, start_date = ?, end_date = ?, available_slots = ?, main_image = ?, created_at = ? WHERE tour_id = ?";
+        String sql = "UPDATE tours SET destination_id = ?, category_id = ?, title = ?, description = ?, price = ?, price_old = ?, duration_days = ?, start_date = ?, end_date = ?, available_slots = ?, main_image = ?, created_at = ? WHERE tour_id = ?";
         try (Connection conn = DatabaseDao.getDriver().getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+             PreparedStatement stmt = conn.prepareStatement(sql);
         ){
             stmt.setInt(1, tours.destination_id);
-            stmt.setString(2, tours.title);
-            stmt.setString(3, tours.description);
-            stmt.setDouble(4, tours.price);
-            stmt.setDouble(5, tours.price_old);
-            stmt.setInt(6, tours.duration_days);
-            stmt.setTimestamp(7, tours.start_date);
-            stmt.setTimestamp(8, tours.end_date);
-            stmt.setInt(9, tours.available_slots);
-            stmt.setString(10, tours.main_image);
-            stmt.setTimestamp(11, tours.created_at);
+            stmt.setInt(2, tours.category_id);
+            stmt.setString(3, tours.title);
+            stmt.setString(4, tours.description);
+            stmt.setDouble(5, tours.price);
+            stmt.setDouble(6, tours.price_old);
+            stmt.setInt(7, tours.duration_days);
+            stmt.setTimestamp(8, tours.start_date);
+            stmt.setTimestamp(9, tours.end_date);
+            stmt.setInt(10, tours.available_slots);
+            stmt.setString(11, tours.main_image);
+            stmt.setTimestamp(12, tours.created_at);
+            stmt.setInt(13, tours.tour_id);
             stmt.executeUpdate();
             return true;
         }catch (SQLException e) {
@@ -89,6 +92,7 @@ public class TourImpl implements TourDao {
             if(rs.next()) {
                 int tour_id = rs.getInt("tour_id");
                 int destination_id = rs.getInt("destination_id");
+                int category_id = rs.getInt("category_id");
                 String title = rs.getString("title");
                 String description = rs.getString("description");
                 double price = rs.getDouble("price");
@@ -99,7 +103,7 @@ public class TourImpl implements TourDao {
                 int available_slots = rs.getInt("available_slots");
                 String main_image = rs.getString("main_image");
                 Timestamp created_at = rs.getTimestamp("created_at");
-                return new Tours(tour_id, destination_id, title, description, price, price_old, duration_days,start_date, end_date,
+                return new Tours(tour_id, destination_id, category_id, title, description, price, price_old, duration_days,start_date, end_date,
                         available_slots, main_image, created_at);
             }
         } catch(SQLException e) {
@@ -119,6 +123,7 @@ public class TourImpl implements TourDao {
             while (rs.next()) {
                 int tour_id = rs.getInt("tour_id");
                 int destination_id = rs.getInt("destination_id");
+                int category_id = rs.getInt("category_id");
                 String title = rs.getString("title");
                 String description = rs.getString("description");
                 double price = rs.getDouble("price");
@@ -129,7 +134,7 @@ public class TourImpl implements TourDao {
                 int available_slots = rs.getInt("available_slots");
                 String main_image = rs.getString("main_image");
                 Timestamp created_at = rs.getTimestamp("created_at");
-                toursList.add(new Tours(tour_id, destination_id, title, description, price, price_old, duration_days,
+                toursList.add(new Tours(tour_id, destination_id, category_id, title, description, price, price_old, duration_days,
                         start_date, end_date, available_slots, main_image, created_at));
             }
 

@@ -12,16 +12,17 @@ public class CategoryImpl implements CategoryDao {
 
     @Override
     public boolean insert(Category category) {
-        String sql = "INSERT INTO categories(name, slug, description,thumbnail, parent_id, status, created_at) VAVLUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO categories(name, thumbnail, status, created_at) VALUES(?,?,?,?)";
         try (Connection conn = DatabaseDao.getDriver().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
         ){
             stmt.setString(1, category.name);
-            stmt.setString(2, category.slug);
-            stmt.setString(3, category.description);
-            stmt.setString(4, category.thumbnail);
-            stmt.setBoolean(5, category.status);
-            stmt.setTimestamp(6, category.created_at);
+            stmt.setString(2, category.thumbnail);
+            stmt.setBoolean(3, category.status != null ? category.status : true);
+            Timestamp createdAt = category.created_at != null
+                    ? category.created_at
+                    : new Timestamp(System.currentTimeMillis());
+            stmt.setTimestamp(4, createdAt);
             stmt.executeUpdate();
             return true;
 
@@ -33,17 +34,18 @@ public class CategoryImpl implements CategoryDao {
 
     @Override
     public boolean update(Category category) {
-        String sql = "UPDATE categories SET name = ?, slug = ?, description = ?, parent_id = ?, status = ?, created_at = ? WHERE id = ?";
+        String sql = "UPDATE categories SET name = ?, thumbnail = ?, status = ?, created_at = ? WHERE id = ?";
         try (Connection conn = DatabaseDao.getDriver().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
         ){
             stmt.setString(1, category.name);
-            stmt.setString(2, category.slug);
-            stmt.setString(3, category.description);
-            stmt.setString(4, category.thumbnail);
-            stmt.setInt(5, category.parent_id);
-            stmt.setBoolean(6, category.status);
-            stmt.setTimestamp(7, category.created_at);
+            stmt.setString(2, category.thumbnail);
+            stmt.setBoolean(3, category.status != null ? category.status : true);
+            Timestamp createdAt = category.created_at != null
+                    ? category.created_at
+                    : new Timestamp(System.currentTimeMillis());
+            stmt.setTimestamp(4, createdAt);
+            stmt.setInt(5, category.id);
             stmt.executeUpdate();
             return true;
 
@@ -79,13 +81,10 @@ public class CategoryImpl implements CategoryDao {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     String name = rs.getString("name");
-                    String slug = rs.getString("slug");
-                    String description = rs.getString("description");
                     String thumbnail = rs.getString("thumbnail");
-                    int parent_id = rs.getInt("parent_id");
                     boolean status = rs.getBoolean("status");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-                    return new Category(id, name, slug, description,thumbnail, parent_id, createdAt, status);
+                    return new Category(id, name, thumbnail, createdAt, status);
                 }
             }
 
@@ -106,13 +105,10 @@ public class CategoryImpl implements CategoryDao {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
-                String slug = rs.getString("slug");
-                String description = rs.getString("description");
                 String thumbnail = rs.getString("thumbnail");
-                int parent_id = rs.getInt("parent_id");
                 boolean status = rs.getBoolean("status");
                 Timestamp createdAt = rs.getTimestamp("created_at");
-                categoryList.add(new Category(id, name, slug, description, thumbnail, parent_id, createdAt, status));
+                categoryList.add(new Category(id, name, thumbnail, createdAt, status));
             }
         }catch(SQLException e) {
             e.printStackTrace();
