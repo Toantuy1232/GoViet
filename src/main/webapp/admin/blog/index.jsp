@@ -65,8 +65,23 @@
                                     <tr>
                                         <td>${index}</td>
                                         <td>${b.title}</td>
-                                        <td>${b.author_id}</td>
-                                        <td>${b.cover_image}</td>
+                                        <td>
+                                            <c:set var="found" value="false" />
+                                            <c:forEach var="u" items="${users}">
+                                                <c:if test="${u.user_id eq b.author_id}">
+                                                    ${u.fullname}
+                                                    <c:set var="found" value="true" />
+                                                </c:if>
+                                            </c:forEach>
+                                            <c:if test="${not found}">
+                                                ${b.author_id}
+                                            </c:if>
+                                        </td>
+                                        <td>
+                                            <c:if test="${not empty b.cover_image}">
+                                                <img src="${pageContext.request.contextPath}/img/${b.cover_image}" style="max-height: 60px;" alt="Cover" />
+                                            </c:if>
+                                        </td>
                                         <td>${b.created_at}</td>
                                         <td>
                                             <a href="EditBlogServlet?postId=${b.post_id}"><i class="bi bi-pencil-square"></i></a>

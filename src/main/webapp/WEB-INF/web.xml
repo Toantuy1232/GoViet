@@ -235,6 +235,10 @@
         <servlet-name>UserServlet</servlet-name>
         <servlet-class>toan.dev.UserServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BlogServlet</servlet-name>
+        <servlet-class>toan.dev.BlogServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -255,6 +259,10 @@
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/UserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogServlet</servlet-name>
+        <url-pattern>/BlogServlet</url-pattern>
     </servlet-mapping>
 
     <!-- Welcome file (trang mặc định) - redirect to HomeServlet -->
