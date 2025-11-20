@@ -203,4 +203,20 @@ public class OrderImpl implements OrdersDao {
         }
         return orders;
     }
+
+    @Override
+    public boolean hasOrdersByUserId(int userId) {
+        String sql = "SELECT 1 FROM `orders` WHERE user_id = ? LIMIT 1";
+        try (Connection conn = DatabaseDao.getDriver().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+        ){
+            stmt.setInt(1, userId);
+            try (ResultSet rs = stmt.executeQuery()){
+                return rs.next();
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

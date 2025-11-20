@@ -51,8 +51,20 @@
                                 <input type="file" name="cover_file" class="form-control" accept="image/*" />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">ID tác giả (tùy chọn)</label>
-                                <input type="number" name="author_id" class="form-control" />
+                                <label class="form-label">Tác giả (tùy chọn)</label>
+                                <select name="author_id" class="form-select">
+                                    <option value="">-- Chọn tác giả --</option>
+                                    <%
+                                        java.util.List<toan.dev.data.model.Users> users = (java.util.List<toan.dev.data.model.Users>) request.getAttribute("users");
+                                        if (users != null) {
+                                            for (toan.dev.data.model.Users u : users) {
+                                    %>
+                                        <option value="<%= u.user_id %>"><%= u.fullname %> (<%= u.email %>)</option>
+                                    <%
+                                            }
+                                        }
+                                    %>
+                                </select>
                             </div>
                             <button type="submit" class="btn btn-primary">Lưu</button>
                             <a href="${pageContext.request.contextPath}/IndexBlogServlet" class="btn btn-secondary">Hủy</a>

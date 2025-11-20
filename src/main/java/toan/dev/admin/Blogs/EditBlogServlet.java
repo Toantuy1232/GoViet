@@ -3,6 +3,7 @@ package toan.dev.admin.Blogs;
 import toan.dev.admin.BaseAdminServlet;
 import toan.dev.data.dao.DatabaseDao;
 import toan.dev.data.model.Blogposts;
+import toan.dev.data.model.Users;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -27,6 +28,8 @@ public class EditBlogServlet extends BaseAdminServlet {
         int postId = Integer.parseInt(idParam);
         Blogposts blog = DatabaseDao.getInstance().getBlogDao().find(postId);
         request.setAttribute("blog", blog);
+        java.util.List<Users> users = DatabaseDao.getInstance().getUserDao().findAll();
+        request.setAttribute("users", users);
         request.getRequestDispatcher("admin/blog/edit.jsp").forward(request, response);
     }
 

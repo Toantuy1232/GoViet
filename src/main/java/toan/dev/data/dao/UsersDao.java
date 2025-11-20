@@ -13,4 +13,6 @@ public interface UsersDao {
     public List<Users> findAll();
     Users findByEmail(String email);
     Users findByPhone(String phone);
+
+    Users find(String email);
 }

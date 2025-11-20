@@ -31,6 +31,7 @@
         <div class="container-fluid pt-4 px-4">
                 <%
                     toan.dev.data.model.Blogposts blog = (toan.dev.data.model.Blogposts) request.getAttribute("blog");
+                    java.util.List<toan.dev.data.model.Users> users = (java.util.List<toan.dev.data.model.Users>) request.getAttribute("users");
                 %>
                 <h1 class="h3 mb-2 text-gray-800">Sửa bài viết</h1>
                 <p class="mb-4">Chỉnh sửa thông tin bài viết blog.</p>
@@ -60,8 +61,23 @@
                                 <% } %>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">ID tác giả (tùy chọn)</label>
-                                <input type="number" name="author_id" class="form-control" value="<%= blog != null ? blog.getAuthor_id() : 1 %>" />
+                                <label class="form-label">Tác giả (tùy chọn)</label>
+                                <select name="author_id" class="form-select">
+                                    <option value="">-- Chọn tác giả --</option>
+                                    <%
+                                        int currentAuthorId = blog != null ? blog.getAuthor_id() : 0;
+                                        if (users != null) {
+                                            for (toan.dev.data.model.Users u : users) {
+                                                boolean selected = (u.user_id == currentAuthorId);
+                                    %>
+                                        <option value="<%= u.user_id %>" <%= selected ? "selected" : "" %>>
+                                            <%= u.fullname %> (<%= u.email %>)
+                                        </option>
+                                    <%
+                                            }
+                                        }
+                                    %>
+                                </select>
                             </div>
                             <button type="submit" class="btn btn-primary">Cập nhật</button>
                             <a href="${pageContext.request.contextPath}/IndexBlogServlet" class="btn btn-secondary">Hủy</a>
