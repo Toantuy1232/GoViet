@@ -63,7 +63,7 @@
         <!-- Navbar & Hero Start -->
         <div class="container-fluid position-relative p-0">
             <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
-                <a href="" class="navbar-brand p-0">
+                <a href="${pageContext.request.contextPath}/HomeServlet" class="navbar-brand p-0">
                     <h1 class="m-0"><i class="fa fa-map-marker-alt me-3"></i>GoViet</h1>
                     <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
@@ -72,26 +72,22 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="about.jsp" class="nav-item nav-link">About</a>
-                        <a href="services.html" class="nav-item nav-link">Services</a>
-                        <a href="packages.html" class="nav-item nav-link">Packages</a>
-                        <a href="blog.jsp" class="nav-item nav-link">Blog</a>
+                        <a href="${pageContext.request.contextPath}/HomeServlet" class="nav-item nav-link active">Trang chủ</a>
+                        <a href="${pageContext.request.contextPath}/about.jsp" class="nav-item nav-link">Giới thiệu</a>
+                        <a href="${pageContext.request.contextPath}/services.html" class="nav-item nav-link">Dịch vụ</a>
+                        <a href="${pageContext.request.contextPath}/BlogServlet" class="nav-item nav-link">Bài viết</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Trang</a>
                             <div class="dropdown-menu m-0">
-                                <a href="destination.jsp" class="dropdown-item">Destination</a>
-                                <a href="tour.html" class="dropdown-item">Explore Tour</a>
-                                <a href="booking.jsp" class="dropdown-item">Travel Booking</a>
-                                <a href="gallery.jsp" class="dropdown-item">Our Gallery</a>
-                                <a href="guides.jsp" class="dropdown-item">Travel Guides</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="404.jsp" class="dropdown-item">404 Page</a>
+                                <a href="${pageContext.request.contextPath}/destination.jsp" class="dropdown-item">Điểm đến</a>
+                                <a href="${pageContext.request.contextPath}/tour.html" class="dropdown-item">Khám phá chuyến tham quan</a>
+                                <a href="${pageContext.request.contextPath}/booking.jsp" class="dropdown-item">Đặt chỗ du lịch</a>
+                                <a href="${pageContext.request.contextPath}/404.jsp" class="dropdown-item">404</a>
                             </div>
                         </div>
-                        <a href="contact.jsp" class="nav-item nav-link">Contact</a>
+                        <a href="${pageContext.request.contextPath}/contact.jsp" class="nav-item nav-link">Liên Hệ</a>
                     </div>
-                    <a href="" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">Book Now</a>
+                    <a href="" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">Đăng ký tư vấn</a>
                 </div>
             </nav>
 

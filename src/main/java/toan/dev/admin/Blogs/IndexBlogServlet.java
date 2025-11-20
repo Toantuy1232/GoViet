@@ -3,6 +3,7 @@ package toan.dev.admin.Blogs;
 import toan.dev.admin.BaseAdminServlet;
 import toan.dev.data.dao.DatabaseDao;
 import toan.dev.data.model.Blogposts;
+import toan.dev.data.model.Users;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,9 @@ public class IndexBlogServlet extends BaseAdminServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Blogposts> blogpostsList = DatabaseDao.getInstance().getBlogDao().findAll();
+        List<Users> users = DatabaseDao.getInstance().getUserDao().findAll();
         request.setAttribute("blogpostsList", blogpostsList);
+        request.setAttribute("users", users);
         request.getRequestDispatcher("admin/blog/index.jsp").forward(request, response);
     }
     @Override
