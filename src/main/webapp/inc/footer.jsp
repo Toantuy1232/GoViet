@@ -1,6 +1,6 @@
  <%@page pageEncoding="UTF-8" %>
  <div class="container-fluid footer py-5">
-            <div class="container py-5">
+            <div class="container-fluid py-5">
                 <div class="row g-5">
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="footer-item d-flex flex-column">
