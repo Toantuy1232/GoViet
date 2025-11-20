@@ -699,354 +699,88 @@
 
         <!-- Packages Start -->
         <div class="container-fluid packages py-5">
-            <div class="container py-5">
-                <div class="mx-auto text-center mb-5" style="max-width: 900px;">
-                    <h5 class="section-title px-3">Bài viết</h5>
-                    <h1 class="mb-0">Bài viết mới nhất</h1>
-                </div>
-                <div class="packages-carousel owl-carousel">
-                    <c:forEach var="b" items="${blogpostsList}">
-                        <div class="packages-item">
-                            <div class="packages-img">
-                                <img src="${pageContext.request.contextPath}/img/${b.cover_image}" class="img-fluid w-100 rounded-top" alt="Image">
-                                <div class="packages-info d-flex border border-start-0 border-end-0 position-absolute" style="width: 100%; bottom: 0; left: 0; z-index: 5;">
-                                    <small class="flex-fill text-center border-end py-2">
-                                        <i class="fa fa-calendar-alt me-2"></i>${b.created_at}
-                                    </small>
-                                </div>
-                            </div>
-                            <div class="packages-content bg-light">
-                                <div class="p-4 pb-0">
-                                    <h5 class="mb-0">${b.title}</h5>
-                                    <small class="text-uppercase">Bài viết</small>
-                                    <p class="mb-4 mt-3">${fn:substring(b.content, 0, 150)}...</p>
-                                </div>
-                                <div class="row bg-primary rounded-bottom mx-0">
-                                    <div class="col-12 text-center px-0">
-                                        <a href="#" class="btn-hover btn text-white py-2 px-4">Đọc thêm</a>
+
+        <c:if test="${not empty categoryGalleryList}">
+        <div class="container-fluid gallery py-5 my-5">
+            <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+                <h5 class="section-title px-3">THƯ VIỆN ẢNH</h5>
+                <h1 class="mb-4">Thư viện du lịch & hành trình.</h1>
+                <p class="mb-0">Khám phá những khoảnh khắc đẹp trong các chuyến đi, điểm đến nổi bật
+                    và trải nghiệm ấn tượng của du khách cùng GoViet.</p>
+            </div>
+            <div class="tab-class text-center">
+                <ul class="nav nav-pills d-inline-flex justify-content-center mb-5">
+                    <li class="nav-item">
+                        <a class="d-flex mx-3 py-2 border border-primary bg-light rounded-pill active" data-bs-toggle="pill" href="#GalleryTab-all">
+                            <span class="text-dark" style="width: 150px;">Tất cả</span>
+                        </a>
+                    </li>
+                    <c:forEach items="${categoryList}" var="cat">
+                        <li class="nav-item">
+                            <a class="d-flex mx-3 py-2 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#GalleryTab-${cat.id}">
+                                <span class="text-dark" style="width: 150px;">${cat.name}</span>
+                            </a>
+                        </li>
+                    </c:forEach>
+                </ul>
+                <div class="tab-content">
+                    <!-- Tab All: tất cả ảnh -->
+                    <div id="GalleryTab-all" class="tab-pane fade show p-0 active">
+                        <div class="row g-2">
+                            <c:forEach items="${categoryGalleryList}" var="item">
+                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                                    <div class="gallery-item h-100">
+
+                                        <img src="${pageContext.request.contextPath}/img/${item.image_url}"
+                                             class="img-fluid w-100 h-100 rounded" alt="Image">
+                                        <div class="gallery-content">
+                                            <div class="gallery-info">
+                                                <h5 class="text-white text-uppercase mb-2">Gallery</h5>
+                                                <a href="#" class="btn-hover text-white">Xem ảnh <i class="fa fa-arrow-right ms-2"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="gallery-plus-icon">
+                                            <a href="${pageContext.request.contextPath}/img/${item.image_url}"
+                                               data-lightbox="gallery-all" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                                        </div>
                                     </div>
                                 </div>
+                            </c:forEach>
+                        </div>
+                    </div>
+                    <!-- Các tab theo danh mục: mỗi tab hiển thị ảnh của 1 category -->
+                    <c:forEach items="${categoryList}" var="cat">
+                        <div id="GalleryTab-${cat.id}" class="tab-pane fade show p-0">
+                            <div class="row g-2">
+                                <c:forEach items="${categoryGalleryList}" var="item">
+                                    <c:if test="${item.category_id == cat.id}">
+                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                                            <div class="gallery-item h-100">
+                                                <img src="${pageContext.request.contextPath}/img/${item.image_url}"
+                                                     class="img-fluid w-100 h-100 rounded" alt="Image">
+                                                <div class="gallery-content">
+                                                    <div class="gallery-info">
+                                                        <h5 class="text-white text-uppercase mb-2">${cat.name}</h5>
+                                                        <a href="#" class="btn-hover text-white">View Image <i class="fa fa-arrow-right ms-2"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="gallery-plus-icon">
+                                                    <a href="${pageContext.request.contextPath}/img/${item.image_url}"
+                                                       data-lightbox="gallery-cat-${cat.id}" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </c:if>
+                                </c:forEach>
                             </div>
                         </div>
                     </c:forEach>
                 </div>
             </div>
         </div>
-        <!-- Packages End -->
-
-        <!-- Gallery Start -->
-        <div class="container-fluid gallery py-5 my-5">
-            <div class="mx-auto text-center mb-5" style="max-width: 900px;">
-                <h5 class="section-title px-3">Our Gallery</h5>
-                <h1 class="mb-4">Tourism & Traveling Gallery.</h1>
-                <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum tempore nam, architecto doloremque velit explicabo? Voluptate sunt eveniet fuga eligendi! Expedita laudantium fugiat corrupti eum cum repellat a laborum quasi.
-                </p>
-            </div>
-            <div class="tab-class text-center">
-                <ul class="nav nav-pills d-inline-flex justify-content-center mb-5">
-                    <li class="nav-item">
-                        <a class="d-flex mx-3 py-2 border border-primary bg-light rounded-pill active" data-bs-toggle="pill" href="#GalleryTab-1">
-                            <span class="text-dark" style="width: 150px;">All</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="d-flex py-2 mx-3 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#GalleryTab-2">
-                            <span class="text-dark" style="width: 150px;">World tour</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="d-flex mx-3 py-2 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#GalleryTab-3">
-                            <span class="text-dark" style="width: 150px;">Ocean Tour</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="d-flex mx-3 py-2 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#GalleryTab-4">
-                            <span class="text-dark" style="width: 150px;">Summer Tour</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="d-flex mx-3 py-2 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#GalleryTab-5">
-                            <span class="text-dark" style="width: 150px;">Sport Tour</span>
-                        </a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                    <div id="GalleryTab-1" class="tab-pane fade show p-0 active">
-                        <div class="row g-2">
-                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                                <div class="gallery-item h-100">
-                                    <img src="img/gallery-1.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
-                                    <div class="gallery-content">
-                                        <div class="gallery-info">
-                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
-                                            <a href="#" class="btn-hover text-white">View All Place <i class="fa fa-arrow-right ms-2"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="gallery-plus-icon">
-                                        <a href="img/gallery-1.jpg" data-lightbox="gallery-1" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                                <div class="gallery-item h-100">
-                                    <img src="img/gallery-2.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
-                                    <div class="gallery-content">
-                                        <div class="gallery-info">
-                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
-                                            <a href="#" class="btn-hover text-white">View All Place <i class="fa fa-arrow-right ms-2"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="gallery-plus-icon">
-                                        <a href="img/gallery-2.jpg" data-lightbox="gallery-2" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                                <div class="gallery-item h-100">
-                                    <img src="img/gallery-3.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
-                                    <div class="gallery-content">
-                                        <div class="gallery-info">
-                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
-                                            <a href="#" class="btn-hover text-white">View All Place <i class="fa fa-arrow-right ms-2"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="gallery-plus-icon">
-                                        <a href="img/gallery-3.jpg" data-lightbox="gallery-3" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                                <div class="gallery-item h-100">
-                                    <img src="img/gallery-4.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
-                                    <div class="gallery-content">
-                                        <div class="gallery-info">
-                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
-                                            <a href="#" class="btn-hover text-white">View All Place <i class="fa fa-arrow-right ms-2"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="gallery-plus-icon">
-                                        <a href="img/gallery-4.jpg" data-lightbox="gallery-4" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                                <div class="gallery-item h-100">
-                                    <img src="img/gallery-5.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
-                                    <div class="gallery-content">
-                                        <div class="gallery-info">
-                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
-                                            <a href="#" class="btn-hover text-white">View All Place <i class="fa fa-arrow-right ms-2"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="gallery-plus-icon">
-                                        <a href="img/gallery-5.jpg" data-lightbox="gallery-5" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                                <div class="gallery-item h-100">
-                                    <img src="img/gallery-6.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
-                                    <div class="gallery-content">
-                                        <div class="gallery-info">
-                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
-                                            <a href="#" class="btn-hover text-white">View All Place <i class="fa fa-arrow-right ms-2"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="gallery-plus-icon">
-                                        <a href="img/gallery-6.jpg" data-lightbox="gallery-6" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3">
-                                <div class="gallery-item h-100">
-                                    <img src="img/gallery-7.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
-                                    <div class="gallery-content">
-                                        <div class="gallery-info">
-                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
-                                            <a href="#" class="btn-hover text-white">View All Place <i class="fa fa-arrow-right ms-2"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="gallery-plus-icon">
-                                        <a href="img/gallery-7.jpg" data-lightbox="gallery-7" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-6 col-lg-3 col-xl-2">
-                                <div class="gallery-item h-100">
-                                    <img src="img/gallery-8.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
-                                    <div class="gallery-content">
-                                        <div class="gallery-info">
-                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
-                                            <a href="#" class="btn-hover text-white">View All Place <i class="fa fa-arrow-right ms-2"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="gallery-plus-icon">
-                                        <a href="img/gallery-8.jpg" data-lightbox="gallery-8" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3">
-                                <div class="gallery-item h-100">
-                                    <img src="img/gallery-9.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
-                                    <div class="gallery-content">
-                                        <div class="gallery-info">
-                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
-                                            <a href="#" class="btn-hover text-white">View All Place <i class="fa fa-arrow-right ms-2"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="gallery-plus-icon">
-                                        <a href="img/gallery-9.jpg" data-lightbox="gallery-9" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-6 col-lg-3 col-xl-2">
-                                <div class="gallery-item h-100">
-                                    <img src="img/gallery-10.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
-                                    <div class="gallery-content">
-                                        <div class="gallery-info">
-                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
-                                            <a href="#" class="btn-hover text-white">View All Place <i class="fa fa-arrow-right ms-2"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="gallery-plus-icon">
-                                        <a href="img/gallery-10.jpg" data-lightbox="gallery-10" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="GalleryTab-2" class="tab-pane fade show p-0">
-                        <div class="row g-2">
-                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                                <div class="gallery-item h-100">
-                                    <img src="img/gallery-2.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
-                                    <div class="gallery-content">
-                                        <div class="gallery-info">
-                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
-                                            <a href="#" class="btn-hover text-white">View All Place <i class="fa fa-arrow-right ms-2"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="gallery-plus-icon">
-                                        <a href="img/gallery-2.jpg" data-lightbox="gallery-2" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                                <div class="gallery-item h-100">
-                                    <img src="img/gallery-3.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
-                                    <div class="gallery-content">
-                                        <div class="gallery-info">
-                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
-                                            <a href="#" class="btn-hover text-white">View All Place <i class="fa fa-arrow-right ms-2"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="gallery-plus-icon">
-                                        <a href="img/gallery-3.jpg" data-lightbox="gallery-3" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="GalleryTab-3" class="tab-pane fade show p-0">
-                        <div class="row g-2">
-                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                                <div class="gallery-item h-100">
-                                    <img src="img/gallery-2.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
-                                    <div class="gallery-content">
-                                        <div class="gallery-info">
-                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
-                                            <a href="#" class="btn-hover text-white">View All Place <i class="fa fa-arrow-right ms-2"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="gallery-plus-icon">
-                                        <a href="img/gallery-2.jpg" data-lightbox="gallery-2" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                                <div class="gallery-item h-100">
-                                    <img src="img/gallery-3.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
-                                    <div class="gallery-content">
-                                        <div class="gallery-info">
-                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
-                                            <a href="#" class="btn-hover text-white">View All Place <i class="fa fa-arrow-right ms-2"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="gallery-plus-icon">
-                                        <a href="img/gallery-3.jpg" data-lightbox="gallery-3" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="GalleryTab-4" class="tab-pane fade show p-0">
-                        <div class="row g-2">
-                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                                <div class="gallery-item h-100">
-                                    <img src="img/gallery-2.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
-                                    <div class="gallery-content">
-                                        <div class="gallery-info">
-                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
-                                            <a href="#" class="btn-hover text-white">View All Place <i class="fa fa-arrow-right ms-2"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="gallery-plus-icon">
-                                        <a href="img/gallery-2.jpg" data-lightbox="gallery-2" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                                <div class="gallery-item h-100">
-                                    <img src="img/gallery-3.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
-                                    <div class="gallery-content">
-                                        <div class="gallery-info">
-                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
-                                            <a href="#" class="btn-hover text-white">View All Place <i class="fa fa-arrow-right ms-2"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="gallery-plus-icon">
-                                        <a href="img/gallery-3.jpg" data-lightbox="gallery-3" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="GalleryTab-5" class="tab-pane fade show p-0">
-                        <div class="row g-2">
-                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                                <div class="gallery-item h-100">
-                                    <img src="img/gallery-2.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
-                                    <div class="gallery-content">
-                                        <div class="gallery-info">
-                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
-                                            <a href="#" class="btn-hover text-white">View All Place <i class="fa fa-arrow-right ms-2"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="gallery-plus-icon">
-                                        <a href="img/gallery-2.jpg" data-lightbox="gallery-2" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                                <div class="gallery-item h-100">
-                                    <img src="img/gallery-3.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
-                                    <div class="gallery-content">
-                                        <div class="gallery-info">
-                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
-                                            <a href="#" class="btn-hover text-white">View All Place <i class="fa fa-arrow-right ms-2"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="gallery-plus-icon">
-                                        <a href="img/gallery-3.jpg" data-lightbox="gallery-3" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </c:if>
         <!-- Gallery End -->
+
 
         <!-- Tour Booking Start -->
         <div class="container-fluid booking py-5">

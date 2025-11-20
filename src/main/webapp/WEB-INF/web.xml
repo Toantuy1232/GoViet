@@ -71,6 +71,23 @@
         <servlet-name>CreateCategoryServlet</servlet-name>
         <servlet-class>toan.dev.admin.category.CreateCategoryServlet</servlet-class>
     </servlet>
+    <!--Cấu hình admin category gallery-->
+    <servlet>
+        <servlet-name>IndexCategoryGalleryServlet</servlet-name>
+        <servlet-class>toan.dev.admin.CategoryGallery.IndexCategoryGalleryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateCategoryGalleryServlet</servlet-name>
+        <servlet-class>toan.dev.admin.CategoryGallery.CreateCategoryGalleryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditCategoryGalleryServlet</servlet-name>
+        <servlet-class>toan.dev.admin.CategoryGallery.EditCategoryGalleryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCategoryGalleryServlet</servlet-name>
+        <servlet-class>toan.dev.admin.CategoryGallery.DeleteCategoryGalleryServlet</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>DashboardServlet</servlet-name>
         <servlet-class>toan.dev.admin.DashboardServlet</servlet-class>
@@ -108,6 +125,23 @@
     <servlet>
         <servlet-name>DeleteUserServlet</servlet-name>
         <servlet-class>toan.dev.admin.user.DeleteUserServlet</servlet-class>
+    </servlet>
+    <!--Cấu hình admin tour-->
+    <servlet>
+        <servlet-name>IndexTourServlet</servlet-name>
+        <servlet-class>toan.dev.admin.Tours.IndexTourServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateTourServlet</servlet-name>
+        <servlet-class>toan.dev.admin.Tours.CreateTourServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditTourServlet</servlet-name>
+        <servlet-class>toan.dev.admin.Tours.EditTourServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteTourServlet</servlet-name>
+        <servlet-class>toan.dev.admin.Tours.DeleteTourServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
@@ -153,6 +187,23 @@
         <servlet-name>CreateCategoryServlet</servlet-name>
         <url-pattern>/CreateCategoryServlet</url-pattern>
     </servlet-mapping>
+    <!--Cấu hình admin category gallery-->
+    <servlet-mapping>
+        <servlet-name>IndexCategoryGalleryServlet</servlet-name>
+        <url-pattern>/IndexCategoryGalleryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateCategoryGalleryServlet</servlet-name>
+        <url-pattern>/CreateCategoryGalleryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCategoryGalleryServlet</servlet-name>
+        <url-pattern>/EditCategoryGalleryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCategoryGalleryServlet</servlet-name>
+        <url-pattern>/DeleteCategoryGalleryServlet</url-pattern>
+    </servlet-mapping>
     <!--Cấu hình admin blog-->
     <servlet-mapping>
         <servlet-name>IndexBlogServlet</servlet-name>
@@ -186,6 +237,23 @@
     <servlet-mapping>
         <servlet-name>DeleteUserServlet</servlet-name>
         <url-pattern>/DeleteUserServlet</url-pattern>
+    </servlet-mapping>
+    <!--Cấu hình admin tour-->
+    <servlet-mapping>
+        <servlet-name>IndexTourServlet</servlet-name>
+        <url-pattern>/IndexTourServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateTourServlet</servlet-name>
+        <url-pattern>/CreateTourServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditTourServlet</servlet-name>
+        <url-pattern>/EditTourServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteTourServlet</servlet-name>
+        <url-pattern>/DeleteTourServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DashboardServlet</servlet-name>
@@ -239,6 +307,10 @@
         <servlet-name>BlogServlet</servlet-name>
         <servlet-class>toan.dev.BlogServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GalleryServlet</servlet-name>
+        <servlet-class>toan.dev.GalleryServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -263,6 +335,10 @@
     <servlet-mapping>
         <servlet-name>BlogServlet</servlet-name>
         <url-pattern>/BlogServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GalleryServlet</servlet-name>
+        <url-pattern>/gallery.jsp</url-pattern>
     </servlet-mapping>
 
     <!-- Welcome file (trang mặc định) - redirect to HomeServlet -->

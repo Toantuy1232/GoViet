@@ -39,6 +39,14 @@
                     </div>
 
                     <div class="nav-item dropdown">
+                        <a href="${pageContext.request.contextPath}/IndexCategoryGalleryServlet" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-images me-2"></i>Category Gallery</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="${pageContext.request.contextPath}/IndexCategoryGalleryServlet" class="dropdown-item">All</a>
+                            <a href="${pageContext.request.contextPath}/CreateCategoryGalleryServlet" class="dropdown-item">Add</a>
+                        </div>
+                    </div>
+
+                    <div class="nav-item dropdown">
                         <a href="${pageContext.request.contextPath}/IndexBannerServlet" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-image me-2"></i>Banners</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="${pageContext.request.contextPath}/IndexBannerServlet" class="dropdown-item">All</a>
@@ -62,6 +70,13 @@
                       </div>
                       </div>
 
+                    <div class="nav-item dropdown">
+                     <a href="${pageContext.request.contextPath}/IndexTourServlet" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-route me-2"></i>Tours</a>
+                     <div class="dropdown-menu bg-transparent border-0">
+                          <a href="${pageContext.request.contextPath}/IndexTourServlet" class="dropdown-item">All</a>
+                           <a href="${pageContext.request.contextPath}/CreateTourServlet" class="dropdown-item">Add</a>
+                      </div>
+                      </div>
 
                     <div class="nav-item dropdown">
                      <a href="${pageContext.request.contextPath}/IndexOrderServlet" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-receipt me-2"></i>Orders</a>

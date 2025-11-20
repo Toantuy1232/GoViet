@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 public class Tours {
     public int tour_id;
     public int destination_id;
+    public int category_id;
     public String title;
     public String description;
     public double price;
@@ -16,9 +17,10 @@ public class Tours {
     public String main_image;
     public Timestamp created_at;
 
-    public Tours(int tourId, String title, String description, double price, double priceOld, int durationDays, Timestamp startDate, Timestamp endDate, int availableSlots, String mainImage, Timestamp now) {
+    public Tours(int tourId, int categoryId, String title, String description, double price, double priceOld, int durationDays, Timestamp startDate, Timestamp endDate, int availableSlots, String mainImage, Timestamp now) {
         super();
         this.tour_id = tourId;
+        this.category_id = categoryId;
         this.title = title;
         this.description = description;
         this.price = price;
@@ -53,6 +55,14 @@ public class Tours {
 
     public void setDestination_id(int destination_id) {
         this.destination_id = destination_id;
+    }
+
+    public int getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
     }
 
     public String getTitle() {
@@ -127,10 +137,11 @@ public class Tours {
         this.created_at = created_at;
     }
 
-    public Tours(int tour_id, int destination_id, String title, String description, double price, double price_old, int duration_days, Timestamp start_date, Timestamp end_date, int available_slots, String main_image, Timestamp created_at) {
+    public Tours(int tour_id, int destination_id, int category_id, String title, String description, double price, double price_old, int duration_days, Timestamp start_date, Timestamp end_date, int available_slots, String main_image, Timestamp created_at) {
         super();
         this.tour_id = tour_id;
         this.destination_id = destination_id;
+        this.category_id = category_id;
         this.title = title;
         this.description = description;
         this.price = price;

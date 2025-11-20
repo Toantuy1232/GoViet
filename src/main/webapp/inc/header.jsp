@@ -1,4 +1,6 @@
 <%@page pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!-- Topbar Start -->
         <div class="container-fluid bg-primary px-5 d-none d-lg-block">
             <div class="row gx-0">
@@ -17,7 +19,8 @@
                             <%
                               toan.dev.data.model.Users currentUser = (toan.dev.data.model.Users) session.getAttribute("user");
                               boolean isAdmin = (currentUser != null && "admin".equals(currentUser.getRole()));
-                              String displayName = (currentUser != null && currentUser.getFullname() != null && !currentUser.getFullname().trim().isEmpty())
+                              String displayName = (currentUser != null ? currentUser.getEmail() : null);
+                              String fullNameLine = (currentUser != null && currentUser.getFullname() != null && !currentUser.getFullname().trim().isEmpty())
                                       ? currentUser.getFullname() : (currentUser != null ? currentUser.getEmail() : null);
                             %>
                             <a href="#" class="dropdown-toggle text-light" data-bs-toggle="dropdown"><small>
@@ -34,7 +37,7 @@
                                 } else {
                               %>
                                 <span class="dropdown-item-text"><strong><%= displayName %></strong></span>
-                                <span class="dropdown-item-text text-muted"><%= currentUser.getEmail() %></span>
+                                <span class="dropdown-item-text text-muted"><%= fullNameLine %></span>
                                 <div class="dropdown-divider"></div>
                                 <a href="#" class="dropdown-item">Danh sách yêu thích</a>
                                 <a href="${pageContext.request.contextPath}/CartServlet" class="dropdown-item">Giỏ hàng của tôi</a>
@@ -76,6 +79,18 @@
                         <a href="${pageContext.request.contextPath}/about.jsp" class="nav-item nav-link">Giới thiệu</a>
                         <a href="${pageContext.request.contextPath}/services.html" class="nav-item nav-link">Dịch vụ</a>
                         <a href="${pageContext.request.contextPath}/BlogServlet" class="nav-item nav-link">Bài viết</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Tour</a>
+                            <div class="dropdown-menu m-0">
+                                <c:forEach items="${categoryList}" var="cat">
+                                    <c:if test="${cat.status}">
+                                        <a href="${pageContext.request.contextPath}/destination.jsp?categoryId=${cat.id}" class="dropdown-item">
+                                            ${cat.name}
+                                        </a>
+                                    </c:if>
+                                </c:forEach>
+                            </div>
+                        </div>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Trang</a>
                             <div class="dropdown-menu m-0">

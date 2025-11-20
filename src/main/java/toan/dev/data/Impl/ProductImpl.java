@@ -79,23 +79,25 @@ public class ProductImpl implements ProductsDao {
 
     @Override
     public Products find(int id) {
-        String sql = "SELECT * FROM `products`";
+        String sql = "SELECT * FROM `products` WHERE id = ?";
         try (Connection conn = DatabaseDao.getDriver().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
         ){
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()){
-               String name = rs.getString("name");
-               String sku = rs.getString("sku");
-               String description = rs.getString("description");
-               double price = rs.getDouble("price");
-               double price_old = rs.getDouble("price_old");
-               int stock = rs.getInt("stock");
-               String image_url = rs.getString("image_url");
-               int category_id = rs.getInt("category_id");
-               Timestamp created_at = rs.getTimestamp("created_at");
-               Timestamp updated_at = rs.getTimestamp("updated_at");
-               return new Products(id, name, sku, description, price, price_old, stock, image_url, category_id, created_at, updated_at);
+                if (rs.next()) {
+                    String name = rs.getString("name");
+                    String sku = rs.getString("sku");
+                    String description = rs.getString("description");
+                    double price = rs.getDouble("price");
+                    double price_old = rs.getDouble("price_old");
+                    int stock = rs.getInt("stock");
+                    String image_url = rs.getString("image_url");
+                    int category_id = rs.getInt("category_id");
+                    Timestamp created_at = rs.getTimestamp("created_at");
+                    Timestamp updated_at = rs.getTimestamp("updated_at");
+                    return new Products(id, name, sku, description, price, price_old, stock, image_url, category_id, created_at, updated_at);
+                }
             }
 
         }catch (SQLException e) {
@@ -107,11 +109,11 @@ public class ProductImpl implements ProductsDao {
     @Override
     public List<Products> findAll() {
         List<Products> productsList = new ArrayList<>();
-        String sql = "SELECT * FROM `products` WHERE id = ?";
+        String sql = "SELECT * FROM `products`";
         try (Connection conn = DatabaseDao.getDriver().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery();
         ){
-            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");

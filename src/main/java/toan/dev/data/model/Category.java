@@ -5,21 +5,15 @@ import java.sql.Timestamp;
 public class Category {
     public int id;
     public String name;
-    public String slug;
-    public String description;
     public String thumbnail;
-    public int parent_id;
     public Boolean status;
     public Timestamp created_at;
 
-    public Category(int id, String name, String slug, String description, String thumbnail, int parentId, Timestamp createdAt, boolean status) {
+    public Category(int id, String name, String thumbnail, Timestamp createdAt, boolean status) {
         super();
         this.id = id;
         this.name = name;
-        this.slug = slug;
-        this.description = description;
         this.thumbnail = thumbnail;
-        this.parent_id = parentId;
         this.created_at = createdAt;
         this.status = status;
     }
@@ -28,10 +22,7 @@ public class Category {
         super();
         this.id = id;
         this.name = name;
-        this.slug = slug;
-        this.description = description;
         this.thumbnail = thumbnail;
-        this.parent_id = parentId;
         this.created_at = createdAt;
         this.status = status;
     }
@@ -67,30 +58,6 @@ public class Category {
         this.name = name;
     }
 
-    public String getSlug() {
-        return slug;
-    }
-
-    public void setSlug(String slug) {
-        this.slug = slug;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getParent_id() {
-        return parent_id;
-    }
-
-    public void setParent_id(int parent_id) {
-        this.parent_id = parent_id;
-    }
-
     public Boolean getStatus() {
         return status;
     }
@@ -111,9 +78,6 @@ public class Category {
         super();
         this.id = id;
         this.name = name;
-        this.slug = slug;
-        this.description = description;
-        this.parent_id = parent_id;
         this.status = status;
         this.created_at = created_at;
     }

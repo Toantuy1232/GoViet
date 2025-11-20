@@ -19,6 +19,7 @@ public class DatabaseDao {
     private BlogpostsDao blogDao;
     private UsersDao usersDao;
     private OrdersDao orderDao;
+    private CategoryGalleryDao categoryGalleryDao;
     private TourDao tourDao;
     private DatabaseDao() {
         categoryDao = new CategoryImpl();
@@ -27,6 +28,7 @@ public class DatabaseDao {
         blogDao = new BlogpostsImpl();
         orderDao = new OrderImpl();
         tourDao = new TourImpl();
+        categoryGalleryDao = new CategoryGalleryImpl();
 
         usersDao = new UserImpl() {
 
@@ -162,5 +164,8 @@ public class DatabaseDao {
 
     public TourDao getTourDao() {
         return tourDao;
+    }
+    public CategoryGalleryDao getCategoryGalleryDao() {
+        return categoryGalleryDao;
     }
 }
