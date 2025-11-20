@@ -92,6 +92,23 @@
         <servlet-name>DeleteBlogServlet</servlet-name>
         <servlet-class>toan.dev.admin.Blogs.DeleteBlogServlet</servlet-class>
     </servlet>
+    <!--Cấu hình admin user-->
+    <servlet>
+        <servlet-name>IndexUserServlet</servlet-name>
+        <servlet-class>toan.dev.admin.user.IndexUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateUserServlet</servlet-name>
+        <servlet-class>toan.dev.admin.user.CreateUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditUserServlet</servlet-name>
+        <servlet-class>toan.dev.admin.user.EditUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteUserServlet</servlet-name>
+        <servlet-class>toan.dev.admin.user.DeleteUserServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/</url-pattern>
@@ -152,6 +169,23 @@
     <servlet-mapping>
         <servlet-name>DeleteBlogServlet</servlet-name>
         <url-pattern>/DeleteBlogServlet</url-pattern>
+    </servlet-mapping>
+    <!--Cấu hình admin user-->
+    <servlet-mapping>
+        <servlet-name>IndexUserServlet</servlet-name>
+        <url-pattern>/IndexUserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateUserServlet</servlet-name>
+        <url-pattern>/CreateUserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditUserServlet</servlet-name>
+        <url-pattern>/EditUserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteUserServlet</servlet-name>
+        <url-pattern>/DeleteUserServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DashboardServlet</servlet-name>

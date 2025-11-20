@@ -81,18 +81,18 @@
                                     <tbody>
 <c:forEach var="user" items="${userList}">
     <tr>
-        <th scope="row">${user.id}</th>
+        <th scope="row">${user.user_id}</th>
         <td>${user.email}</td>
         <td>${user.role}</td>
         <td>
             <!-- Nút Edit -->
-            <a href="EditUserServlet?userId=${user.id}" class="btn btn-sm btn-primary">
+            <a href="EditUserServlet?userId=${user.user_id}" class="btn btn-sm btn-primary">
                 <i class="fa fa-edit"></i> Edit
             </a>
 
             <!-- Nút Delete -->
             <form action="DeleteUserServlet" method="POST" style="display:inline-block;">
-                <input type="hidden" name="userId" value="${user.id}"/>
+                <input type="hidden" name="userId" value="${user.user_id}"/>
                 <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
                     <i class="fa fa-trash"></i> Delete
                 </button>

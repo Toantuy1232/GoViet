@@ -18,11 +18,13 @@ public class DatabaseDao {
     private BannerDao bannerDao;
     private BlogpostsDao blogDao;
     private UsersDao usersDao;
+    private OrdersDao orderDao;
     private DatabaseDao() {
         categoryDao = new CategoryImpl();
         productDao = new ProductImpl();
         bannerDao = new BannerImpl();
         blogDao = new BlogpostsImpl();
+        orderDao = new OrderImpl();
         usersDao = new UserImpl() {
 
             @Override
@@ -149,5 +151,9 @@ public class DatabaseDao {
     }
     public BlogpostsDao getBlogDao() {
         return blogDao;
+    }
+
+    public OrdersDao getOrderDao() {
+        return orderDao;
     }
 }
