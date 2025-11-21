@@ -37,6 +37,23 @@
     </servlet>
 
     <!--Cấu hình admin-->
+    <!-- Cấu hình admin hotel -->
+    <servlet>
+        <servlet-name>IndexHotelServlet</servlet-name>
+        <servlet-class>toan.dev.admin.Hotel.IndexHotelServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateHotelServlet</servlet-name>
+        <servlet-class>toan.dev.admin.Hotel.CreateHotelServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditHotelServlet</servlet-name>
+        <servlet-class>toan.dev.admin.Hotel.EditHotelServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteHotelServlet</servlet-name>
+        <servlet-class>toan.dev.admin.Hotel.DeleteHotelServlet</servlet-class>
+    </servlet>
     <!--cấu hình admin banner-->
     <servlet>
         <servlet-name>CreateBannerServlet</servlet-name>
@@ -185,6 +202,24 @@
     <servlet-mapping>
         <servlet-name>IndexBannerServlet</servlet-name>
         <url-pattern>/IndexBannerServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Cấu hình admin hotel -->
+    <servlet-mapping>
+        <servlet-name>IndexHotelServlet</servlet-name>
+        <url-pattern>/IndexHotelServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateHotelServlet</servlet-name>
+        <url-pattern>/CreateHotelServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditHotelServlet</servlet-name>
+        <url-pattern>/EditHotelServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteHotelServlet</servlet-name>
+        <url-pattern>/DeleteHotelServlet</url-pattern>
     </servlet-mapping>
 
     <!--Cấu hình admin category-->

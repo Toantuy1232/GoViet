@@ -1,13 +1,14 @@
 <%@page pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
 
     <head>
         <meta charset="utf-8">
-        <title>Travela - Tourism Website Template</title>
+        <title>GoViet - Tour Du Lịch Thế Giới</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -42,7 +43,7 @@
           <div class="container py-5">
               <div class="row g-5 align-items-center">
 
-                  <!-- Cột ảnh -->
+               
                   <div class="col-lg-5">
                       <div class="h-100" style="border: 50px solid; border-color: transparent #13357B transparent #13357B;">
                           <c:choose>
@@ -59,11 +60,10 @@
                                   <img src="${pageContext.request.contextPath}/img/default-about.jpg" class="img-fluid w-100 h-100" alt="About us">
                               </c:otherwise>
                           </c:choose>
-                      </div> <!-- 🔥 THẺ DIV NÀY BẠN BỊ THIẾU -->
+                      </div> 
 
                   </div>
 
-                  <!-- Cột nội dung -->
                   <div class="col-lg-7"
                        style="background: linear-gradient(rgba(255,255,255,.8), rgba(255,255,255,.8)), url(img/about-img-1.png);">
 
@@ -447,7 +447,6 @@
         </div>
         </c:if>
         <!-- Gallery End -->
- Tour Booking Start -->
         <div class="container-fluid booking py-5">
             <div class="container py-5">
                 <div class="row g-5 align-items-center">
@@ -532,278 +531,157 @@
         <!-- Tour Booking End -->
 
         <!-- Travel Guide Start -->
-        <div class="container-fluid guide py-5">
-            <div class="container py-5">
-                <div class="mx-auto text-center mb-5" style="max-width: 900px;">
-                    <h5 class="section-title px-3">Travel Guide</h5>
-                    <h1 class="mb-0">Meet Our Guide</h1>
-                </div>
-                <div class="row g-4">
-                    <div class="col-md-6 col-lg-3">
-                        <div class="guide-item">
-                            <div class="guide-img">
-                                <div class="guide-img-efects">
-                                    <img src="img/guide-1.jpg" class="img-fluid w-100 rounded-top" alt="Image">
-                                </div>
-                                <div class="guide-icon rounded-pill p-2">
-                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                                </div>
-                            </div>
-                            <div class="guide-title text-center rounded-bottom p-4">
-                                <div class="guide-title-inner">
-                                    <h4 class="mt-3">Full Name</h4>
-                                    <p class="mb-0">Designation</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="guide-item">
-                            <div class="guide-img">
-                                <div class="guide-img-efects">
-                                    <img src="img/guide-2.jpg" class="img-fluid w-100 rounded-top" alt="Image">
-                                </div>
-                                <div class="guide-icon rounded-pill p-2">
-                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                                </div>
-                            </div>
-                            <div class="guide-title text-center rounded-bottom p-4">
-                                <div class="guide-title-inner">
-                                    <h4 class="mt-3">Full Name</h4>
-                                    <p class="mb-0">Designation</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="guide-item">
-                            <div class="guide-img">
-                                <div class="guide-img-efects">
-                                    <img src="img/guide-3.jpg" class="img-fluid w-100 rounded-top" alt="Image">
-                                </div>
-                                <div class="guide-icon rounded-pill p-2">
-                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                                </div>
-                            </div>
-                            <div class="guide-title text-center rounded-bottom p-4">
-                                <div class="guide-title-inner">
-                                    <h4 class="mt-3">Full Name</h4>
-                                    <p class="mb-0">Designation</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="guide-item">
-                            <div class="guide-img">
-                                <div class="guide-img-efects">
-                                    <img src="img/guide-4.jpg" class="img-fluid w-100 rounded-top" alt="Image">
-                                </div>
-                                <div class="guide-icon rounded-pill p-2">
-                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                                </div>
-                            </div>
-                            <div class="guide-title text-center rounded-bottom p-4">
-                                <div class="guide-title-inner">
-                                    <h4 class="mt-3">Full Name</h4>
-                                    <p class="mb-0">Designation</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+       <!-- Hướng dẫn viên Start -->
+       <div class="container-fluid guide py-5">
+           <div class="container py-5">
+               <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+                   <h5 class="section-title px-3">Hướng dẫn viên</h5>
+                   <h1 class="mb-0">Đội ngũ hướng dẫn viên chuyên nghiệp</h1>
+               </div>
+
+               <!-- Debug: Show guides data -->
+               <c:if test="${not empty guides}">
+                   <div style="display: none;">
+                       <c:forEach items="${guides}" var="g" varStatus="loop">
+                           Guide ${loop.index + 1}: ${g.fullname} - ${g.role} - ${g.avatar_url}<br>
+                       </c:forEach>
+                   </div>
+               </c:if>
+
+               <div class="row g-4">
+                   <c:choose>
+                       <c:when test="${not empty guides}">
+                           <c:forEach items="${guides}" var="guide" varStatus="status">
+                               <div class="col-md-6 col-lg-3">
+                                   <div class="guide-item">
+                                       <div class="guide-img">
+                                           <div class="guide-img-efects">
+                                               <c:choose>
+                                                   <c:when test="${not empty guide.avatar_url}">
+                                                       <img src="${pageContext.request.contextPath}${guide.avatar_url}"
+                                                            class="img-fluid w-100 rounded-top"
+                                                            alt="${guide.fullname}">
+                                                   </c:when>
+                                                   <c:otherwise>
+                                                       <img src="${pageContext.request.contextPath}/assets/images/avatars/default-avatar.jpg"
+                                                            class="img-fluid w-100 rounded-top"
+                                                            alt="${guide.fullname}">
+                                                   </c:otherwise>
+                                               </c:choose>
+                                           </div>
+                                           <div class="guide-icon rounded-pill p-2">
+                                               <!-- Social media links can be added here if needed -->
+                                               <a href="#" class="btn btn-square btn-primary rounded-circle mx-1">
+                                                   <i class="fab fa-facebook-f"></i>
+                                               </a>
+                                               <a href="#" class="btn btn-square btn-primary rounded-circle mx-1">
+                                                   <i class="fab fa-twitter"></i>
+                                               </a>
+                                           </div>
+                                       </div>
+                                       <div class="guide-title text-center rounded-bottom p-4">
+                                           <div class="guide-title-inner">
+                                               <h4 class="mt-3">${guide.fullname}</h4>
+                                               <p class="mb-0">${guide.role}</p>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                           </c:forEach>
+                       </c:when>
+                       <c:otherwise>
+                           <div class="col-12 text-center">
+                               <div class="alert alert-info">
+                                   <i class="fas fa-info-circle me-2"></i> Chưa có hướng dẫn viên nào
+                               </div>
+                           </div>
+                       </c:otherwise>
+                   </c:choose>
+               </div>
+           </div>
+       </div>
         <!-- Travel Guide End -->
 
         <!-- Blog Start -->
         <div class="container-fluid blog py-5">
             <div class="container py-5">
                 <div class="mx-auto text-center mb-5" style="max-width: 900px;">
-                    <h5 class="section-title px-3">Our Blog</h5>
-                    <h1 class="mb-4">Popular Travel Blogs</h1>
-                    <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti deserunt tenetur sapiente atque. Magni non explicabo beatae sit, vel reiciendis consectetur numquam id similique sunt error obcaecati ducimus officia maiores.
-                    </p>
+                    <h5 class="section-title px-3">Tin Tức & Sự Kiện</h5>
+                    <h1 class="mb-4">Bài Viết Mới Nhất</h1>
+                    <p class="mb-0">Cập nhật những tin tức và sự kiện mới nhất về du lịch trong nước và quốc tế.</p>
                 </div>
                 <div class="row g-4 justify-content-center">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-item">
-                            <div class="blog-img">
-                                <div class="blog-img-inner">
-                                    <img class="img-fluid w-100 rounded-top" src="img/blog-1.jpg" alt="Image">
-                                    <div class="blog-icon">
-                                        <a href="#" class="my-auto"><i class="fas fa-link fa-2x text-white"></i></a>
+                    <c:choose>
+                        <c:when test="${not empty randomBlogPosts}">
+                            <c:forEach items="${randomBlogPosts}" var="post" varStatus="status">
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="blog-item">
+                                        <div class="blog-img">
+                                            <div class="blog-img-inner">
+                                                <c:choose>
+                                                    <c:when test="${not empty post.cover_image}">
+                                                        <img class="img-fluid w-100 rounded-top"
+                                                             src="${pageContext.request.contextPath}/assets/images/${post.cover_image}"
+                                                             alt="${post.title}">
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <img class="img-fluid w-100 rounded-top"
+                                                             src="${pageContext.request.contextPath}/img/blog/default-blog.jpg"
+                                                             alt="${post.title}">
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <div class="blog-icon">
+                                                    <a href="${pageContext.request.contextPath}/blog/detail?id=${post.post_id}"
+                                                       class="my-auto">
+                                                        <i class="fas fa-link fa-2x text-white"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="blog-info d-flex align-items-center border border-start-0 border-end-0">
+                                                <small class="flex-fill text-center border-end py-2">
+                                                    <i class="fa fa-calendar-alt text-primary me-2"></i>
+                                                    <fmt:formatDate value="${post.created_at}" pattern="dd/MM/yyyy" />
+                                                </small>
+                                                <a href="#" class="btn-hover flex-fill text-center text-white border-end py-2">
+                                                    <i class="fa fa-user text-primary me-2"></i>
+                                                    <c:out value="${post.author_id}"/>
+                                                </a>
+                                                <a href="#" class="btn-hover flex-fill text-center text-white py-2">
+                                                    <i class="fa fa-eye text-primary me-2"></i>0
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="blog-content border border-top-0 rounded-bottom p-4">
+                                            <a href="${pageContext.request.contextPath}/blog/detail?id=${post.post_id}"
+                                               class="h4 d-block mb-3">${post.title}</a>
+                                            <p class="my-3">
+                                                <c:choose>
+                                                    <c:when test="${fn:length(post.content) > 150}">
+                                                        ${fn:substring(post.content, 0, 150)}...
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        ${post.content}
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </p>
+                                            <a href="${pageContext.request.contextPath}/blog/detail?id=${post.post_id}"
+                                               class="btn btn-primary rounded-pill py-2 px-4">Đọc thêm</a>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="blog-info d-flex align-items-center border border-start-0 border-end-0">
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>28 Jan 2050</small>
-                                    <a href="#" class="btn-hover flex-fill text-center text-white border-end py-2"><i class="fa fa-thumbs-up text-primary me-2"></i>1.7K</a>
-                                    <a href="#" class="btn-hover flex-fill text-center text-white py-2"><i class="fa fa-comments text-primary me-2"></i>1K</a>
-                                </div>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="col-12 text-center">
+                                <p>Chưa có bài viết nào.</p>
                             </div>
-                            <div class="blog-content border border-top-0 rounded-bottom p-4">
-                                <p class="mb-3">Posted By: Royal Hamblin </p>
-                                <a href="#" class="h4">Adventures Trip</a>
-                                <p class="my-3">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam eos</p>
-                                <a href="#" class="btn btn-primary rounded-pill py-2 px-4">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-item">
-                            <div class="blog-img">
-                                <div class="blog-img-inner">
-                                    <img class="img-fluid w-100 rounded-top" src="img/blog-2.jpg" alt="Image">
-                                    <div class="blog-icon">
-                                        <a href="#" class="my-auto"><i class="fas fa-link fa-2x text-white"></i></a>
-                                    </div>
-                                </div>
-                                <div class="blog-info d-flex align-items-center border border-start-0 border-end-0">
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>28 Jan 2050</small>
-                                    <a href="#" class="btn-hover flex-fill text-center text-white border-end py-2"><i class="fa fa-thumbs-up text-primary me-2"></i>1.7K</a>
-                                    <a href="#" class="btn-hover flex-fill text-center text-white py-2"><i class="fa fa-comments text-primary me-2"></i>1K</a>
-                                </div>
-                            </div>
-                            <div class="blog-content border border-top-0 rounded-bottom p-4">
-                                <p class="mb-3">Posted By: Royal Hamblin </p>
-                                <a href="#" class="h4">Adventures Trip</a>
-                                <p class="my-3">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam eos</p>
-                                <a href="#" class="btn btn-primary rounded-pill py-2 px-4">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-item">
-                            <div class="blog-img">
-                                <div class="blog-img-inner">
-                                    <img class="img-fluid w-100 rounded-top" src="img/blog-3.jpg" alt="Image">
-                                    <div class="blog-icon">
-                                        <a href="#" class="my-auto"><i class="fas fa-link fa-2x text-white"></i></a>
-                                    </div>
-                                </div>
-                                <div class="blog-info d-flex align-items-center border border-start-0 border-end-0">
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>28 Jan 2050</small>
-                                    <a href="#" class="btn-hover flex-fill text-center text-white border-end py-2"><i class="fa fa-thumbs-up text-primary me-2"></i>1.7K</a>
-                                    <a href="#" class="btn-hover flex-fill text-center text-white py-2"><i class="fa fa-comments text-primary me-2"></i>1K</a>
-                                </div>
-                            </div>
-                            <div class="blog-content border border-top-0 rounded-bottom p-4">
-                                <p class="mb-3">Posted By: Royal Hamblin </p>
-                                <a href="#" class="h4">Adventures Trip</a>
-                                <p class="my-3">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam eos</p>
-                                <a href="#" class="btn btn-primary rounded-pill py-2 px-4">Read More</a>
-                            </div>
-                        </div>
-                    </div>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>
         <!-- Blog End -->
 
-        <!-- Testimonial Start -->
-        <div class="container-fluid testimonial py-5">
-            <div class="container py-5">
-                <div class="mx-auto text-center mb-5" style="max-width: 900px;">
-                    <h5 class="section-title px-3">Testimonial</h5>
-                    <h1 class="mb-0">Our Clients Say!!!</h1>
-                </div>
-                <div class="testimonial-carousel owl-carousel">
-                    <div class="testimonial-item text-center rounded pb-4">
-                        <div class="testimonial-comment bg-light rounded p-4">
-                            <p class="text-center mb-5">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam quasi porro officiis. Vero reiciendis,
-                            </p>
-                        </div>
-                        <div class="testimonial-img p-1">
-                            <img src="img/testimonial-1.jpg" class="img-fluid rounded-circle" alt="Image">
-                        </div>
-                        <div style="margin-top: -35px;">
-                            <h5 class="mb-0">John Abraham</h5>
-                            <p class="mb-0">New York, USA</p>
-                            <div class="d-flex justify-content-center">
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item text-center rounded pb-4">
-                        <div class="testimonial-comment bg-light rounded p-4">
-                            <p class="text-center mb-5">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam quasi porro officiis. Vero reiciendis,
-                            </p>
-                        </div>
-                        <div class="testimonial-img p-1">
-                            <img src="img/testimonial-2.jpg" class="img-fluid rounded-circle" alt="Image">
-                        </div>
-                        <div style="margin-top: -35px;">
-                            <h5 class="mb-0">John Abraham</h5>
-                            <p class="mb-0">New York, USA</p>
-                            <div class="d-flex justify-content-center">
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item text-center rounded pb-4">
-                        <div class="testimonial-comment bg-light rounded p-4">
-                            <p class="text-center mb-5">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam quasi porro officiis. Vero reiciendis,
-                            </p>
-                        </div>
-                        <div class="testimonial-img p-1">
-                            <img src="img/testimonial-3.jpg" class="img-fluid rounded-circle" alt="Image">
-                        </div>
-                        <div style="margin-top: -35px;">
-                            <h5 class="mb-0">John Abraham</h5>
-                            <p class="mb-0">New York, USA</p>
-                            <div class="d-flex justify-content-center">
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item text-center rounded pb-4">
-                        <div class="testimonial-comment bg-light rounded p-4">
-                            <p class="text-center mb-5">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam quasi porro officiis. Vero reiciendis,
-                            </p>
-                        </div>
-                        <div class="testimonial-img p-1">
-                            <img src="img/testimonial-4.jpg" class="img-fluid rounded-circle" alt="Image">
-                        </div>
-                        <div style="margin-top: -35px;">
-                            <h5 class="mb-0">John Abraham</h5>
-                            <p class="mb-0">New York, USA</p>
-                            <div class="d-flex justify-content-center">
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Testimonial End -->
 
         <!-- Subscribe Start -->
         <div class="container-fluid subscribe py-5">
