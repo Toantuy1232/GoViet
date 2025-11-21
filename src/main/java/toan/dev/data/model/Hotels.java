@@ -10,6 +10,16 @@ public class Hotels {
     public String image_url;
     public int tour_id;
 
+    public Hotels(int destinationId, String name, String address, double pricePerNight, int stars, String imageUrl, int tourId) {
+        this.destination_id =destinationId;
+        this.name = name;
+        this.address = address;
+        this.price_per_night = pricePerNight;
+        this.stars = stars;
+        this.image_url = imageUrl;
+        this.tour_id = tourId;
+    }
+
     public int getTour_id() {
         return tour_id;
     }

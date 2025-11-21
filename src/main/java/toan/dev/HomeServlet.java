@@ -1,14 +1,14 @@
 package toan.dev;
 
 import toan.dev.data.dao.DatabaseDao;
-import toan.dev.data.model.CategoryGallery;
-import toan.dev.data.model.Destinations;
-import toan.dev.data.model.Category;
+import toan.dev.data.model.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class HomeServlet extends BaseServlet {
@@ -25,7 +25,32 @@ public class HomeServlet extends BaseServlet {
             CategoryGallery randomImage = categoryGalleryList.get(randomIndex);
             request.setAttribute("randomGalleryImage", randomImage);
         }
-        
+        List<Blogposts> blogPosts = DatabaseDao.getInstance().getBlogDao().findAll();
+        if (blogPosts != null && !blogPosts.isEmpty()) {
+            Collections.shuffle(blogPosts);
+            int count = Math.min(blogPosts.size(), 3);
+            List<Blogposts> randomBlogPosts = blogPosts.subList(0, count);
+            request.setAttribute("randomBlogPosts", randomBlogPosts);
+        }
+        List<Users> allUsers = DatabaseDao.getInstance().getUserDao().findAll();
+        List<Users> guides = new ArrayList<>();
+        for (Users user : allUsers) {
+            if (user.getRole() != null && user.getRole().equalsIgnoreCase("GUIDE")) {
+
+                if (user.getAvatar_url() != null && !user.getAvatar_url().startsWith("/")) {
+                    user.setAvatar_url("/" + user.getAvatar_url());
+                }
+                guides.add(user);
+            }
+        }
+        if (guides.isEmpty()) {
+            Users sampleGuide = new Users("guide@example.com", "hashedpassword", "GUIDE");
+            sampleGuide.setFullname("Nguyễn Văn Mẫu");
+            sampleGuide.setAvatar_url("/assets/images/avatars/default-avatar.jpg");
+            guides.add(sampleGuide);
+        }
+
+        request.setAttribute("guides", guides);
         request.setAttribute("categoryGalleryList", categoryGalleryList);
         request.setAttribute("destinationsList", DatabaseDao.getInstance().getDestinationsDao().findAll());
         request.setAttribute("categoryList", DatabaseDao.getInstance().getCategoryDao().findAll());
