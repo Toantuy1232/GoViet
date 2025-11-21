@@ -20,6 +20,12 @@ public class HomeServlet extends BaseServlet {
         setDataAttributes(request);
         List<CategoryGallery> categoryGalleryList = DatabaseDao.getInstance()
                 .getCategoryGalleryDao().findAll();
+        if (categoryGalleryList != null && !categoryGalleryList.isEmpty()) {
+            int randomIndex = (int) (Math.random() * categoryGalleryList.size());
+            CategoryGallery randomImage = categoryGalleryList.get(randomIndex);
+            request.setAttribute("randomGalleryImage", randomImage);
+        }
+        
         request.setAttribute("categoryGalleryList", categoryGalleryList);
         request.setAttribute("destinationsList", DatabaseDao.getInstance().getDestinationsDao().findAll());
         request.setAttribute("categoryList", DatabaseDao.getInstance().getCategoryDao().findAll());
