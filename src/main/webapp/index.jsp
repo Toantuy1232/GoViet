@@ -38,166 +38,201 @@
         <%@include file="./inc/header.jsp" %>
 
         <!-- About Start -->
-        <div class="container-fluid about py-5">
-            <div class="container py-5">
-                <div class="row g-5 align-items-center">
-                    <div class="col-lg-5">
-                        <div class="h-100" style="border: 50px solid; border-color: transparent #13357B transparent #13357B;">
-                            <img src="img/about-img.jpg" class="img-fluid w-100 h-100" alt="">
-                        </div>
-                    </div>
-                    <div class="col-lg-7" style="background: linear-gradient(rgba(255, 255, 255, .8), rgba(255, 255, 255, .8)), url(img/about-img-1.png);">
-                        <h5 class="section-about-title pe-3">About Us</h5>
-                        <h1 class="mb-4">Welcome to <span class="text-primary">Travela</span></h1>
-                        <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, dolorum, doloribus sunt dicta, officia voluptatibus libero necessitatibus natus impedit quam ullam assumenda? Id atque iste consectetur. Commodi odit ab saepe!</p>
-                        <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium quos voluptatem suscipit neque enim, doloribus ipsum rem eos distinctio, dignissimos nisi saepe nulla? Libero numquam perferendis provident placeat molestiae quia?</p>
-                        <div class="row gy-2 gx-4 mb-4">
-                            <div class="col-sm-6">
-                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>First Class Flights</p>
-                            </div>
-                            <div class="col-sm-6">
-                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Handpicked Hotels</p>
-                            </div>
-                            <div class="col-sm-6">
-                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>5 Star Accommodations</p>
-                            </div>
-                            <div class="col-sm-6">
-                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Latest Model Vehicles</p>
-                            </div>
-                            <div class="col-sm-6">
-                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>150 Premium City Tours</p>
-                            </div>
-                            <div class="col-sm-6">
-                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>24/7 Service</p>
-                            </div>
-                        </div>
-                        <a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="">Read More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+      <div class="container-fluid about py-5">
+          <div class="container py-5">
+              <div class="row g-5 align-items-center">
+
+                  <!-- Cột ảnh -->
+                  <div class="col-lg-5">
+                      <div class="h-100" style="border: 50px solid; border-color: transparent #13357B transparent #13357B;">
+                          <c:choose>
+                              <c:when test="${not empty randomGalleryImage}">
+                                  <img src="${pageContext.request.contextPath}/img/${randomGalleryImage.image_url}" class="img-fluid w-100 h-100" alt="${randomGalleryImage.image_url}">
+                              </c:when>
+
+                              <c:when test="${not empty categoryGalleryList}">
+                                  <c:set var="randomImage" value="${categoryGalleryList[0]}" />
+                                  <img src="${pageContext.request.contextPath}/img/${randomImage.image_url}" class="img-fluid w-100 h-100" alt="${randomImage.image_url}">
+                              </c:when>
+
+                              <c:otherwise>
+                                  <img src="${pageContext.request.contextPath}/img/default-about.jpg" class="img-fluid w-100 h-100" alt="About us">
+                              </c:otherwise>
+                          </c:choose>
+                      </div> <!-- 🔥 THẺ DIV NÀY BẠN BỊ THIẾU -->
+
+                  </div>
+
+                  <!-- Cột nội dung -->
+                  <div class="col-lg-7"
+                       style="background: linear-gradient(rgba(255,255,255,.8), rgba(255,255,255,.8)), url(img/about-img-1.png);">
+
+                      <h5 class="section-about-title pe-3">Về Chúng Tôi</h5>
+                      <h1 class="mb-4">Chào mừng đến với <span class="text-primary">GoViet</span></h1>
+
+                      <p class="mb-4">
+                          Chúng tôi là công ty du lịch chuyên cung cấp các dịch vụ tour trong và ngoài nước,
+                          mang đến cho bạn những trải nghiệm tuyệt vời, an toàn và đáng nhớ.
+                      </p>
+
+                      <p class="mb-4">
+                          Sứ mệnh của chúng tôi là đồng hành cùng bạn trên mọi chuyến đi.
+                      </p>
+
+                      <div class="row gy-2 gx-4 mb-4">
+                          <div class="col-sm-6"><p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Chuyến Bay Hạng Nhất</p></div>
+                          <div class="col-sm-6"><p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Khách Sạn Tuyển Chọn</p></div>
+                          <div class="col-sm-6"><p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Lưu Trú Chuẩn 5 Sao</p></div>
+                          <div class="col-sm-6"><p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Xe Du Lịch Đời Mới</p></div>
+                          <div class="col-sm-6"><p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>150 Tour Tham Quan Cao Cấp</p></div>
+                          <div class="col-sm-6"><p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Dịch Vụ 24/7</p></div>
+                      </div>
+
+                      <a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="">Xem Thêm</a>
+                  </div>
+
+              </div>
+          </div>
+      </div>
+
         <!-- About End -->
 
         <!-- Services Start -->
-        <div class="container-fluid bg-light service py-5">
-            <div class="container py-5">
-                <div class="mx-auto text-center mb-5" style="max-width: 900px;">
-                    <h5 class="section-title px-3">Searvices</h5>
-                    <h1 class="mb-0">Our Services</h1>
-                </div>
-                <div class="row g-4">
-                    <div class="col-lg-6">
-                        <div class="row g-4">
-                            <div class="col-12">
-                                <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 pe-0">
-                                    <div class="service-content text-end">
-                                        <h5 class="mb-4">WorldWide Tours</h5>
-                                        <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum, suscipit expedita corrupti officiis debitis possimus nam laudantium beatae quidem dolore consequuntur voluptate rem reiciendis, omnis sequi harum earum.
-                                        </p>
-                                    </div>
-                                    <div class="service-icon p-4">
-                                        <i class="fa fa-globe fa-4x text-primary"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="service-content-inner d-flex align-items-center  bg-white border border-primary rounded p-4 pe-0">
-                                    <div class="service-content text-end">
-                                        <h5 class="mb-4">Hotel Reservation</h5>
-                                        <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum, suscipit expedita corrupti officiis debitis possimus nam laudantium beatae quidem dolore consequuntur voluptate rem reiciendis, omnis sequi harum earum.
-                                        </p>
-                                    </div>
-                                    <div class="service-icon p-4">
-                                        <i class="fa fa-hotel fa-4x text-primary"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 pe-0">
-                                    <div class="service-content text-end">
-                                        <h5 class="mb-4">Travel Guides</h5>
-                                        <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum, suscipit expedita corrupti officiis debitis possimus nam laudantium beatae quidem dolore consequuntur voluptate rem reiciendis, omnis sequi harum earum.
-                                        </p>
-                                    </div>
-                                    <div class="service-icon p-4">
-                                        <i class="fa fa-user fa-4x text-primary"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 pe-0">
-                                    <div class="service-content text-end">
-                                        <h5 class="mb-4">Event Management</h5>
-                                        <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum, suscipit expedita corrupti officiis debitis possimus nam laudantium beatae quidem dolore consequuntur voluptate rem reiciendis, omnis sequi harum earum.
-                                        </p>
-                                    </div>
-                                    <div class="service-icon p-4">
-                                        <i class="fa fa-cog fa-4x text-primary"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="row g-4">
-                            <div class="col-12">
-                                <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 ps-0">
-                                    <div class="service-icon p-4">
-                                        <i class="fa fa-globe fa-4x text-primary"></i>
-                                    </div>
-                                    <div class="service-content">
-                                        <h5 class="mb-4">WorldWide Tours</h5>
-                                        <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum, suscipit expedita corrupti officiis debitis possimus nam laudantium beatae quidem dolore consequuntur voluptate rem reiciendis, omnis sequi harum earum.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 ps-0">
-                                    <div class="service-icon p-4">
-                                        <i class="fa fa-hotel fa-4x text-primary"></i>
-                                    </div>
-                                    <div class="service-content">
-                                        <h5 class="mb-4">Hotel Reservation</h5>
-                                        <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum, suscipit expedita corrupti officiis debitis possimus nam laudantium beatae quidem dolore consequuntur voluptate rem reiciendis, omnis sequi harum earum.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 ps-0">
-                                    <div class="service-icon p-4">
-                                        <i class="fa fa-user fa-4x text-primary"></i>
-                                    </div>
-                                    <div class="service-content">
-                                        <h5 class="mb-4">Travel Guides</h5>
-                                        <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum, suscipit expedita corrupti officiis debitis possimus nam laudantium beatae quidem dolore consequuntur voluptate rem reiciendis, omnis sequi harum earum.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 ps-0">
-                                    <div class="service-icon p-4">
-                                        <i class="fa fa-cog fa-4x text-primary"></i>
-                                    </div>
-                                    <div class="service-content">
-                                        <h5 class="mb-4">Event Management</h5>
-                                        <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum, suscipit expedita corrupti officiis debitis possimus nam laudantium beatae quidem dolore consequuntur voluptate rem reiciendis, omnis sequi harum earum.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="text-center">
-                            <a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="">Service More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+       <div class="container-fluid bg-light service py-5">
+           <div class="container py-5">
+               <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+                   <h5 class="section-title px-3">Dịch Vụ</h5>
+                   <h1 class="mb-0">Các Dịch Vụ Của Chúng Tôi</h1>
+               </div>
+               <div class="row g-4">
+                   <div class="col-lg-6">
+                       <div class="row g-4">
+                           <div class="col-12">
+                               <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 pe-0">
+                                   <div class="service-content text-end">
+                                       <h5 class="mb-4">Tour Du Lịch Toàn Thế Giới</h5>
+                                       <p class="mb-0">
+                                       Khám phá những điểm đến nổi tiếng trên khắp thế giới với các tour được thiết kế trọn gói, lịch trình linh hoạt và hướng dẫn viên chuyên nghiệp. Mang đến cho bạn trải nghiệm du lịch trọn vẹn và đáng nhớ nhất.
+                                       </p>
+                                   </div>
+                                   <div class="service-icon p-4">
+                                       <i class="fa fa-globe fa-4x text-primary"></i>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="col-12">
+                               <div class="service-content-inner d-flex align-items-center  bg-white border border-primary rounded p-4 pe-0">
+                                   <div class="service-content text-end">
+                                       <h5 class="mb-4">Đặt Phòng Khách Sạn</h5>
+                                       <p class="mb-0">
+                                       Chúng tôi cung cấp hệ thống đặt phòng khách sạn nhanh chóng, giá tốt, đa dạng từ bình dân đến cao cấp. Đảm bảo không phát sinh chi phí, nhiều ưu đãi độc quyền và dịch vụ hỗ trợ 24/7.
+                                       </p>
+                                   </div>
+                                   <div class="service-icon p-4">
+                                       <i class="fa fa-hotel fa-4x text-primary"></i>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="col-12">
+                               <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 pe-0">
+                                   <div class="service-content text-end">
+                                       <h5 class="mb-4">Hướng Dẫn Viên Du Lịch</h5>
+                                       <p class="mb-0">
+                                       Đội ngũ hướng dẫn viên giàu kinh nghiệm, thân thiện và nhiệt tình sẽ đồng hành cùng bạn trong suốt chuyến đi, giới thiệu văn hóa – lịch sử – ẩm thực địa phương một cách sinh động và hấp dẫn.
+                                       </p>
+                                   </div>
+                                   <div class="service-icon p-4">
+                                       <i class="fa fa-user fa-4x text-primary"></i>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="col-12">
+                               <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 pe-0">
+                                   <div class="service-content text-end">
+                                       <h5 class="mb-4">Tổ Chức Sự Kiện</h5>
+                                       <p class="mb-0">
+                                       Nhận tổ chức các chương trình team building, hội nghị – hội thảo, sự kiện doanh nghiệp tại các địa điểm du lịch. Chuyên nghiệp trong khâu chuẩn bị, sáng tạo trong nội dung, đảm bảo thành công trọn vẹn.
+                                       </p>
+                                   </div>
+                                   <div class="service-icon p-4">
+                                       <i class="fa fa-cog fa-4x text-primary"></i>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+
+                   <div class="col-lg-6">
+                       <div class="row g-4">
+                           <div class="col-12">
+                               <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 ps-0">
+                                   <div class="service-icon p-4">
+                                       <i class="fa fa-globe fa-4x text-primary"></i>
+                                   </div>
+                                   <div class="service-content">
+                                       <h5 class="mb-4">Tour Du Lịch Toàn Thế Giới</h5>
+                                       <p class="mb-0">
+                                       Khám phá những điểm đến nổi tiếng trên khắp thế giới với các tour được thiết kế trọn gói, lịch trình linh hoạt và hướng dẫn viên chuyên nghiệp. Mang đến cho bạn trải nghiệm du lịch trọn vẹn và đáng nhớ nhất.
+                                       </p>
+                                   </div>
+                               </div>
+                           </div>
+
+                           <div class="col-12">
+                               <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 ps-0">
+                                   <div class="service-icon p-4">
+                                       <i class="fa fa-hotel fa-4x text-primary"></i>
+                                   </div>
+                                   <div class="service-content">
+                                       <h5 class="mb-4">Đặt Phòng Khách Sạn</h5>
+                                       <p class="mb-0">
+                                       Chúng tôi cung cấp hệ thống đặt phòng khách sạn nhanh chóng, giá tốt, đa dạng từ bình dân đến cao cấp. Đảm bảo không phát sinh chi phí, nhiều ưu đãi độc quyền và dịch vụ hỗ trợ 24/7.
+                                       </p>
+                                   </div>
+                               </div>
+                           </div>
+
+                           <div class="col-12">
+                               <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 ps-0">
+                                   <div class="service-icon p-4">
+                                       <i class="fa fa-user fa-4x text-primary"></i>
+                                   </div>
+                                   <div class="service-content">
+                                       <h5 class="mb-4">Hướng Dẫn Viên Du Lịch</h5>
+                                       <p class="mb-0">
+                                       Đội ngũ hướng dẫn viên giàu kinh nghiệm, thân thiện và nhiệt tình sẽ đồng hành cùng bạn trong suốt chuyến đi, giới thiệu văn hóa – lịch sử – ẩm thực địa phương một cách sinh động và hấp dẫn.
+                                       </p>
+                                   </div>
+                               </div>
+                           </div>
+
+                           <div class="col-12">
+                               <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 ps-0">
+                                   <div class="service-icon p-4">
+                                       <i class="fa fa-cog fa-4x text-primary"></i>
+                                   </div>
+                                   <div class="service-content">
+                                       <h5 class="mb-4">Tổ Chức Sự Kiện</h5>
+                                       <p class="mb-0">
+                                       Nhận tổ chức các chương trình team building, hội nghị – hội thảo, sự kiện doanh nghiệp tại các địa điểm du lịch. Chuyên nghiệp trong khâu chuẩn bị, sáng tạo trong nội dung, đảm bảo thành công trọn vẹn.
+                                       </p>
+                                   </div>
+                               </div>
+                           </div>
+
+                       </div>
+                   </div>
+
+                   <div class="col-12">
+                       <div class="text-center">
+                           <a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="">Xem Thêm Dịch Vụ</a>
+                       </div>
+                   </div>
+
+               </div>
+           </div>
+       </div>
+
         <!-- Services End -->
 
     
