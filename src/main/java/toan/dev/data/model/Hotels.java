@@ -8,6 +8,15 @@ public class Hotels {
     public double price_per_night;
     public int stars;
     public String image_url;
+    public int tour_id;
+
+    public int getTour_id() {
+        return tour_id;
+    }
+
+    public void setTour_id(int tour_id) {
+        this.tour_id = tour_id;
+    }
 
     public int getHotel_id() {
         return hotel_id;
@@ -65,7 +74,7 @@ public class Hotels {
         this.image_url = image_url;
     }
 
-    public Hotels(int hotel_id, int destination_id, String name, String address, double price_per_night, int stars, String image_url) {
+    public Hotels(int hotel_id, int destination_id, String name, String address, double price_per_night, int stars, String image_url, int tour_id) {
         super();
         this.hotel_id = hotel_id;
         this.destination_id = destination_id;
@@ -74,5 +83,6 @@ public class Hotels {
         this.price_per_night = price_per_night;
         this.stars = stars;
         this.image_url = image_url;
+        this.tour_id = tour_id;
     }
 }

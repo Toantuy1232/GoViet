@@ -7,16 +7,26 @@ public class Destinations {
     public String name;
     public String description;
     public String location;
+    public int category_id;
     public String image_url;
     public String best_time_to_visit;
     public Timestamp created_at;
 
-    public Destinations(int id, int destinationId, String name, String description, String location, String imageUrl, String bestTimeToVisit, Timestamp createdAt) {
+    public int getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
+    }
+
+    public Destinations(int id, int destinationId, String name, String description, String location, int category_id, String imageUrl, String bestTimeToVisit, Timestamp createdAt) {
         super();
         this.destination_id = destinationId;
         this.name = name;
         this.description = description;
         this.location = location;
+        this.category_id = category_id;
         this.image_url = imageUrl;
         this.best_time_to_visit = bestTimeToVisit;
         this.created_at = createdAt;
@@ -79,12 +89,13 @@ public class Destinations {
         this.created_at = created_at;
     }
 
-    public Destinations(int destination_id, String name, String description, String location, String image_url, String best_time_to_visit, Timestamp created_at) {
+    public Destinations(int destination_id, String name, String description, String location, int category_id,String image_url, String best_time_to_visit, Timestamp created_at) {
         super();
         this.destination_id = destination_id;
         this.name = name;
         this.description = description;
         this.location = location;
+        this.category_id = category_id;
         this.image_url = image_url;
         this.best_time_to_visit = best_time_to_visit;
         this.created_at = created_at;

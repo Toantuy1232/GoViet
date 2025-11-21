@@ -11,14 +11,14 @@ import java.util.List;
 public class DestinationsImpl implements DestinationsDao {
     @Override
     public boolean insert(Destinations destinations) {
-        String sql = "insert into destinations(destination_id, name, description, location, image_url, best_time_to_visit, created_at) values(?,?,?,?,?,?,?)";
+        String sql = "insert into destinations(name, description, location, category_id, image_url, best_time_to_visit, created_at) values(?,?,?,?,?,?,?)";
         try (Connection conn = DatabaseDao.getDriver().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
         ){
-            stmt.setInt(1, destinations.destination_id);
-            stmt.setString(2, destinations.name);
-            stmt.setString(3, destinations.description);
-            stmt.setString(4, destinations.location);
+            stmt.setString(1, destinations.name);
+            stmt.setString(2, destinations.description);
+            stmt.setString(3, destinations.location);
+            stmt.setInt(4, destinations.category_id);
             stmt.setString(5, destinations.image_url);
             stmt.setString(6, destinations.best_time_to_visit);
             stmt.setTimestamp(7, destinations.created_at);
@@ -32,17 +32,18 @@ public class DestinationsImpl implements DestinationsDao {
 
     @Override
     public boolean update(Destinations destinations) {
-        String sql = "update destinations set name = ?, description = ?, location = ?, image_url = ?, best_time_to_visit = ?, created_at = ? where destination_id = ?";
+        String sql = "update destinations set name = ?, description = ?, category_id = ?, location = ?, image_url = ?, best_time_to_visit = ?, created_at = ? where destination_id = ?";
         try (Connection conn = DatabaseDao.getDriver().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
         ){
             stmt.setString(1, destinations.name);
             stmt.setString(2, destinations.description);
-            stmt.setString(3, destinations.location);
-            stmt.setString(4, destinations.image_url);
-            stmt.setString(5, destinations.best_time_to_visit);
-            stmt.setTimestamp(6, destinations.created_at);
-            stmt.setInt(7, destinations.destination_id);
+            stmt.setInt(3, destinations.category_id);
+            stmt.setString(4, destinations.location);
+            stmt.setString(5, destinations.image_url);
+            stmt.setString(6, destinations.best_time_to_visit);
+            stmt.setTimestamp(7, destinations.created_at);
+            stmt.setInt(8, destinations.destination_id);
             
             return stmt.executeUpdate() > 0;
         } catch (SQLException ex) {
@@ -78,10 +79,11 @@ public class DestinationsImpl implements DestinationsDao {
               String name = rs.getString("name");
               String description = rs.getString("description");
               String location = rs.getString("location");
+              int category_id = rs.getInt("category_id");
               String image_url = rs.getString("image_url");
               String best_time_to_visit = rs.getString("best_time_to_visit");
               Timestamp created_at = rs.getTimestamp("created_at");
-              return new Destinations(id, destination_id, name, description, location, image_url, best_time_to_visit, created_at);
+              return new Destinations(id, destination_id, name, description, location,category_id, image_url, best_time_to_visit, created_at);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -102,10 +104,11 @@ public class DestinationsImpl implements DestinationsDao {
                 String name = rs.getString("name");
                 String description = rs.getString("description");
                 String location = rs.getString("location");
+                int category_id = rs.getInt("category_id");
                 String image_url = rs.getString("image_url");
                 String best_time_to_visit = rs.getString("best_time_to_visit");
                 Timestamp created_at = rs.getTimestamp("created_at");
-               destinationsList.add(new Destinations(destination_id, name, description, location, image_url, best_time_to_visit, created_at));
+               destinationsList.add(new Destinations(destination_id, name, description, location,category_id, image_url, best_time_to_visit, created_at));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

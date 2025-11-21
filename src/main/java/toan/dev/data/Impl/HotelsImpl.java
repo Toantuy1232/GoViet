@@ -11,7 +11,7 @@ import java.util.List;
 public class HotelsImpl implements HotelsDao {
     @Override
     public boolean insert(Hotels hotels) {
-        String sql = "INSERT INTO hotels(hotel_id, destination_id, name, address, price_per_night, stars, image_url) values(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO hotels(hotel_id, destination_id, name, address, price_per_night, stars, image_url,tour_id) values(?,?,?,?,?,?,?,?)";
         try (Connection conn = DatabaseDao.getDriver().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
         ){
@@ -21,6 +21,7 @@ public class HotelsImpl implements HotelsDao {
             stmt.setString(4, hotels.address);
             stmt.setDouble(5, hotels.stars);
             stmt.setString(6, hotels.image_url);
+            stmt.setInt(7, hotels.tour_id);
             stmt.executeUpdate();
             return true;
         } catch(SQLException e) {
@@ -31,7 +32,7 @@ public class HotelsImpl implements HotelsDao {
 
     @Override
     public boolean update(Hotels hotels) {
-        String sql = "UPDATE hotels SET destination_id = ?, name = ?, address = ?, price_per_night = ?, stars = ?, image_url = ? WHERE hotel_id = ?";
+        String sql = "UPDATE hotels SET destination_id = ?, name = ?, address = ?, price_per_night = ?, stars = ?, image_url = ?, tour_id = ? WHERE hotel_id = ?";
         try (Connection conn = DatabaseDao.getDriver().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
         ){
@@ -42,6 +43,7 @@ public class HotelsImpl implements HotelsDao {
             stmt.setInt(5, hotels.stars);
             stmt.setString(6, hotels.image_url);
             stmt.setInt(7, hotels.hotel_id);
+            stmt.setInt(8, hotels.tour_id);
             stmt.executeUpdate();
             return true;
         } catch(SQLException e) {
@@ -81,7 +83,8 @@ public class HotelsImpl implements HotelsDao {
                 double price_per_night = rs.getDouble("price_per_night");
                 int stars = rs.getInt("stars");
                 String image_url = rs.getString("image_url");
-                return new Hotels(hotel_id, destination_id, name, address, price_per_night, stars, image_url);
+                int tour_id = rs.getInt("tour_id");
+                return new Hotels(hotel_id, destination_id, name, address, price_per_night, stars, image_url, tour_id);
             }
         } catch(SQLException e) {
             e.printStackTrace();
@@ -105,7 +108,8 @@ public class HotelsImpl implements HotelsDao {
                 double price_per_night = rs.getDouble("price_per_night");
                 int stars = rs.getInt("stars");
                 String image_url = rs.getString("image_url");
-                hotelsList.add(new Hotels(hotel_id, destination_id, name, address, price_per_night, stars, image_url));
+                int tour_id = rs.getInt("tour_id");
+                hotelsList.add(new Hotels(hotel_id, destination_id, name, address, price_per_night, stars, image_url, tour_id));
             }
         } catch(SQLException e) {
             e.printStackTrace();
@@ -130,7 +134,8 @@ public class HotelsImpl implements HotelsDao {
                 double price_per_night = rs.getDouble("price_per_night");
                 int stars = rs.getInt("stars");
                 String image_url = rs.getString("image_url");
-                hotelsList.add(new Hotels(hotel_id, destination_id, name, address, price_per_night, stars, image_url));
+                int tour_id = rs.getInt("tour_id");
+                hotelsList.add(new Hotels(hotel_id, destination_id, name, address, price_per_night, stars, image_url, tour_id));
             }
         } catch(SQLException e) {
             e.printStackTrace();

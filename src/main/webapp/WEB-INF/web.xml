@@ -143,6 +143,23 @@
         <servlet-name>DeleteTourServlet</servlet-name>
         <servlet-class>toan.dev.admin.Tours.DeleteTourServlet</servlet-class>
     </servlet>
+    <!--Cấu hình admin destinations-->
+    <servlet>
+        <servlet-name>IndexDestinationsServlet</servlet-name>
+        <servlet-class>toan.dev.admin.Destinations.IndexDestinationsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateDestinationsServlet</servlet-name>
+        <servlet-class>toan.dev.admin.Destinations.CreateDestinationsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditDestinationsServlet</servlet-name>
+        <servlet-class>toan.dev.admin.Destinations.EditDestinationsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteDestinationsServlet</servlet-name>
+        <servlet-class>toan.dev.admin.Destinations.DeleteDestinationsServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/</url-pattern>
@@ -254,6 +271,23 @@
     <servlet-mapping>
         <servlet-name>DeleteTourServlet</servlet-name>
         <url-pattern>/DeleteTourServlet</url-pattern>
+    </servlet-mapping>
+    <!--Cấu hình admin destinations-->
+    <servlet-mapping>
+        <servlet-name>IndexDestinationsServlet</servlet-name>
+        <url-pattern>/IndexDestinationsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateDestinationsServlet</servlet-name>
+        <url-pattern>/CreateDestinationsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditDestinationsServlet</servlet-name>
+        <url-pattern>/EditDestinationsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteDestinationsServlet</servlet-name>
+        <url-pattern>/DeleteDestinationsServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DashboardServlet</servlet-name>
