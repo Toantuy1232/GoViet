@@ -2,6 +2,8 @@ package toan.dev;
 
 import toan.dev.data.dao.DatabaseDao;
 import toan.dev.data.model.CategoryGallery;
+import toan.dev.data.model.Destinations;
+import toan.dev.data.model.Category;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +21,8 @@ public class HomeServlet extends BaseServlet {
         List<CategoryGallery> categoryGalleryList = DatabaseDao.getInstance()
                 .getCategoryGalleryDao().findAll();
         request.setAttribute("categoryGalleryList", categoryGalleryList);
+        request.setAttribute("destinationsList", DatabaseDao.getInstance().getDestinationsDao().findAll());
+        request.setAttribute("categoryList", DatabaseDao.getInstance().getCategoryDao().findAll());
         // Forward đến index.jsp
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }

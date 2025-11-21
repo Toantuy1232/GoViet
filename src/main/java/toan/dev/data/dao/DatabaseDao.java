@@ -19,8 +19,10 @@ public class DatabaseDao {
     private BlogpostsDao blogDao;
     private UsersDao usersDao;
     private OrdersDao orderDao;
+    private DestinationsDao destinationsDao;
     private CategoryGalleryDao categoryGalleryDao;
     private TourDao tourDao;
+    private HotelsDao hotelsDao;
     private DatabaseDao() {
         categoryDao = new CategoryImpl();
         productDao = new ProductImpl();
@@ -28,6 +30,7 @@ public class DatabaseDao {
         blogDao = new BlogpostsImpl();
         orderDao = new OrderImpl();
         tourDao = new TourImpl();
+        destinationsDao = new DestinationsImpl();
         categoryGalleryDao = new CategoryGalleryImpl();
 
         usersDao = new UserImpl() {
@@ -167,5 +170,11 @@ public class DatabaseDao {
     }
     public CategoryGalleryDao getCategoryGalleryDao() {
         return categoryGalleryDao;
+    }
+    public HotelsDao getHotelsDao() {
+        return hotelsDao;
+    }
+    public DestinationsDao getDestinationsDao() {
+        return destinationsDao;
     }
 }

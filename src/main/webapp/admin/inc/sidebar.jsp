@@ -79,6 +79,14 @@
                       </div>
 
                     <div class="nav-item dropdown">
+                     <a href="${pageContext.request.contextPath}/IndexDestinationsServlet" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-map-marker-alt me-2"></i>Destinations</a>
+                     <div class="dropdown-menu bg-transparent border-0">
+                          <a href="${pageContext.request.contextPath}/IndexDestinationsServlet" class="dropdown-item">All</a>
+                           <a href="${pageContext.request.contextPath}/CreateDestinationsServlet" class="dropdown-item">Add</a>
+                      </div>
+                      </div>
+
+                    <div class="nav-item dropdown">
                      <a href="${pageContext.request.contextPath}/IndexOrderServlet" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-receipt me-2"></i>Orders</a>
                      <div class="dropdown-menu bg-transparent border-0">
                           <a href="${pageContext.request.contextPath}/IndexOrderServlet" class="dropdown-item">All</a>

@@ -31,4 +31,8 @@ public class DatabaseDao {
         }
         return driver;
     }
+
+    public DestinationsDao getDestinationsDao() {
+        return new DestinationsImpl();
+    }
 }
