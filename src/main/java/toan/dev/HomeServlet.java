@@ -1,6 +1,8 @@
 package toan.dev;
 
+import toan.dev.data.dao.CategoryDao;
 import toan.dev.data.dao.DatabaseDao;
+import toan.dev.data.dao.DestinationsDao;
 import toan.dev.data.model.*;
 
 import javax.servlet.ServletException;
@@ -49,7 +51,12 @@ public class HomeServlet extends BaseServlet {
             sampleGuide.setAvatar_url("/assets/images/avatars/default-avatar.jpg");
             guides.add(sampleGuide);
         }
-
+        DestinationsDao destinationDao = DatabaseDao.getInstance().getDestinationsDao();
+        List<Destinations> destinations = destinationDao.findAll();
+        CategoryDao categoryDao = DatabaseDao.getInstance().getCategoryDao();
+        List<Category> categories = categoryDao.findAll();
+        request.setAttribute("categories", categories);
+        request.setAttribute("destinations", destinations);
         request.setAttribute("guides", guides);
         request.setAttribute("categoryGalleryList", categoryGalleryList);
         request.setAttribute("destinationsList", DatabaseDao.getInstance().getDestinationsDao().findAll());

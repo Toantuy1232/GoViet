@@ -109,6 +109,10 @@
         <servlet-name>DashboardServlet</servlet-name>
         <servlet-class>toan.dev.admin.DashboardServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProfileServlet</servlet-name>
+        <servlet-class>toan.dev.ProfileServlet</servlet-class>
+    </servlet>
     <!--Cấu hình admin blog-->
     <servlet>
         <servlet-name>IndexBlogServlet</servlet-name>
@@ -204,6 +208,11 @@
     <servlet-mapping>
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/SearchServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileServlet</servlet-name>
+        <url-pattern>/profile</url-pattern>
+        <url-pattern>/ProfileServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
@@ -397,10 +406,6 @@
         <servlet-class>toan.dev.RegisterServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ProfileServlet</servlet-name>
-        <servlet-class>toan.dev.ProfileServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>UserServlet</servlet-name>
         <servlet-class>toan.dev.UserServlet</servlet-class>
     </servlet>
@@ -424,10 +429,6 @@
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ProfileServlet</servlet-name>
-        <url-pattern>/ProfileServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
