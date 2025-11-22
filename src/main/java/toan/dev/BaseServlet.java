@@ -98,6 +98,7 @@ public abstract class BaseServlet extends HttpServlet implements DataProvider {
     }
     protected void setDataAttributes(HttpServletRequest request) {
         request.setAttribute("categoryList", getCategories());
+        request.setAttribute("categories", getCategories());  
         request.setAttribute("productList", getProducts());
         request.setAttribute("hotProductsList", getHotProducts());
         request.setAttribute("newProductsList", getNewProducts());
