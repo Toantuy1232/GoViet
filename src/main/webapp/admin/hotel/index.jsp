@@ -150,7 +150,7 @@
                                                                 <tr>
                                                                     <td>
                                                                         <c:if test="${not empty hotel.image_url}">
-                                                                            <img src="${pageContext.request.contextPath}/uploads/hotels/${hotel.image_url}"
+                                                                            <img src="${pageContext.request.contextPath}/assets/images/${hotel.image_url}"
                                                                                  width="70" 
                                                                                  height="50" 
                                                                                  style="object-fit:cover" 

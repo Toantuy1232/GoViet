@@ -45,7 +45,7 @@ public class HomeServlet extends BaseServlet {
         }
         if (guides.isEmpty()) {
             Users sampleGuide = new Users("guide@example.com", "hashedpassword", "GUIDE");
-            sampleGuide.setFullname("Nguyễn Văn Mẫu");
+            sampleGuide.setFullname("Nguyễn Bá Toàn");
             sampleGuide.setAvatar_url("/assets/images/avatars/default-avatar.jpg");
             guides.add(sampleGuide);
         }
