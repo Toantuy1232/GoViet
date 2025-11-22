@@ -17,7 +17,7 @@ public class IndexHotelServlet extends BaseAdminServlet {
             throws ServletException, IOException {
         List<Hotels> hotelsList = DatabaseDao.getInstance().getHotelsDao().findAll();
         request.setAttribute("hotelsList", hotelsList);
-        request.getRequestDispatcher("admin/hotels/index.jsp").forward(request, response);
+        request.getRequestDispatcher("admin/hotel/index.jsp").forward(request, response);
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

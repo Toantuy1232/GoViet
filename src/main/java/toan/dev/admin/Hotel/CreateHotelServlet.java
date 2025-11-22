@@ -13,7 +13,7 @@ public class CreateHotelServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("admin/hotels/create.jsp").forward(request, response);
+        request.getRequestDispatcher("admin/hotel/create.jsp").forward(request, response);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class CreateHotelServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Error creating hotel: " + e.getMessage());
-            request.getRequestDispatcher("admin/hotels/create.jsp").forward(request, response);
+            request.getRequestDispatcher("admin/hotel/create.jsp").forward(request, response);
         }
     }
 }
