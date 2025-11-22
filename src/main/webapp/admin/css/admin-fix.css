@@ -1,7 +1,6 @@
-/* Admin CSS Fix */
+
 @charset "UTF-8";
 
-/* Fix Font Awesome icons */
 .fa, .fas, .far, .fab, .fal, .fad {
     font-family: "Font Awesome 5 Free", "Font Awesome 5 Brands", "Font Awesome 5 Pro" !important;
     font-weight: 900 !important;
@@ -26,7 +25,6 @@
     font-weight: 300 !important;
 }
 
-/* Fix icon colors */
 .fa.text-primary {
     color: #007bff !important;
 }
@@ -59,18 +57,17 @@
     color: #333 !important;
 }
 
-/* Global font family for all admin elements (except icons) */
+
 *:not(.fa):not(.fas):not(.far):not(.fab):not(.fal):not(.fad) {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 }
 
-/* Fix navbar text encoding and colors */
+
 .navbar, .navbar *:not(.fa):not(.fas):not(.far):not(.fab):not(.fal):not(.fad) {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
     color: #333 !important;
 }
 
-/* Force all navbar text to be dark */
 .navbar-dark, .navbar-dark *:not(.fa):not(.fas):not(.far):not(.fab):not(.fal):not(.fad) {
     color: #333 !important;
 }
@@ -89,7 +86,6 @@
     color: #666 !important;
 }
 
-/* Force search input placeholder to be dark */
 .navbar input[type="search"]::-webkit-input-placeholder {
     color: #666 !important;
 }
@@ -126,13 +122,12 @@
     color: white !important;
 }
 
-/* Fix navbar background to be lighter */
+
 .navbar {
     background: linear-gradient(135deg, #f8f9fa, #e9ecef) !important;
     border-bottom: 1px solid #dee2e6 !important;
 }
 
-/* Override Bootstrap navbar classes */
 .navbar .navbar-brand,
 .navbar .navbar-nav .nav-link,
 .navbar .navbar-text,
@@ -147,7 +142,6 @@
     color: #333 !important;
 }
 
-/* Fix specific navbar elements */
 .navbar .d-flex,
 .navbar .align-items-center,
 .navbar .me-3,
@@ -158,7 +152,6 @@
     color: #333 !important;
 }
 
-/* Fix sidebar text encoding and colors */
 .sidebar, .sidebar *:not(.fa):not(.fas):not(.far):not(.fab):not(.fal):not(.fad) {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 }
@@ -179,54 +172,124 @@
     opacity: 0.5 !important;
 }
 
-/* Ensure proper text rendering for all elements */
 .sidebar h4, .sidebar h6, .sidebar span, .sidebar small {
     color: #ffffff !important;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 }
 
-/* Fix content area */
 .content, .content *:not(.fa):not(.fas):not(.far):not(.fab):not(.fal):not(.fad) {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
     color: #333 !important;
 }
 
-/* Fix table text */
+
 .table, .table *:not(.fa):not(.fas):not(.far):not(.fab):not(.fal):not(.fad) {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
     color: #333 !important;
 }
 
-/* Fix card text */
+
 .card, .card *:not(.fa):not(.fas):not(.far):not(.fab):not(.fal):not(.fad) {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
     color: #333 !important;
 }
 
-/* Fix button text */
 .btn, .btn *:not(.fa):not(.fas):not(.far):not(.fab):not(.fal):not(.fad) {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 }
 
-/* Fix form elements */
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    position: fixed;
+    z-index: 1040;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar.toggled {
+    margin-left: -250px;
+}
+
+
+#content-wrapper {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    transition: all 0.3s;
+}
+
+.sidebar-toggled #content-wrapper {
+    margin-left: 0;
+    width: 100%;
+}
+
+@media (max-width: 992px) {
+    .sidebar {
+        margin-left: -250px;
+    }
+    
+    .sidebar.toggled {
+        margin-left: 0;
+    }
+    
+    #content-wrapper {
+        margin-left: 0;
+        width: 100%;
+    }
+    
+    .sidebar-toggled #content-wrapper {
+        margin-left: 0;
+    }
+}
+
+
+.navbar {
+    z-index: 1030;
+}
+
+.navbar,
+.sidebar,
+#content-wrapper {
+    transition: all 0.3s ease;
+}
+
+
+body.sidebar-toggled {
+    overflow-x: hidden;
+}
+
+body.sidebar-toggled .content {
+    width: 100%;
+    margin-left: 0;
+}
+
+.wrapper {
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
 .form-control, .form-control *:not(.fa):not(.fas):not(.far):not(.fab):not(.fal):not(.fad) {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
     color: #333 !important;
 }
 
-/* Fix dropdown text */
 .dropdown-menu, .dropdown-menu *:not(.fa):not(.fas):not(.far):not(.fab):not(.fal):not(.fad) {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
     color: #333 !important;
 }
 
-/* Force UTF-8 encoding for all text elements */
+
 h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label, th, td {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
     color: #333 !important;
 }
 
-/* Override ALL Bootstrap text color classes in navbar */
+
 .navbar .text-white,
 .navbar .text-white-50,
 .navbar .text-light,
@@ -241,7 +304,6 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
     color: #333 !important;
 }
 
-/* Override ALL Bootstrap opacity classes in navbar */
 .navbar .opacity-0,
 .navbar .opacity-25,
 .navbar .opacity-50,
@@ -251,12 +313,11 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
     color: #333 !important;
 }
 
-/* Force navbar text to be visible */
 .navbar *:not(.fa):not(.fas):not(.far):not(.fab):not(.fal):not(.fad) {
     color: #333 !important;
 }
 
-/* Fix sidebar styling */
+
 .sidebar {
     background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%) !important;
     min-height: 100vh;
@@ -289,7 +350,6 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
     display: none;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .sidebar {
         position: fixed;

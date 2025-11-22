@@ -26,14 +26,42 @@
     });
 
 
-    // Sidebar Toggler
-    $('.sidebar-toggler').click(function () {
-        $('.sidebar, .content').toggleClass("open");
-        return false;
+    $(document).on('click', '.sidebar-toggler', function (e) {
+        e.preventDefault();
+        $('body').toggleClass('sidebar-toggled');
+        $('.sidebar').toggleClass('toggled');
+
+        if ($('body').hasClass('sidebar-toggled')) {
+            localStorage.setItem('sidebar-toggled', 'true');
+        } else {
+            localStorage.removeItem('sidebar-toggled');
+        }
+    });
+
+    if (localStorage.getItem('sidebar-toggled') === 'true') {
+        $('body').addClass('sidebar-toggled');
+        $('.sidebar').addClass('toggled');
+    }
+
+    $(document).click(function(e) {
+        if ($(window).width() <= 992) {
+            if (!$(e.target).closest('.sidebar, .sidebar-toggler').length) {
+                $('body').addClass('sidebar-toggled');
+                $('.sidebar').addClass('toggled');
+                localStorage.setItem('sidebar-toggled', 'true');
+            }
+        }
+    });
+
+    $(window).resize(function() {
+        if ($(window).width() > 992) {
+            $('body').removeClass('sidebar-toggled');
+            $('.sidebar').removeClass('toggled');
+            localStorage.removeItem('sidebar-toggled');
+        }
     });
 
 
-    // Progress Bar
     $('.pg-bar').waypoint(function () {
         $('.progress .progress-bar').each(function () {
             $(this).css("width", $(this).attr("aria-valuenow") + '%');
@@ -41,14 +69,12 @@
     }, {offset: '80%'});
 
 
-    // Calender
+
     $('#calender').datetimepicker({
         inline: true,
         format: 'L'
     });
 
-
-    // Testimonials carousel
     $(".testimonial-carousel").owlCarousel({
         autoplay: true,
         smartSpeed: 1000,
@@ -59,7 +85,6 @@
     });
 
 
-    // Worldwide Sales Chart
     var ctx1 = $("#worldwide-sales").get(0).getContext("2d");
     var myChart1 = new Chart(ctx1, {
         type: "bar",
@@ -88,7 +113,6 @@
     });
 
 
-    // Salse & Revenue Chart
     var ctx2 = $("#salse-revenue").get(0).getContext("2d");
     var myChart2 = new Chart(ctx2, {
         type: "line",
@@ -113,9 +137,6 @@
         }
     });
     
-
-
-    // Single Line Chart
     var ctx3 = $("#line-chart").get(0).getContext("2d");
     var myChart3 = new Chart(ctx3, {
         type: "line",
@@ -134,7 +155,6 @@
     });
 
 
-    // Single Bar Chart
     var ctx4 = $("#bar-chart").get(0).getContext("2d");
     var myChart4 = new Chart(ctx4, {
         type: "bar",
@@ -157,7 +177,6 @@
     });
 
 
-    // Pie Chart
     var ctx5 = $("#pie-chart").get(0).getContext("2d");
     var myChart5 = new Chart(ctx5, {
         type: "pie",
@@ -179,8 +198,6 @@
         }
     });
 
-
-    // Doughnut Chart
     var ctx6 = $("#doughnut-chart").get(0).getContext("2d");
     var myChart6 = new Chart(ctx6, {
         type: "doughnut",

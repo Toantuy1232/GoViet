@@ -32,6 +32,7 @@ public class DatabaseDao {
         tourDao = new TourImpl();
         destinationsDao = new DestinationsImpl();
         categoryGalleryDao = new CategoryGalleryImpl();
+        hotelsDao = new HotelsImpl();
 
         usersDao = new UserImpl() {
 
