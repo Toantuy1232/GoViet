@@ -11,4 +11,8 @@ public interface TourDao {
     public boolean delete(int id);
     public Tours find(int id);
     public List<Tours> findAll();
+
+    List<Tours> findByCategoryAndSearchTerm(int categoryId, String searchTerm);
+
+    List<Tours> findBySearchTerm(String searchTerm);
 }

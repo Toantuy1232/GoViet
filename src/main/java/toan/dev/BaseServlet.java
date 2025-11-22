@@ -106,8 +106,9 @@ public abstract class BaseServlet extends HttpServlet implements DataProvider {
         request.setAttribute("blogpostsList", getBlog());
     }
 
-    protected abstract void doGet(javax.servlet.http.HttpServletRequest request, HttpServletResponse response)
-            throws javax.servlet.ServletException, IOException;
+    protected void doGet(javax.servlet.http.HttpServletRequest request, HttpServletResponse response)
+            throws javax.servlet.ServletException, IOException {
+    }
 
     protected abstract void doPost(javax.servlet.http.HttpServletRequest request, HttpServletResponse response)
             throws javax.servlet.ServletException, IOException;
