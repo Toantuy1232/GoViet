@@ -189,6 +189,10 @@
         <servlet-name>BlogDetailServlet</servlet-name>
         <servlet-class>toan.dev.BlogDetailServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchServlet</servlet-name>
+        <servlet-class>toan.dev.SearchServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/</url-pattern>
@@ -196,6 +200,10 @@
     <servlet-mapping>
         <servlet-name>DestinationServlet</servlet-name>
         <url-pattern>/DestinationServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/SearchServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
