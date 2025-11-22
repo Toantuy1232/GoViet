@@ -94,7 +94,7 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Trang</a>
                             <div class="dropdown-menu m-0">
-                                <a href="${pageContext.request.contextPath}/destination.jsp" class="dropdown-item">Điểm đến</a>
+                                <a href="${pageContext.request.contextPath}/DestinationServlet" class="dropdown-item">Điểm đến</a>
                                 <a href="${pageContext.request.contextPath}/tour.html" class="dropdown-item">Khám phá chuyến tham quan</a>
                                 <a href="${pageContext.request.contextPath}/booking.jsp" class="dropdown-item">Đặt chỗ du lịch</a>
                                 <a href="${pageContext.request.contextPath}/404.jsp" class="dropdown-item">404</a>

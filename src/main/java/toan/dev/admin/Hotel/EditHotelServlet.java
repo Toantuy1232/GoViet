@@ -1,9 +1,7 @@
 package toan.dev.admin.Hotel;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -21,7 +19,6 @@ import toan.dev.data.model.Hotels;
     maxRequestSize = 1024 * 1024 * 50     // 50MB
 )
 public class EditHotelServlet extends HttpServlet {
-    private static final String UPLOAD_DIR = "uploads/hotels/";
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -65,15 +62,9 @@ public class EditHotelServlet extends HttpServlet {
         for (String item : items) {
             if (item.trim().startsWith("filename")) {
                 String fileName = item.substring(item.indexOf("=") + 2, item.length() - 1);
-                
-                fileName = fileName.replaceAll("\\s+", "");
-
-                String fileExtension = "";
-                int lastDot = fileName.lastIndexOf('.');
-                if (lastDot > 0) {
-                    fileExtension = fileName.substring(lastDot);
-                }
-                return UUID.randomUUID().toString() + fileExtension;
+                // Giữ nguyên tên file gốc, chỉ xóa các ký tự đặc biệt có thể gây lỗi
+                fileName = fileName.replaceAll("[^a-zA-Z0-9.-]", "_");
+                return fileName;
             }
         }
         return "";
@@ -125,47 +116,30 @@ public class EditHotelServlet extends HttpServlet {
     
             String fileName = hotel.getImage_url();
             if (filePart != null && filePart.getSize() > 0) {
-              
+    
                 if (fileName != null && !fileName.isEmpty()) {
-                    String oldFilePath = getServletContext().getRealPath("") + UPLOAD_DIR + File.separator + fileName;
+                    String oldFilePath = getServletContext().getRealPath("") + ".." + File.separator + "assets" + File.separator + "images" + File.separator + fileName;
                     File oldFile = new File(oldFilePath);
                     if (oldFile.exists()) {
                         oldFile.delete();
                     }
                 }
                 
-             
+        
                 String appPath = getServletContext().getRealPath("");
-                String uploadPath = appPath + File.separator + UPLOAD_DIR;
-               
+                String uploadPath = appPath + ".." + File.separator + "assets" + File.separator + "images";
+                uploadPath = new File(uploadPath).getCanonicalPath();
                 File uploadDir = new File(uploadPath);
                 if (!uploadDir.exists()) {
                     uploadDir.mkdirs();
                 }
-                
-               
-                String targetUploadPath = "d:\\DuLich\\GoViet\\target\\GoViet-1.0-SNAPSHOT\\uploads\\hotels";
-                File targetUploadDir = new File(targetUploadPath);
-                if (!targetUploadDir.exists()) {
-                    targetUploadDir.mkdirs();
-                }
 
-                String originalFileName = getFileName(filePart);
-                String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
-                fileName = UUID.randomUUID().toString() + fileExtension;
-            
+                fileName = getFileName(filePart);
                 File uploadedFile = new File(uploadPath + File.separator + fileName);
                 filePart.write(uploadedFile.getAbsolutePath());
-                
-
-                File targetFile = new File(targetUploadPath + File.separator + fileName);
-                try (InputStream fileContent = filePart.getInputStream();
-                     FileOutputStream out = new FileOutputStream(targetFile)) {
-                    byte[] buffer = new byte[1024];
-                    int length;
-                    while ((length = fileContent.read(buffer)) > 0) {
-                        out.write(buffer, 0, length);
-                    }
+        
+                if (!uploadedFile.exists()) {
+                    throw new IOException("Failed to save uploaded file: " + uploadedFile.getAbsolutePath());
                 }
             }
    

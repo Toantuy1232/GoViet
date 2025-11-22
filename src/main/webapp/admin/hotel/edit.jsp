@@ -21,342 +21,380 @@
     <link href="${pageContext.request.contextPath}/assets/admin/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/assets/admin/css/style.css" rel="stylesheet">
     <style>
-        .form-control, .form-select {
-            border-radius: 0.35rem;
-            font-size: 0.875rem;
-            padding: 0.35rem 0.75rem;
-            height: calc(1.5em + 0.5rem + 2px);
-        }
-        .form-label {
-            margin-bottom: 0.25rem;
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-        .card {
-            border: none;
-            box-shadow: 0 0.15rem 1rem 0 rgba(58, 59, 69, 0.1);
-            margin-bottom: 1rem;
-        }
-        .card-header {
-            border-bottom: 1px solid #e3e6f0;
-            padding: 0.75rem 1.25rem;
-        }
-        .card-body {
-            padding: 1rem;
-        }
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        .btn {
-            padding: 0.35rem 0.75rem;
-            font-size: 0.875rem;
-        }
-        h1 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        .alert {
-            padding: 0.5rem 1rem;
-            margin-bottom: 1rem;
-            font-size: 0.875rem;
-        }
         body {
             background-color: #f8f9fc;
         }
+        #wrapper {
+            display: flex;
+            width: 100%;
+            align-items: stretch;
+        }
+        #content-wrapper {
+            width: 100%;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+        .container-fluid {
+            padding: 0 15px;
+            margin-left: 0;
+            width: 100%;
+        }
+        .card {
+            border: none;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+            margin-bottom: 1.5rem;
+        }
+        .card-header {
+            background-color: #f8f9fc;
+            border-bottom: 1px solid #e3e6f0;
+            padding: 1rem 1.25rem;
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .form-control, .form-select {
+            border-radius: 0.35rem;
+            font-size: 0.875rem;
+            padding: 0.5rem 0.75rem;
+        }
+        .form-label {
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #4e73df;
+        }
+        .btn {
+            padding: 0.4rem 1rem;
+            font-size: 0.9rem;
+            border-radius: 0.35rem;
+        }
+        .btn-primary {
+            background-color: #4e73df;
+            border-color: #4e73df;
+        }
+        .btn-primary:hover {
+            background-color: #2e59d9;
+            border-color: #2653d4;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+        .btn-success {
+            background-color: #1cc88a;
+            border-color: #1cc88a;
+        }
+        .btn-success:hover {
+            background-color: #17a673;
+            border-color: #169b6b;
+        }
+        .alert {
+            border-radius: 0.35rem;
+            padding: 0.75rem 1.25rem;
+        }
+        .sidebar {
+            min-width: 250px;
+            max-width: 250px;
+            min-height: 100vh;
+            transition: all 0.3s;
+            position: fixed;
+            z-index: 100;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        #content {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+            min-height: 100vh;
+            transition: all 0.3s;
+        }
+        @media (max-width: 992px) {
+            .sidebar {
+                margin-left: -250px;
+            }
+            .sidebar.active {
+                margin-left: 0;
+            }
+            #content {
+                width: 100%;
+                margin-left: 0;
+            }
+            #content.active {
+                margin-left: 250px;
+                width: calc(100% - 250px);
+            }
+        }
+        .form-check-label {
+            font-size: 0.9rem;
+        }
+        .amenities-container {
+            background-color: #f8f9fc;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            border: 1px solid #e3e6f0;
+        }
+        .form-section {
+            margin-bottom: 2rem;
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+        }
     </style>
 </head>
-<body id="page-top">
-<div id="wrapper">
-    <%@include file="../inc/sidebar.jsp"%>
+<body>
+    <div id="wrapper">
+        <%@include file="../inc/sidebar.jsp"%>
 
-    <div id="content-wrapper" class="d-flex flex-column">
-        <%@include file="../inc/navbar.jsp"%>
+        <div id="content">
+            <%@include file="../inc/navbar.jsp"%>
 
-        <div class="container-fluid" style="margin-left: 200px; padding: 15px; max-width: calc(100% - 200px);">
-            <div class="d-flex align-items-center justify-content-between mb-3">
-                <h1 class="h4 mb-0 text-success">Chỉnh sửa khách sạn</h1>
-                <div>
-                    <a href="index.jsp" class="btn btn-secondary btn-sm me-2">
-                        <i class="fas fa-arrow-left me-1"></i> Quay lại
-                    </a>
-                    <button type="submit" form="hotelForm" class="btn btn-success btn-sm" onclick="document.getElementById('hotelForm').submit();">
-                        <i class="fas fa-save me-1"></i> Lưu thay đổi
-                    </button>
+            <div class="container-fluid">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1 class="h4 mb-0 text-gray-800">
+                        <i class="fas fa-hotel me-2"></i>Chỉnh sửa khách sạn
+                    </h1>
+                    <div>
+                        <a href="IndexHotelServlet" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left me-1"></i> Quay lại
+                        </a>
+                    </div>
                 </div>
-            </div>
-                
+
                 <c:if test="${not empty errorMessage}">
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <i class="fas fa-exclamation-triangle me-2"></i>${errorMessage}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </c:if>
-                
-                <c:if test="${empty hotel}">
-                    <div class="alert alert-danger">Không có dữ liệu khách sạn để hiển thị.</div>
+
+                <c:if test="${not empty successMessage}">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="fas fa-check-circle me-2"></i>${successMessage}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                 </c:if>
 
                 <c:if test="${not empty hotel}">
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3" style="background-color: #28a745; border-color: #28a745;">
-                            <h6 class="m-0 font-weight-bold text-white">Thông tin khách sạn</h6>
+                    <form id="hotelForm" action="EditHotelServlet" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="hotel_id" value="${hotel.hotel_id}">
+
+                        <div class="form-section">
+                            <h5 class="text-primary mb-4">
+                                <i class="fas fa-info-circle me-2"></i>Thông tin cơ bản
+                            </h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label">Tên khách sạn <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="name" name="name" value="${hotel.name}" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="address" class="form-label">Địa chỉ <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="address" name="address" value="${hotel.address}" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="price_per_night" class="form-label">Giá mỗi đêm (VND) <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="price_per_night" name="price_per_night"
+                                               value="<fmt:formatNumber value="${hotel.price_per_night}" pattern="#,##0"/>" required>
+                                        <span class="input-group-text">₫</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="stars" class="form-label">Hạng sao <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="stars" name="stars" required>
+                                        <option value="1" ${hotel.stars == 1 ? 'selected' : ''}>1 sao</option>
+                                        <option value="2" ${hotel.stars == 2 ? 'selected' : ''}>2 sao</option>
+                                        <option value="3" ${hotel.stars == 3 ? 'selected' : ''}>3 sao</option>
+                                        <option value="4" ${hotel.stars == 4 ? 'selected' : ''}>4 sao</option>
+                                        <option value="5" ${hotel.stars == 5 ? 'selected' : ''}>5 sao</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="image" class="form-label">Hình ảnh</label>
+                                    <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                                    <small class="text-muted">Để trống nếu không muốn thay đổi ảnh</small>
+                                    <c:if test="${not empty hotel.image_url}">
+                                        <div class="mt-2">
+                                            <img src="${pageContext.request.contextPath}/assets/images/${hotel.image_url}"
+                                                 alt="Ảnh khách sạn" class="img-thumbnail" style="max-width: 150px; max-height: 100px;">
+                                        </div>
+                                    </c:if>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <label class="form-label">Tiện ích</label>
+                                    <div class="amenities-container">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="amenities" value="wifi" id="wifi">
+                                                    <label class="form-check-label" for="wifi">
+                                                        <i class="fas fa-wifi me-1"></i> WiFi miễn phí
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="amenities" value="parking" id="parking">
+                                                    <label class="form-check-label" for="parking">
+                                                        <i class="fas fa-parking me-1"></i> Bãi đỗ xe
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="amenities" value="pool" id="pool">
+                                                    <label class="form-check-label" for="pool">
+                                                        <i class="fas fa-swimming-pool me-1"></i> Hồ bơi
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="amenities" value="restaurant" id="restaurant">
+                                                    <label class="form-check-label" for="restaurant">
+                                                        <i class="fas fa-utensils me-1"></i> Nhà hàng
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="amenities" value="gym" id="gym">
+                                                    <label class="form-check-label" for="gym">
+                                                        <i class="fas fa-dumbbell me-1"></i> Phòng tập gym
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="amenities" value="spa" id="spa">
+                                                    <label class="form-check-label" for="spa">
+                                                        <i class="fas fa-spa me-1"></i> Spa
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="amenities" value="aircon" id="aircon">
+                                                    <label class="form-check-label" for="aircon">
+                                                        <i class="fas fa-wind me-1"></i> Điều hòa
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="amenities" value="breakfast" id="breakfast">
+                                                    <label class="form-check-label" for="breakfast">
+                                                        <i class="fas fa-coffee me-1"></i> Bữa sáng
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="amenities" value="laundry" id="laundry">
+                                                    <label class="form-check-label" for="laundry">
+                                                        <i class="fas fa-tshirt me-1"></i> Dịch vụ giặt ủi
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <form id="hotelForm" action="EditHotelServlet" method="POST" enctype="multipart/form-data">
-                                <input type="hidden" name="hotel_id" value="${hotel.hotel_id}">
 
-                                <div class="row mb-4">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="font-weight-bold">Ảnh hiện tại</label>
-                                            <div class="border rounded p-3 text-center" style="min-height: 200px; background-color: #f8fff8; border-color: #28a745;">
-                                                <c:choose>
-                                                    <c:when test="${not empty hotel.image_url}">
-                                                        <img id="currentImage" src="${pageContext.request.contextPath}/uploads/hotels/${hotel.image_url}" 
-                                                             class="img-fluid rounded shadow-sm" style="max-height:180px; max-width: 100%; object-fit: contain;" 
-                                                             alt="${hotel.name}">
-                                                        <div class="mt-2">
-                                                            <small class="text-success font-weight-bold">
-                                                                <i class="fas fa-check-circle"></i> Đã có ảnh
-                                                            </small>
-                                                            <br>
-                                                            <small class="text-muted">Ảnh: ${hotel.image_url}</small>
-                                                        </div>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <div class="text-muted">
-                                                            <i class="fas fa-image fa-4x mb-3 text-success"></i>
-                                                            <p class="font-weight-bold text-success">Chưa có ảnh</p>
-                                                            <small>Vui lòng upload ảnh bên dưới</small>
-                                                        </div>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="d-flex justify-content-end gap-2 mt-4">
+                            <button type="button" class="btn btn-secondary" onclick="window.history.back()">
+                                <i class="fas fa-times me-1"></i> Hủy
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-1"></i> Lưu thay đổi
+                            </button>
+                        </div>
+                    </form>
 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="font-weight-bold">Upload ảnh mới</label>
-                                            <div class="custom-file">
-                                                <input type="file" class="form-control" id="image" name="image" accept="image/*" onchange="previewImage(this, 'imagePreview')">
-                                            </div>
-                                            <small class="form-text text-muted">Không bắt buộc, chỉ chọn nếu muốn thay ảnh.</small>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <label class="font-weight-bold">Tên khách sạn <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="name" name="name" value="${hotel.name}" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <label class="font-weight-bold">Điểm đến <span class="text-danger">*</span></label>
-                                            <select class="form-control" id="destination_id" name="destination_id" required>
-                                                <option value="" disabled>Chọn điểm đến</option>
-                                                <c:forEach var="destination" items="${destinations}">
-                                                    <option value="${destination.destination_id}" ${destination.destination_id == hotel.destination_id ? 'selected' : ''}>
-                                                        ${destination.name}
-                                                    </option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <label class="font-weight-bold">Tour liên quan <span class="text-danger">*</span></label>
-                                            <select class="form-control" id="tour_id" name="tour_id" required>
-                                                <option value="" disabled>Chọn tour</option>
-                                                <c:forEach var="tour" items="${tours}">
-                                                    <option value="${tour.tour_id}" ${tour.tour_id == hotel.tour_id ? 'selected' : ''}>
-                                                        ${tour.title}
-                                                    </option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <label class="font-weight-bold">Địa chỉ <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="address" name="address" value="${hotel.address}" required>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <label class="font-weight-bold">Giá mỗi đêm (VND) <span class="text-danger">*</span></label>
-                                            <div class="input-group">
-                                                <input type="number" class="form-control" id="price_per_night" 
-                                                       name="price_per_night" min="0" step="10000" 
-                                                       value="${hotel.price_per_night}" required>
-                                                <span class="input-group-text">₫</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <label class="font-weight-bold">Hạng sao <span class="text-danger">*</span></label>
-                                            <select class="form-control" id="stars" name="stars" required>
-                                                <option value="5" ${hotel.stars == 5 ? 'selected' : ''}>★★★★★ 5 sao</option>
-                                                <option value="4" ${hotel.stars == 4 ? 'selected' : ''}>★★★★☆ 4 sao</option>
-                                                <option value="3" ${hotel.stars == 3 ? 'selected' : ''}>★★★☆☆ 3 sao</option>
-                                                <option value="2" ${hotel.stars == 2 ? 'selected' : ''}>★★☆☆☆ 2 sao</option>
-                                                <option value="1" ${hotel.stars == 1 ? 'selected' : ''}>★☆☆☆☆ 1 sao</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                            <div class="form-group mb-3">
-                                <label class="form-label fw-bold mb-2">Tiện ích</label>
-                                <div class="row g-2">
-                                    <div class="col-6 col-md-4">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="wifi" name="amenities" value="wifi">
-                                            <label class="form-check-label small" for="wifi">
-                                                <i class="fas fa-wifi me-1"></i> Wifi
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="parking" name="amenities" value="parking">
-                                            <label class="form-check-label small" for="parking">
-                                                <i class="fas fa-parking me-1"></i> Bãi đỗ xe
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-4">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="pool" name="amenities" value="pool">
-                                            <label class="form-check-label small" for="pool">
-                                                <i class="fas fa-swimming-pool me-1"></i> Hồ bơi
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="restaurant" name="amenities" value="restaurant">
-                                            <label class="form-check-label small" for="restaurant">
-                                                <i class="fas fa-utensils me-1"></i> Nhà hàng
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-4">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="spa" name="amenities" value="spa">
-                                            <label class="form-check-label small" for="spa">
-                                                <i class="fas fa-spa me-1"></i> Spa
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="gym" name="amenities" value="gym">
-                                            <label class="form-check-label small" for="gym">
-                                                <i class="fas fa-dumbbell me-1"></i> Phòng gym
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <hr class="my-3">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <a href="index.jsp" class="btn btn-sm btn-outline-secondary">
-                                    <i class="fas fa-times me-1"></i> Hủy bỏ
-                                </a>
-                                <button type="submit" name="action" value="update" class="btn btn-sm btn-success">
-                                    <i class="fas fa-save me-1"></i> Cập nhật
-                                </button>
-                            </div>
-                        </form>
-                        
-                        <script>
+                    <script>
                         document.addEventListener('DOMContentLoaded', function() {
+                            // Format price input
+                            const priceInput = document.getElementById('price_per_night');
+                            if (priceInput) {
+                                priceInput.addEventListener('input', function(e) {
+                                    let value = e.target.value.replace(/\D/g, '');
+                                    if (value) {
+                                        value = parseInt(value).toLocaleString('vi-VN');
+                                    }
+                                    e.target.value = value;
+                                });
+                            }
+
+                            // Initialize amenities checkboxes
                             const amenities = '${hotelAmenities}';
                             if (amenities) {
-                                const amenitiesArray = amenities.split(',');
-                                amenitiesArray.forEach(function(amenity) {
-                                    const checkbox = document.querySelector('input[name="amenities"][value="' + amenity + '"]');
-                                    if (checkbox) {
+                                const amenityValues = amenities.split(',');
+                                document.querySelectorAll('input[name="amenities"]').forEach(checkbox => {
+                                    if (amenityValues.includes(checkbox.value)) {
                                         checkbox.checked = true;
                                     }
                                 });
                             }
-                            
-                         
-                            const saveButton = document.querySelector('button[form="hotelForm"]');
-                            if (saveButton) {
-                                saveButton.addEventListener('click', function(e) {
-                                    e.preventDefault();
-                                    document.getElementById('hotelForm').submit();
+
+                            // Form validation
+                            const form = document.getElementById('hotelForm');
+                            if (form) {
+                                form.addEventListener('submit', function(e) {
+                                    const price = document.getElementById('price_per_night').value;
+                                    if (price && price.trim() !== '') {
+                                        const numericValue = price.replace(/\D/g, '');
+                                        document.getElementById('price_per_night').value = numericValue;
+                                    }
+                                    return true;
                                 });
                             }
                         });
-                        </script>
+                    </script>
+                </c:if>
+
+                <c:if test="${empty hotel}">
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle me-2"></i>Không tìm thấy thông tin khách sạn
                     </div>
-                </div>
-            </c:if>
-                
-            <c:if test="${empty hotel}">
-                <div class="alert alert-warning">Hotel not found.</div>
-                <a href="IndexHotelServlet" class="btn btn-secondary">Back to List</a>
-            </c:if>
+                    <a href="IndexHotelServlet" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left me-1"></i> Quay lại danh sách
+                    </a>
+                </c:if>
+            </div>
         </div>
     </div>
-    
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
 
     <script src="${pageContext.request.contextPath}/assets/admin/vendor/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/admin/js/sb-admin-2.min.js"></script>
-    
-    <script>
 
-        document.getElementById('price_per_night').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            e.target.value = value ? parseInt(value).toLocaleString('vi-VN') : '';
-        });
-        
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl);
-        });
-   
-        function previewImage(input, previewId) {
-            const preview = document.getElementById(previewId);
-            const currentImage = document.getElementById('currentImage');
-            
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    if (currentImage) {
-                        currentImage.style.display = 'none';
+    <script>
+        // Toggle sidebar on mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.querySelector('.sidebar');
+            const content = document.getElementById('content');
+
+            // Toggle sidebar on button click
+            document.querySelector('.sidebar-toggler').addEventListener('click', function() {
+                sidebar.classList.toggle('active');
+                content.classList.toggle('active');
+            });
+
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener('click', function(e) {
+                if (window.innerWidth <= 992) {
+                    if (!sidebar.contains(e.target) && !e.target.closest('.sidebar-toggler')) {
+                        sidebar.classList.remove('active');
+                        content.classList.remove('active');
                     }
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
                 }
-                reader.readAsDataURL(input.files[0]);
-            } else {
-                if (currentImage) {
-                    currentImage.style.display = 'block';
-                    if (preview) preview.style.display = 'none';
-                } else if (preview) {
-                    preview.style.display = 'none';
-                }
-            }
-        }
+            });
+        });
     </script>
-    <%@include file="../inc/footer.jsp" %>
 </body>
 </html>

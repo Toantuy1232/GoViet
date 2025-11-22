@@ -19,7 +19,6 @@ import toan.dev.data.model.Hotels;
         maxRequestSize = 1024 * 1024 * 50     // 50MB
 )
 public class CreateHotelServlet extends HttpServlet {
-    private static final String UPLOAD_DIR = "uploads/hotels/";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -51,23 +50,24 @@ public class CreateHotelServlet extends HttpServlet {
             String fileName = null;
 
             if (filePart != null && filePart.getSize() > 0) {
-               
                 String appPath = getServletContext().getRealPath("");
-                String uploadPath = appPath + File.separator + UPLOAD_DIR;
-                uploadPath = uploadPath.replace("\\", "/"); 
+                String uploadPath = appPath + ".." + File.separator + "assets" + File.separator + "images";
+                uploadPath = new File(uploadPath).getCanonicalPath();
                 File uploadDir = new File(uploadPath);
                 if (!uploadDir.exists()) {
                     uploadDir.mkdirs();
                 }
 
-                String originalFileName = getFileName(filePart);
-                String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
-                fileName = UUID.randomUUID().toString() + fileExtension;
+                fileName = getFileName(filePart);
 
-                filePart.write(uploadPath + File.separator + fileName);
+                File uploadedFile = new File(uploadPath + File.separator + fileName);
+                filePart.write(uploadedFile.getAbsolutePath());
+                
+                if (!uploadedFile.exists()) {
+                    throw new IOException("Failed to save uploaded file: " + uploadedFile.getAbsolutePath());
+                }
             }
 
-          
             Hotels hotel = new Hotels(
                     destinationId,
                     name,
@@ -101,15 +101,8 @@ public class CreateHotelServlet extends HttpServlet {
         for (String item : items) {
             if (item.trim().startsWith("filename")) {
                 String fileName = item.substring(item.indexOf("=") + 2, item.length() - 1);
-                // Clean up the filename - remove any whitespace and special characters
-                fileName = fileName.replaceAll("\\s+", "");
-                // Generate a unique filename to avoid conflicts
-                String fileExtension = "";
-                int lastDot = fileName.lastIndexOf('.');
-                if (lastDot > 0) {
-                    fileExtension = fileName.substring(lastDot);
-                }
-                return UUID.randomUUID().toString() + fileExtension;
+                fileName = fileName.replaceAll("[^a-zA-Z0-9.-]", "_");
+                return fileName;
             }
         }
         return "";
