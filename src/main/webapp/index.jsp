@@ -684,20 +684,20 @@
 
 
         <!-- Subscribe Start -->
-        <div class="container-fluid subscribe py-5">
-            <div class="container text-center py-5">
-                <div class="mx-auto text-center" style="max-width: 900px;">
-                    <h5 class="subscribe-title px-3">Subscribe</h5>
-                    <h1 class="text-white mb-4">Our Newsletter</h1>
-                    <p class="text-white mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum tempore nam, architecto doloremque velit explicabo? Voluptate sunt eveniet fuga eligendi! Expedita laudantium fugiat corrupti eum cum repellat a laborum quasi.
-                    </p>
-                    <div class="position-relative mx-auto">
-                        <input class="form-control border-primary rounded-pill w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                        <button type="button" class="btn btn-primary rounded-pill position-absolute top-0 end-0 py-2 px-4 mt-2 me-2">Subscribe</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+           <div class="container-fluid subscribe py-5">
+                   <div class="container text-center py-5">
+                       <div class="mx-auto text-center" style="max-width: 900px;">
+                           <h5 class="subscribe-title px-3">Đăng ký</h5>
+                           <h1 class="text-white mb-4">Nhận bản tin du lịch</h1>
+                           <p class="text-white mb-5">Đăng ký để nhận tin tức, ưu đãi và các bài viết du lịch mới nhất từ GoViet.
+                           </p>
+                           <div class="position-relative mx-auto">
+                               <input class="form-control border-primary rounded-pill w-100 py-3 ps-4 pe-5" type="text" placeholder="Email của bạn">
+                               <button type="button" class="btn btn-primary rounded-pill position-absolute top-0 end-0 py-2 px-4 mt-2 me-2">Đăng ký</button>
+                           </div>
+                       </div>
+                   </div>
+               </div>
         <!-- Subscribe End -->
 
         <!-- Footer Start -->
@@ -709,13 +709,10 @@
             <div class="container">
                 <div class="row g-4 align-items-center">
                     <div class="col-md-6 text-center text-md-end mb-md-0">
-                        <i class="fas fa-copyright me-2"></i><a class="text-white" href="#">Your Site Name</a>, All right reserved.
+                        <i class="fas fa-copyright me-2"></i> All right reserved.
                     </div>
                     <div class="col-md-6 text-center text-md-start">
-                        <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                        <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
-                        <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                        Designed By <a class="text-white" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a href="https://themewagon.com">ThemeWagon</a>
+                        Thiết kế bởi <a class="text-white" href="HomeServlet">Trần Viết Trường An</a>
                     </div>
                     </div>
                 </div>
