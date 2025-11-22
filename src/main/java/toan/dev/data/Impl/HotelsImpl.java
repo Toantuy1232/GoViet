@@ -11,23 +11,38 @@ import java.util.List;
 public class HotelsImpl implements HotelsDao {
     @Override
     public boolean insert(Hotels hotels) {
-        String sql = "INSERT INTO hotels(hotel_id, destination_id, name, address, price_per_night, stars, image_url,tour_id) values(?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO hotels(hotel_id, destination_id, name, address, price_per_night, stars, image_url, tour_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseDao.getDriver().getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-        ){
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        ) {
             stmt.setInt(1, hotels.hotel_id);
             stmt.setInt(2, hotels.destination_id);
             stmt.setString(3, hotels.name);
             stmt.setString(4, hotels.address);
-            stmt.setDouble(5, hotels.stars);
-            stmt.setString(6, hotels.image_url);
-            stmt.setInt(7, hotels.tour_id);
-            stmt.executeUpdate();
+            stmt.setDouble(5, hotels.price_per_night);
+            stmt.setInt(6, hotels.stars);
+            stmt.setString(7, hotels.image_url);
+            stmt.setInt(8, hotels.tour_id);
+            
+            int affectedRows = stmt.executeUpdate();
+            
+            if (affectedRows == 0) {
+                throw new SQLException("Creating hotel failed, no rows affected.");
+            }
+            
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    hotels.setHotel_id(generatedKeys.getInt(1));
+                } else {
+                    throw new SQLException("Creating hotel failed, no ID obtained.");
+                }
+            }
+            
             return true;
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
-        return false;
     }
 
     @Override

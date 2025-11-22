@@ -1,51 +1,117 @@
 package toan.dev.admin.Hotel;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import toan.dev.data.dao.DatabaseDao;
 import toan.dev.data.dao.HotelsDao;
 import toan.dev.data.model.Hotels;
 
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024 * 2,  // 2MB
+        maxFileSize = 1024 * 1024 * 10,       // 10MB
+        maxRequestSize = 1024 * 1024 * 50     // 50MB
+)
 public class CreateHotelServlet extends HttpServlet {
+    private static final String UPLOAD_DIR = "uploads/hotels/";
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("admin/hotel/create.jsp").forward(request, response);
+        try {
+            var destinations = DatabaseDao.getInstance().getDestinationsDao().findAll();
+            var tours = DatabaseDao.getInstance().getTourDao().findAll();
+            request.setAttribute("destinations", destinations);
+            request.setAttribute("tours", tours);
+            request.getRequestDispatcher("admin/hotel/create.jsp").forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect("IndexHotelServlet");
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            int destinationId = Integer.parseInt(request.getParameter("destination_id"));
             String name = request.getParameter("name");
-            String address = request.getParameter("address");
-            double pricePerNight = Double.parseDouble(request.getParameter("price_per_night"));
-            int stars = Integer.parseInt(request.getParameter("stars"));
-            String imageUrl = request.getParameter("image_url");
+            int destinationId = Integer.parseInt(request.getParameter("destination_id"));
             int tourId = Integer.parseInt(request.getParameter("tour_id"));
+            String address = request.getParameter("address");
+            double pricePerNight = Double.parseDouble(request.getParameter("price_per_night").replaceAll("[^\\d.]", ""));
+            int stars = Integer.parseInt(request.getParameter("stars"));
+            String description = request.getParameter("description");
+            Part filePart = request.getPart("image");
+            String fileName = null;
 
-            Hotels hotel = new Hotels(destinationId, name, address, pricePerNight, stars, imageUrl, tourId);
-            hotel.setDestination_id(destinationId);
-            hotel.setName(name);
-            hotel.setAddress(address);
-            hotel.setPrice_per_night(pricePerNight);
-            hotel.setStars(stars);
-            hotel.setImage_url(imageUrl);
-            hotel.setTour_id(tourId);
+            if (filePart != null && filePart.getSize() > 0) {
+               
+                String appPath = getServletContext().getRealPath("");
+                String uploadPath = appPath + File.separator + UPLOAD_DIR;
+                uploadPath = uploadPath.replace("\\", "/"); 
+                File uploadDir = new File(uploadPath);
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdirs();
+                }
+
+                String originalFileName = getFileName(filePart);
+                String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+                fileName = UUID.randomUUID().toString() + fileExtension;
+
+                filePart.write(uploadPath + File.separator + fileName);
+            }
+
+          
+            Hotels hotel = new Hotels(
+                    destinationId,
+                    name,
+                    address,
+                    pricePerNight,
+                    stars,
+                    fileName,
+                    tourId
+            );
+            hotel.setHotel_id(0); 
 
             HotelsDao hotelsDao = DatabaseDao.getInstance().getHotelsDao();
             hotelsDao.insert(hotel);
 
-        
+            request.getSession().setAttribute("successMessage", "Thêm khách sạn thành công!");
             response.sendRedirect("IndexHotelServlet");
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("errorMessage", "Error creating hotel: " + e.getMessage());
+            request.setAttribute("errorMessage", "Có lỗi xảy ra: " + e.getMessage());
+            var destinations = DatabaseDao.getInstance().getDestinationsDao().findAll();
+            var tours = DatabaseDao.getInstance().getTourDao().findAll();
+            request.setAttribute("destinations", destinations);
+            request.setAttribute("tours", tours);
             request.getRequestDispatcher("admin/hotel/create.jsp").forward(request, response);
         }
+    }
+
+    private String getFileName(Part part) {
+        String contentDisposition = part.getHeader("content-disposition");
+        String[] items = contentDisposition.split(";");
+        for (String item : items) {
+            if (item.trim().startsWith("filename")) {
+                String fileName = item.substring(item.indexOf("=") + 2, item.length() - 1);
+                // Clean up the filename - remove any whitespace and special characters
+                fileName = fileName.replaceAll("\\s+", "");
+                // Generate a unique filename to avoid conflicts
+                String fileExtension = "";
+                int lastDot = fileName.lastIndexOf('.');
+                if (lastDot > 0) {
+                    fileExtension = fileName.substring(lastDot);
+                }
+                return UUID.randomUUID().toString() + fileExtension;
+            }
+        }
+        return "";
     }
 }
