@@ -24,7 +24,7 @@ public class EditHotelServlet extends HttpServlet {
             }
             
             request.setAttribute("hotel", hotel);
-            request.getRequestDispatcher("admin/hotels/edit.jsp").forward(request, response);
+            request.getRequestDispatcher("admin/hotel/edit.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
             response.sendRedirect("IndexHotelServlet");
@@ -66,7 +66,7 @@ public class EditHotelServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Error updating hotel: " + e.getMessage());
-            request.getRequestDispatcher("admin/hotels/edit.jsp").forward(request, response);
+            request.getRequestDispatcher("admin/hotel/edit.jsp").forward(request, response);
         }
     }
 }

@@ -87,11 +87,13 @@
                     </div>
 
                     <div class="nav-item dropdown">
-                     <a href="${pageContext.request.contextPath}/admin/hotel/IndexHotelServlet" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-hotel me-2"></i>Hotels</a>
-                     <div class="dropdown-menu bg-transparent border-0">
-                          <a href="${pageContext.request.contextPath}/admin/hotel/IndexHotelServlet" class="dropdown-item">All</a>
-                          <a href="${pageContext.request.contextPath}/admin/hotel/CreateHotelServlet" class="dropdown-item">Add</a>
-                     </div>
+                        <a href="${pageContext.request.contextPath}/IndexHotelServlet" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fa fa-hotel me-2"></i>Hotels
+                        </a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="${pageContext.request.contextPath}/IndexHotelServlet" class="dropdown-item">All</a>
+                            <a href="${pageContext.request.contextPath}/CreateHotelServlet" class="dropdown-item">Add</a>
+                        </div>
                     </div>
 
                     <div class="nav-item dropdown">
