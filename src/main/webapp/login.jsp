@@ -27,8 +27,30 @@
 
         <!-- Template Stylesheet -->
         <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     </head>
-
+     <style>
+       .password-wrapper {
+             position: relative;
+         }
+         .password-toggle {
+             position: absolute;
+             left: 80%;
+             top: 51%;
+             transform: translateY(-50%);
+             background: none;
+             border: none;
+             color: #6c757d;
+             cursor: pointer;
+             font-size: 25px;
+             z-index: 3;
+             padding: 0 20px;
+         }
+         /* Add padding to input to make room for the icon */
+         .password-wrapper input {
+             padding-left: 40px !important;  /* Adjust this value as needed */
+         }
+     </style>
     <body>
 
         <%@include file="./inc/header.jsp" %>
@@ -46,7 +68,10 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Mật khẩu</label>
-                                    <input type="password" class="form-control" id="password" name="password" required>
+                                   <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Mật khẩu" required>
+                                       <button type="button" class="password-toggle" onclick="togglePassword('loginPassword', this)">
+                                           <i class="bi bi-eye"></i>
+                                       </button>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <div class="form-check">
@@ -92,7 +117,22 @@
                 <!-- Back to Top -->
                 <a href="#" class="btn btn-primary btn-primary-outline-0 btn-md-square back-to-top"><i class="fa fa-arrow-up"></i></a>
 
+         <script>
+         function togglePassword(inputId, button) {
+             const input = document.getElementById(inputId);
+             const icon = button.querySelector('i');
 
+             if (input.type === 'password') {
+                 input.type = 'text';
+                 icon.classList.remove('bi-eye');
+                 icon.classList.add('bi-eye-slash');
+             } else {
+                 input.type = 'password';
+                 icon.classList.remove('bi-eye-slash');
+                 icon.classList.add('bi-eye');
+             }
+         }
+         </script>
         <!-- Scripts -->
         <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
     </body>

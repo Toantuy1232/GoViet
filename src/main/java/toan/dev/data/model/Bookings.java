@@ -11,6 +11,7 @@ public class Bookings {
     public double total_price;
     public String payment_status;
 
+
     public Bookings(int booking_id, int user_id, int tour_id, Timestamp booking_date, int number_of_people, double total_price, String payment_status) {
         super();
         this.booking_id = booking_id;
@@ -77,4 +78,5 @@ public class Bookings {
     public void setPayment_status(String payment_status) {
         this.payment_status = payment_status;
     }
+
 }

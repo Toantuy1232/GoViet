@@ -1,5 +1,5 @@
 package toan.dev.data.Impl;
-import toan.dev.data.DatabaseDao;
+import toan.dev.data.dao.DatabaseDao;
 import toan.dev.data.dao.OrdersDao;
 import toan.dev.data.model.Orders;
 import java.sql.Connection;
@@ -12,7 +12,7 @@ import java.util.List;
 public class OrderImpl implements OrdersDao {
     @Override
     public boolean insert(Orders orders) {
-        String sql = "INSERT INTO orders(order_id, user_id, order_date, total_amount, status, shipping_address, payment_method, payment_id, note, created_at, updated_at, code) VALUES(?,?,?,?,?,?,?,?,?,?,?, ?)";
+        String sql = "INSERT INTO orders(order_id, user_id, order_date, total_amount, status, shipping_address, payment_method, payment_id, note, created_at, updated_at, code, booking_id) VALUES(?,?,?,?,?,?,?,?,?,?,?,?, ?)";
         try (Connection conn = DatabaseDao.getDriver().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
         ){
@@ -28,6 +28,7 @@ public class OrderImpl implements OrdersDao {
             stmt.setTimestamp(10, orders.created_at);
             stmt.setTimestamp(11, orders.updated_at);
             stmt.setString(12, orders.code);
+            stmt.setInt(13, orders.booking_id);
             stmt.executeUpdate();
             return true;
 
@@ -39,7 +40,7 @@ public class OrderImpl implements OrdersDao {
 
     @Override
     public boolean update(Orders orders) {
-        String sql = "UPDATE orders SET user_id = ?, order_date = ?, total_amount = ?, status = ?, shipping_address = ?, payment_method = ?, payment_id = ?, note = ?, created_at = ?, updated_at = ?, code = ? WHERE order_id = ?";
+        String sql = "UPDATE orders SET user_id = ?, order_date = ?, total_amount = ?, status = ?, shipping_address = ?, payment_method = ?, payment_id = ?, note = ?, created_at = ?, updated_at = ?, code = ?, booking_id = ? WHERE order_id = ?";
         try (Connection conn = DatabaseDao.getDriver().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
         ){
@@ -55,6 +56,7 @@ public class OrderImpl implements OrdersDao {
             stmt.setTimestamp(10, orders.updated_at);
             stmt.setInt(11, orders.order_id);
             stmt.setString(12, orders.code);
+            stmt.setInt(13, orders.booking_id);
             stmt.executeUpdate();
             return true;
         }catch(SQLException e) {
@@ -100,6 +102,7 @@ public class OrderImpl implements OrdersDao {
                         rs.getString("note"),
                         rs.getTimestamp("created_at"),
                         rs.getTimestamp("updated_at"),
+                        rs.getInt("booking_id"),
                         rs.getString("code")
                     );
                 }
@@ -131,6 +134,7 @@ public class OrderImpl implements OrdersDao {
                        rs.getString("note"),
                        rs.getTimestamp("created_at"),
                        rs.getTimestamp("updated_at"),
+                       rs.getInt("booking_id"),
                        rs.getString("code")
                ));
              }
@@ -162,6 +166,7 @@ public class OrderImpl implements OrdersDao {
                            rs.getString("note"),
                            rs.getTimestamp("created_at"),
                            rs.getTimestamp("updated_at"),
+                           rs.getInt("booking_id"),
                            rs.getString("code")
                    );
                 }
@@ -194,6 +199,7 @@ public class OrderImpl implements OrdersDao {
                           rs.getString("note"),
                           rs.getTimestamp("created_at"),
                           rs.getTimestamp("updated_at"),
+                          rs.getInt("booking_id"),
                           rs.getString("code")
                   ));
                 }

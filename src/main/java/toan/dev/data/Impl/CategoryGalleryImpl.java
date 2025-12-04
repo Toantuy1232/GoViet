@@ -1,6 +1,6 @@
 package toan.dev.data.Impl;
 
-import toan.dev.data.DatabaseDao;
+import toan.dev.data.dao.DatabaseDao;
 import toan.dev.data.dao.CategoryGalleryDao;
 import toan.dev.data.model.CategoryGallery;
 

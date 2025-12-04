@@ -15,4 +15,6 @@ public interface TourDao {
     List<Tours> findByCategoryAndSearchTerm(int categoryId, String searchTerm);
 
     List<Tours> findBySearchTerm(String searchTerm);
+
+    List<Tours> findByDestination(int destinationId);
 }

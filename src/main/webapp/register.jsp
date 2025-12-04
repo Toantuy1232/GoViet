@@ -24,8 +24,33 @@
 
     <!-- Template Stylesheet -->
     <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 </head>
 <body>
+
+<style>
+  .password-wrapper {
+        position: relative;
+    }
+    .password-toggle {
+        position: absolute;
+        left: 75%;
+        top: 59.5%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: #6c757d;
+        font-size: 25px;
+        cursor: pointer;
+        z-index: 3;
+        padding: 0 20px;
+    }
+    /* Add padding to input to make room for the icon */
+    .password-wrapper input {
+        padding-left: 40px !important;  /* Adjust this value as needed */
+    }
+
+</style>
 
 <%@ include file="./inc/header.jsp" %>
 
@@ -50,11 +75,17 @@
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Mật khẩu</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
+                             <input type="password" class="form-control" id="registerPassword" name="password" placeholder="Mật khẩu" required>
+                                <button type="button" class="password-toggle" onclick="togglePassword('registerPassword', this)">
+                                    <i class="bi bi-eye"></i>
+                                </button>
                         </div>
                         <div class="mb-3">
                             <label for="confirm" class="form-label">Nhập lại mật khẩu</label>
-                            <input type="password" class="form-control" id="confirm" name="confirm" required>
+                             <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Xác nhận mật khẩu" required>
+                                <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword', this)">
+                                    <i class="bi bi-eye"></i>
+                                </button>
                         </div>
                         <button type="submit" class="btn btn-primary w-100 rounded-pill py-2">Đăng ký</button>
                     </form>
@@ -68,6 +99,22 @@
 
 <%@ include file="./inc/footer.jsp" %>
 
+  <script>
+          function togglePassword(inputId, button) {
+              const input = document.getElementById(inputId);
+              const icon = button.querySelector('i');
+
+              if (input.type === 'password') {
+                  input.type = 'text';
+                  icon.classList.remove('bi-eye');
+                  icon.classList.add('bi-eye-slash');
+              } else {
+                  input.type = 'password';
+                  icon.classList.remove('bi-eye-slash');
+                  icon.classList.add('bi-eye');
+              }
+          }
+          </script>
 <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 </body>
 </html>
