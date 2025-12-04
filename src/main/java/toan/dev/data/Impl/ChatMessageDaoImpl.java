@@ -74,6 +74,73 @@ public class ChatMessageDaoImpl implements ChatMessageDao {
     }
 
     @Override
+    public boolean update(ChatMessage message) {
+        String sql = "UPDATE chat_messages SET sender_id = ?, receiver_id = ?, content = ? WHERE message_id = ?";
+        try (Connection conn = MySQLDriver.getInstance().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, message.getSenderId());
+            stmt.setInt(2, message.getReceiverId());
+            stmt.setString(3, message.getContent());
+            stmt.setInt(4, message.getId());
+            
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean delete(int id) {
+        String sql = "DELETE FROM chat_messages WHERE message_id = ?";
+        try (Connection conn = MySQLDriver.getInstance().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, id);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public ChatMessage find(int id) {
+        String sql = "SELECT * FROM chat_messages WHERE message_id = ?";
+        try (Connection conn = MySQLDriver.getInstance().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return mapResultSetToMessage(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<ChatMessage> findAll() {
+        List<ChatMessage> messages = new ArrayList<>();
+        String sql = "SELECT * FROM chat_messages ORDER BY sent_at DESC";
+        
+        try (Connection conn = MySQLDriver.getInstance().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                messages.add(mapResultSetToMessage(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return messages;
+    }
+
+    @Override
     public boolean markAsRead(int messageId) {
         // is_read column doesn't exist in database, skip this functionality
         return true;

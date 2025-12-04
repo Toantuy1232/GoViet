@@ -135,6 +135,24 @@
         <servlet-name>DeleteBlogServlet</servlet-name>
         <servlet-class>toan.dev.admin.Blogs.DeleteBlogServlet</servlet-class>
     </servlet>
+    
+    <!--Cấu hình admin products-->
+    <servlet>
+        <servlet-name>IndexProductsServlet</servlet-name>
+        <servlet-class>toan.dev.admin.products.IndexProductsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateProductServlet</servlet-name>
+        <servlet-class>toan.dev.admin.products.CreateProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditProductServlet</servlet-name>
+        <servlet-class>toan.dev.admin.products.EditProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteProductServlet</servlet-name>
+        <servlet-class>toan.dev.admin.products.DeleteProductServlet</servlet-class>
+    </servlet>
     <!--Cấu hình admin user-->
     <servlet>
         <servlet-name>IndexUserServlet</servlet-name>
@@ -185,6 +203,24 @@
     <servlet>
         <servlet-name>DeleteDestinationsServlet</servlet-name>
         <servlet-class>toan.dev.admin.Destinations.DeleteDestinationsServlet</servlet-class>
+    </servlet>
+    
+    <!--Cấu hình admin chat AI-->
+    <servlet>
+        <servlet-name>IndexChatAIServlet</servlet-name>
+        <servlet-class>toan.dev.admin.ChatAI.IndexChatAIServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateChatAIServlet</servlet-name>
+        <servlet-class>toan.dev.admin.ChatAI.CreateChatAIServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditChatAIServlet</servlet-name>
+        <servlet-class>toan.dev.admin.ChatAI.EditChatAIServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteChatAIServlet</servlet-name>
+        <servlet-class>toan.dev.admin.ChatAI.DeleteChatAIServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DestinationServlet</servlet-name>
@@ -319,6 +355,24 @@
         <servlet-name>DeleteBlogServlet</servlet-name>
         <url-pattern>/DeleteBlogServlet</url-pattern>
     </servlet-mapping>
+    
+    <!--Cấu hình admin products-->
+    <servlet-mapping>
+        <servlet-name>IndexProductsServlet</servlet-name>
+        <url-pattern>/IndexProductsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateProductServlet</servlet-name>
+        <url-pattern>/CreateProductServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditProductServlet</servlet-name>
+        <url-pattern>/EditProductServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteProductServlet</servlet-name>
+        <url-pattern>/DeleteProductServlet</url-pattern>
+    </servlet-mapping>
     <!--Cấu hình admin user-->
     <servlet-mapping>
         <servlet-name>IndexUserServlet</servlet-name>
@@ -369,6 +423,24 @@
     <servlet-mapping>
         <servlet-name>DeleteDestinationsServlet</servlet-name>
         <url-pattern>/DeleteDestinationsServlet</url-pattern>
+    </servlet-mapping>
+    
+    <!--Cấu hình admin chat AI-->
+    <servlet-mapping>
+        <servlet-name>IndexChatAIServlet</servlet-name>
+        <url-pattern>/IndexChatAIServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateChatAIServlet</servlet-name>
+        <url-pattern>/CreateChatAIServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditChatAIServlet</servlet-name>
+        <url-pattern>/EditChatAIServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteChatAIServlet</servlet-name>
+        <url-pattern>/DeleteChatAIServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DashboardServlet</servlet-name>
@@ -422,6 +494,10 @@
         <servlet-name>GalleryServlet</servlet-name>
         <servlet-class>toan.dev.GalleryServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServicesServlet</servlet-name>
+        <servlet-class>toan.dev.ServicesServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -446,6 +522,10 @@
     <servlet-mapping>
         <servlet-name>GalleryServlet</servlet-name>
         <url-pattern>/gallery.jsp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServicesServlet</servlet-name>
+        <url-pattern>/ServicesServlet</url-pattern>
     </servlet-mapping>
 
     <!-- Welcome file (trang mặc định) - redirect to HomeServlet -->

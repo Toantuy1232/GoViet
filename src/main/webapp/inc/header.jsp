@@ -173,7 +173,7 @@
                     <div class="navbar-nav ms-auto py-0">
                         <a href="${pageContext.request.contextPath}/HomeServlet" class="nav-item nav-link active">Trang chủ</a>
                         <a href="${pageContext.request.contextPath}/AboutServlet" class="nav-item nav-link">Giới thiệu</a>
-                        <a href="${pageContext.request.contextPath}/services.html" class="nav-item nav-link">Dịch vụ</a>
+                        <a href="${pageContext.request.contextPath}/ServicesServlet" class="nav-item nav-link">Dịch vụ</a>
                         <a href="${pageContext.request.contextPath}/BlogServlet" class="nav-item nav-link">Bài viết</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Tour</a>
