@@ -1,5 +1,102 @@
 <%@page pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="toan.dev.data.model.Users" %>
+<%@ page import="java.util.Objects" %>
+
+<%-- Initialize variables safely --%>
+<% 
+    Users currentUser = null;
+    String displayName = "";
+    String fullNameLine = "";
+    boolean isAdmin = false;
+    
+    try {
+        currentUser = (Users) session.getAttribute("user");
+        if (currentUser != null) {
+            displayName = currentUser.getEmail();
+            fullNameLine = (currentUser.getFullname() != null && !currentUser.getFullname().trim().isEmpty()) 
+                ? currentUser.getFullname() : currentUser.getEmail();
+            isAdmin = "admin".equals(currentUser.getRole());
+        }
+    } catch (Exception e) {
+        // Log the error but don't show it to users
+        System.err.println("Error initializing user data: " + e.getMessage());
+    }
+%>
+
+<!-- Add this style block in the head section -->
+<style>
+    /* Dropdown styles */
+    .dropdown-menu {
+        display: block !important;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        margin-top: 0;
+        position: absolute;
+        z-index: 1060;
+        min-width: 200px;
+        padding: 0.5rem 0;
+        margin: 0.125rem 0 0;
+        font-size: 0.875rem;
+        color: #212529;
+        text-align: left;
+        list-style: none;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        border-radius: 0.25rem;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
+    }
+    
+    .dropdown-menu.show {
+        opacity: 1;
+        visibility: visible;
+        display: block;
+    }
+    
+    .dropdown-item {
+        padding: 0.5rem 1.5rem;
+        display: flex;
+        align-items: center;
+        color: #212529;
+        text-decoration: none;
+        transition: all 0.2s;
+    }
+    .dropdown-item:hover, .dropdown-item:focus {
+        background-color: #f8f9fa;
+        color: #16181b;
+    }
+    .dropdown-item i {
+        width: 20px;
+        margin-right: 10px;
+        text-align: center;
+    }
+    .dropdown-divider {
+        height: 0;
+        margin: 0.5rem 0;
+        overflow: hidden;
+        border-top: 1px solid #e9ecef;
+    }
+    .dropdown-header {
+        display: block;
+        padding: 0.5rem 1.5rem;
+        margin-bottom: 0;
+        font-size: 0.875rem;
+        color: #6c757d;
+        white-space: nowrap;
+    }
+    .dropdown-toggle::after {
+        display: inline-block;
+        margin-left: 0.255em;
+        vertical-align: 0.255em;
+        content: "";
+        border-top: 0.3em solid;
+        border-right: 0.3em solid transparent;
+        border-bottom: 0;
+        border-left: 0.3em solid transparent;
+    }
+</style>
 
 <!-- Topbar Start -->
         <div class="container-fluid bg-primary px-5 d-none d-lg-block">
@@ -16,46 +113,45 @@
                 <div class="col-lg-4 text-center text-lg-end">
                     <div class="d-inline-flex align-items-center" style="height: 45px;">
                         <div class="dropdown">
-                            <%
-                              toan.dev.data.model.Users currentUser = (toan.dev.data.model.Users) session.getAttribute("user");
-                              boolean isAdmin = (currentUser != null && "admin".equals(currentUser.getRole()));
-                              String displayName = (currentUser != null ? currentUser.getEmail() : null);
-                              String fullNameLine = (currentUser != null && currentUser.getFullname() != null && !currentUser.getFullname().trim().isEmpty())
-                                      ? currentUser.getFullname() : (currentUser != null ? currentUser.getEmail() : null);
-                            %>
-                            <a href="#" class="dropdown-toggle text-light" data-bs-toggle="dropdown"><small>
-                                <i class="fa fa-user me-2"></i>
-                                <%= (displayName != null) ? displayName : "Tài khoản" %>
-                            </small></a>
-                            <div class="dropdown-menu rounded">
-                              <%
+                            <button class="btn btn-link nav-link text-light dropdown-toggle p-0" 
+                                    type="button" 
+                                    id="userDropdown" 
+                                    data-bs-toggle="dropdown" 
+                                    aria-expanded="false"
+                                    style="background: none; border: none; outline: none;">
+                                <i class="fas fa-user me-1"></i>
+                                <span class="d-none d-sm-inline"><%= (displayName != null && !displayName.isEmpty()) ? displayName : "Tài khoản" %></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown" style="min-width: 200px;">
+                                <%
                                 if (currentUser == null) {
-                              %>
-                                <a href="${pageContext.request.contextPath}/LoginServlet" class="dropdown-item">Đăng nhập</a>
-                                <a href="${pageContext.request.contextPath}/RegisterServlet" class="dropdown-item">Đăng ký</a>
-                              <%
+                                %>
+                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/LoginServlet"><i class="fas fa-sign-in-alt me-2"></i>Đăng nhập</a></li>
+                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/RegisterServlet"><i class="fas fa-user-plus me-2"></i>Đăng ký</a></li>
+                                <%
                                 } else {
-                              %>
-                                <span class="dropdown-item-text"><strong><%= displayName %></strong></span>
-                                <span class="dropdown-item-text text-muted"><%= fullNameLine %></span>
-                                <div class="dropdown-divider"></div>
-                                <a href="#" class="dropdown-item">Danh sách yêu thích</a>
-                                <a href="${pageContext.request.contextPath}/CartServlet" class="dropdown-item">Giỏ hàng của tôi</a>
-                                <a href="${pageContext.request.contextPath}/UserServlet" class="dropdown-item">Cài đặt tài khoản</a>
-                                <a href="${pageContext.request.contextPath}/ProfileServlet" class="dropdown-item">Tài khoản của tôi</a>
-                                <%
-                                  if (isAdmin) {
                                 %>
-                                  <a href="${pageContext.request.contextPath}/DashboardServlet" class="dropdown-item">Trang quản trị</a>
+                                    <li class="dropdown-header">
+                                        <div class="fw-bold"><%= displayName %></div>
+                                        <div class="small text-muted"><%= fullNameLine %></div>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-heart me-2"></i>Danh sách yêu thích</a></li>
+                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/CartServlet"><i class="fas fa-shopping-cart me-2"></i>Giỏ hàng của tôi</a></li>
+                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ProfileServlet"><i class="fas fa-user-cog me-2"></i>Tài khoản của tôi</a></li>
+                                    <%
+                                    if (isAdmin) {
+                                    %>
+                                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/DashboardServlet"><i class="fas fa-tachometer-alt me-2"></i>Trang quản trị</a></li>
+                                    <%
+                                    }
+                                    %>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item text-danger" href="${pageContext.request.contextPath}/LogoutServlet"><i class="fas fa-sign-out-alt me-2"></i>Đăng xuất</a></li>
                                 <%
-                                  }
-                                %>
-                                <div class="dropdown-divider"></div>
-                                <a href="${pageContext.request.contextPath}/LogoutServlet" class="dropdown-item">Đăng xuất</a>
-                              <%
                                 }
-                              %>
-                            </div>
+                                %>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -101,12 +197,65 @@
                             </div>
                         </div>
                         <a href="${pageContext.request.contextPath}/contact.jsp" class="nav-item nav-link">Liên Hệ</a>
+                        <%
+                        if (currentUser != null) {
+                        %>
+                            <a href="${pageContext.request.contextPath}/chat" class="nav-item nav-link">
+                                <i class="fas fa-robot"></i> Chat AI
+                            </a>
+                        <%
+                        } else {
+                        %>
+                            <a href="#" class="nav-item nav-link" onclick="showLoginToast(); return false;">
+                                <i class="fas fa-robot"></i> Chat AI
+                            </a>
+                        <%
+                        }
+                        %>
                     </div>
                     <a href="" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">Đăng ký tư vấn</a>
                 </div>
             </nav>
 
             <!-- Carousel Start -->
+            <!-- Initialize Bootstrap dropdowns -->
+            <script>
+                // Simple dropdown initialization that won't cause errors
+                document.addEventListener('DOMContentLoaded', function() {
+                    try {
+                        // Safely initialize dropdowns if Bootstrap is available
+                        if (typeof bootstrap !== 'undefined') {
+                            var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+                            dropdownElementList.forEach(function(dropdownToggleEl) {
+                                try {
+                                    new bootstrap.Dropdown(dropdownToggleEl);
+                                } catch (e) {
+                                    console.error('Error initializing dropdown:', e);
+                                }
+                            });
+
+                            // Close dropdowns when clicking outside
+                            document.addEventListener('click', function(event) {
+                                if (!event.target.closest('.dropdown')) {
+                                    var dropdowns = document.querySelectorAll('.dropdown-menu.show');
+                                    dropdowns.forEach(function(dropdown) {
+                                        var toggle = dropdown.previousElementSibling;
+                                        if (toggle && toggle.matches('[data-bs-toggle="dropdown"]')) {
+                                            var bsDropdown = bootstrap.Dropdown.getInstance(toggle);
+                                            if (bsDropdown) {
+                                                bsDropdown.hide();
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    } catch (e) {
+                        console.error('Error in dropdown initialization:', e);
+                    }
+                });
+            </script>
+            
             <div class="carousel-header">
                 <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
                     <ol class="carousel-indicators">
@@ -174,3 +323,34 @@
            </div>
        </div>
         <!-- Navbar & Hero End -->
+
+<!-- Toast Notification -->
+<div id="loginToast" style="position: fixed; top: 80px; right: 20px; z-index: 9999; display: none;">
+    <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" style="min-width: 300px;">
+        <div class="toast-header bg-warning text-white">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            <strong class="me-auto">Thông báo</strong>
+            <button type="button" class="btn-close btn-close-white" onclick="hideLoginToast()"></button>
+        </div>
+        <div class="toast-body">
+            Vui lòng <a href="${pageContext.request.contextPath}/LoginServlet" class="text-primary fw-bold">đăng nhập</a> để sử dụng tính năng Chat AI!
+        </div>
+    </div>
+</div>
+
+<script>
+function showLoginToast() {
+    const toast = document.getElementById('loginToast');
+    toast.style.display = 'block';
+    
+    // Auto hide after 5 seconds
+    setTimeout(function() {
+        hideLoginToast();
+    }, 5000);
+}
+
+function hideLoginToast() {
+    const toast = document.getElementById('loginToast');
+    toast.style.display = 'none';
+}
+</script>

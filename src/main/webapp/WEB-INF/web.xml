@@ -6,6 +6,11 @@
          version="4.0">
 
     <display-name>Shop</display-name>
+    
+    <!-- MySQL JDBC Cleanup Listener -->
+    <listener>
+        <listener-class>toan.dev.data.driver.MysqlJdbcCleanupListener</listener-class>
+    </listener>
     <filter>
         <filter-name>SetCharacterEncodingFilter</filter-name>
         <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>

@@ -1,5 +1,5 @@
  <%@page pageEncoding="UTF-8" %>
- <div class="container-fluid footer py-5">
+ <div class="container-fluid footer py-5" style="background: #212529 !important; display: block !important; visibility: visible !important;">
             <div class="container-fluid py-5">
                 <div class="row g-5">
                     <div class="col-md-6 col-lg-6 col-xl-3">

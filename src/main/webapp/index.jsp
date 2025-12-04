@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
     <head>
         <meta charset="utf-8">
@@ -447,6 +447,7 @@
         </div>
         </c:if>
         <!-- Gallery End -->
+      <%-- Booking section temporarily commented
       <div class="container-fluid booking py-5">
           <div class="container py-5">
               <div class="row g-5 align-items-center">
@@ -470,88 +471,104 @@
                           Nhận <span class="text-warning">giảm 50%</span> cho chuyến phiêu lưu đầu tiên cùng Travela. Xem thêm các ưu đãi khác tại đây.
                       </p>
 
-                      <form>
-                          <div class="row g-3">
+                     <form action="${pageContext.request.contextPath}/book-tour" method="post">
+                         <div class="row g-3">
+                             <div class="col-md-6">
+                                 <div class="form-floating">
+                                     <input type="text" class="form-control bg-white border-0" id="name"
+                                            name="customerName" placeholder="Tên của bạn" required>
+                                     <label for="name">Tên của bạn</label>
+                                 </div>
+                             </div>
 
-                              <div class="col-md-6">
-                                  <div class="form-floating">
-                                      <input type="text" class="form-control bg-white border-0" id="name" placeholder="Tên của bạn">
-                                      <label for="name">Tên của bạn</label>
-                                  </div>
-                              </div>
+                             <div class="col-md-6">
+                                 <div class="form-floating">
+                                     <input type="email" class="form-control bg-white border-0" id="email"
+                                            name="email" placeholder="Email của bạn" required>
+                                     <label for="email">Email của bạn</label>
+                                 </div>
+                             </div>
 
-                              <div class="col-md-6">
-                                  <div class="form-floating">
-                                      <input type="email" class="form-control bg-white border-0" id="email" placeholder="Email của bạn">
-                                      <label for="email">Email của bạn</label>
-                                  </div>
-                              </div>
+                             <div class="col-md-6">
+                                 <div class="form-floating date" id="date3" data-target-input="nearest">
+                                     <input type="datetime-local" class="form-control bg-white border-0"
+                                            id="bookingDate" name="bookingDate" required>
+                                     <label for="bookingDate">Ngày & Giờ</label>
+                                 </div>
+                             </div>
 
-                            <div class="col-md-6">
-                                <div class="form-floating date" id="date3" data-target-input="nearest">
-                                    <input
-                                        type="datetime-local"
-                                        class="form-control bg-white border-0"
-                                        id="datetime"
-                                        placeholder="Ngày & Giờ"
-                                    />
-                                    <label for="datetime">Ngày & Giờ</label>
-                                </div>
-                            </div>
+                             <div class="col-md-6">
+                                 <div class="form-floating">
+                                     <select class="form-select bg-white border-0" id="destinationId" name="destinationId" required>
+                                         <option value="">-- Chọn điểm đến --</option>
+                                         <c:forEach items="${destinations}" var="destination">
+                                             <option value="${destination.id}">${destination.name}</option>
+                                         </c:forEach>
+                                     </select>
+                                     <label for="destinationId">Điểm đến</label>
+                                 </div>
+                             </div>
 
-                           <div class="col-md-6">
-                               <div class="form-floating">
-                                   <select class="form-select bg-white border-0" id="select1" name="destinationId">
-                                       <option value="">-- Chọn điểm đến --</option>
-                                       <c:forEach items="${destinations}" var="destination">
-                                           <option value="${destination.destination_id}">${destination.name}</option>
-                                       </c:forEach>
-                                   </select>
-                                   <label for="select1">Điểm đến</label>
-                               </div>
-                           </div>
-                              <div class="col-md-6">
-                                  <div class="form-floating">
-                                      <select class="form-select bg-white border-0" id="SelectPerson">
-                                          <option value="1">1 người</option>
-                                          <option value="2">2 người</option>
-                                          <option value="3">3 người</option>
-                                      </select>
-                                      <label for="SelectPerson">Số lượng người</label>
-                                  </div>
-                              </div>
+                             <div class="col-md-6">
+                                 <div class="form-floating">
+                                     <select class="form-select bg-white border-0" id="numberOfPeople" name="numberOfPeople" required>
+                                         <option value="1">1 người</option>
+                                         <option value="2">2 người</option>
+                                         <option value="3">3 người</option>
+                                         <option value="4">4 người</option>
+                                         <option value="5">5 người</option>
+                                         <option value="6">6 người</option>
+                                         <option value="7">7 người</option>
+                                         <option value="8">8 người</option>
+                                         <option value="9">9 người</option>
+                                         <option value="10">10 người</option>
+                                     </select>
+                                     <label for="numberOfPeople">Số lượng người</label>
+                                 </div>
+                             </div>
 
-                              <div class="col-md-6">
-                                  <div class="form-floating">
-                                      <select class="form-select bg-white border-0" id="CategoriesSelect" name="categoryId">
-                                          <option value="">-- Chọn danh mục --</option>
-                                          <c:forEach items="${categories}" var="category">
-                                              <option value="${category.id}">${category.name}</option>
-                                          </c:forEach>
-                                      </select>
-                                      <label for="CategoriesSelect">Danh mục</label>
-                                  </div>
-                              </div>
+                             <div class="col-md-6">
+                                 <div class="form-floating">
+                                     <select class="form-select bg-white border-0" id="categoryId" name="categoryId">
+                                         <option value="">-- Chọn danh mục --</option>
+                                         <c:forEach items="${categories}" var="category">
+                                             <option value="${category.id}">${category.name}</option>
+                                         </c:forEach>
+                                     </select>
+                                     <label for="categoryId">Danh mục</label>
+                                 </div>
+                             </div>
 
-                              <div class="col-12">
-                                  <div class="form-floating">
-                                      <textarea class="form-control bg-white border-0" placeholder="Yêu cầu đặc biệt" id="message" style="height: 100px"></textarea>
-                                      <label for="message">Yêu cầu đặc biệt</label>
-                                  </div>
-                              </div>
+                             <div class="col-12">
+                                 <div class="form-floating">
+                                     <textarea class="form-control bg-white border-0"
+                                              placeholder="Yêu cầu đặc biệt"
+                                              id="specialRequests"
+                                              name="specialRequests"
+                                              style="height: 100px"></textarea>
+                                     <label for="specialRequests">Yêu cầu đặc biệt</label>
+                                 </div>
+                             </div>
 
-                              <div class="col-12">
-                                  <button class="btn btn-primary text-white w-100 py-3" type="submit">Đặt ngay</button>
-                              </div>
-
-                          </div>
-                      </form>
+                             <div class="col-12">
+                                 <c:if test="${sessionScope.user != null}">
+                                     <button class="btn btn-primary text-white w-100 py-3" type="submit">Đặt ngay</button>
+                                 </c:if>
+                                 <c:if test="${sessionScope.user == null}">
+                                     <a href="${pageContext.request.contextPath}/login"
+                                        class="btn btn-warning text-white w-100 py-3">
+                                        Đăng nhập để đặt tour
+                                     </a>
+                                 </c:if>
+                             </div>
+                         </div>
+                     </form>
 
                   </div>
               </div>
           </div>
       </div>
-
+      --%>
         <!-- Tour Booking End -->
 
         <!-- Travel Guide Start -->
@@ -725,9 +742,9 @@
         <!-- Subscribe End -->
 
         <!-- Footer Start -->
-        <%@include file="./inc/footer.jsp" %>
+       <%@include file="./inc/footer.jsp" %>
         <!-- Footer End -->
-        
+
         <!-- Copyright Start -->
         <div class="container-fluid copyright text-body py-4">
             <div class="container">
@@ -745,7 +762,9 @@
         <!-- Copyright End -->
 
         <!-- Back to Top -->
-        <a href="#" class="btn btn-primary btn-primary-outline-0 btn-md-square back-to-top"><i class="fa fa-arrow-up"></i></a>   
+        <a href="#" class="btn btn-primary btn-primary-outline-0 btn-md-square back-to-top">
+            <i class="fa fa-arrow-up"></i>
+        </a>   
 
         
         <!-- JavaScript Libraries -->

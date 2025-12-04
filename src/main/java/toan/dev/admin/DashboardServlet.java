@@ -34,7 +34,7 @@ public class DashboardServlet extends BaseAdminServlet{
         request.setAttribute("earningEachDay", earningEachDay);
 
         // Forward tới dashboard.jsp
-        request.getRequestDispatcher("admin/dashboard.jsp").include(request, response);
+        request.getRequestDispatcher("admin/dashboard.jsp").forward(request, response);
     }
 
     @Override

@@ -15,6 +15,15 @@ public class Orders {
     public String code;
     public Timestamp created_at;
     public Timestamp updated_at;
+    public int booking_id;
+
+    public int getBooking_id() {
+        return booking_id;
+    }
+
+    public void setBooking_id(int booking_id) {
+        this.booking_id = booking_id;
+    }
 
     public int getOrder_id() {
         return order_id;
@@ -112,6 +121,7 @@ public class Orders {
     }
 
     public Orders(int order_id, int user_id, Timestamp order_date, double total_amount, String status, String shipping_address, String payment_method, int payment_id, String note, Timestamp created_at, Timestamp updated_at,
+                  int booking_id,
                   String code) {
         super();
         this.order_id = order_id;
@@ -125,6 +135,7 @@ public class Orders {
         this.note = note;
         this.created_at = created_at;
         this.updated_at = updated_at;
+        this.booking_id = booking_id;
         this.code = code;
     }
 }

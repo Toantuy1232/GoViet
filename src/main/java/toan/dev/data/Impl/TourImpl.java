@@ -1,8 +1,7 @@
 package toan.dev.data.Impl;
 
-import toan.dev.data.DatabaseDao;
+import toan.dev.data.dao.DatabaseDao;
 import toan.dev.data.dao.TourDao;
-import toan.dev.data.model.Discounts;
 import toan.dev.data.model.Tours;
 
 import java.sql.*;
@@ -219,6 +218,43 @@ public class TourImpl implements TourDao {
             e.printStackTrace();
         }
         return toursList;
+    }
+
+    @Override
+    public List<Tours> findByDestination(int destinationId) {
+        List<Tours> tours = new ArrayList<>();
+        String sql = "SELECT * FROM tours WHERE destination_id = ?";
+
+        try (Connection conn = DatabaseDao.getDriver().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, destinationId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Tours tour = new Tours(
+                            rs.getInt("tour_id"),
+                            rs.getInt("destination_id"),
+                            rs.getInt("category_id"),
+                            rs.getString("title"),
+                            rs.getString("description"),
+                            rs.getDouble("price"),
+                            rs.getDouble("price_old"),
+                            rs.getInt("duration_days"),
+                            rs.getTimestamp("start_date"),
+                            rs.getTimestamp("end_date"),
+                            rs.getInt("available_slots"),
+                            rs.getString("main_image"),
+                            rs.getTimestamp("created_at")
+                    );
+                    tours.add(tour);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return tours;
     }
 
 

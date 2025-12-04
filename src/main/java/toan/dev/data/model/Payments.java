@@ -9,6 +9,15 @@ public class Payments {
     public String transaction_id;
     public double amount;
     public Timestamp payment_date;
+    public int order_id;
+
+    public int getOrder_id() {
+        return order_id;
+    }
+
+    public void setOrder_id(int order_id) {
+        this.order_id = order_id;
+    }
 
     public int getPayment_id() {
         return payment_id;
@@ -58,7 +67,7 @@ public class Payments {
         this.payment_date = payment_date;
     }
 
-    public Payments(int payment_id, int booking_id, String payment_method, String transaction_id, double amount, Timestamp payment_date) {
+    public Payments(int payment_id, int booking_id, String payment_method, String transaction_id, double amount, Timestamp payment_date, int order_id) {
         super();
         this.payment_id = payment_id;
         this.booking_id = booking_id;
@@ -66,5 +75,6 @@ public class Payments {
         this.transaction_id = transaction_id;
         this.amount = amount;
         this.payment_date = payment_date;
+        this.order_id = order_id;
     }
 }
