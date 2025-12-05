@@ -1,6 +1,8 @@
 <%@page pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="toan.dev.data.model.Users" %>
+<%@ page import="toan.dev.data.model.CartItem" %>
+<%@ page import="java.util.List" %>
 <%@ page import="java.util.Objects" %>
 
 <%-- Initialize variables safely --%>
@@ -213,7 +215,22 @@
                         }
                         %>
                     </div>
-                    <a href="${pageContext.request.contextPath}/consultation" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">Đăng ký tư vấn</a>
+                    <div class="d-flex align-items-center ms-lg-4">
+                        <a href="${pageContext.request.contextPath}/cart" class="btn btn-outline-primary rounded-circle me-2 position-relative" style="width: 40px; height: 40px; padding: 8px;">
+                            <i class="fas fa-shopping-cart"></i>
+                            <%
+                                java.util.List<toan.dev.data.model.CartItem> cartItems = 
+                                    (java.util.List<toan.dev.data.model.CartItem>) session.getAttribute("cart");
+                                int cartCount = (cartItems != null) ? cartItems.size() : 0;
+                                if (cartCount > 0) {
+                            %>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.7rem;">
+                                    <%= cartCount %>
+                                </span>
+                            <% } %>
+                        </a>
+                        <a href="${pageContext.request.contextPath}/consultation" class="btn btn-primary rounded-pill py-2 px-4">Đăng ký tư vấn</a>
+                    </div>
                 </div>
             </nav>
 

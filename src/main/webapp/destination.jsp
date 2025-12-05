@@ -175,13 +175,13 @@
                                     <small class="fa fa-star text-primary"></small>
                                 </div>
                                 <p style="height: 48px; overflow: hidden;">${product.name}</p>
-                                <div class="d-flex justify-content-center mb-2">
-                                    <a href="${pageContext.request.contextPath}/product-detail?id=${product.id}" 
-                                       class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">
-                                        Xem chi tiết
+                                <div class="d-flex justify-content-center mb-2 gap-1">
+                                    <a href="${pageContext.request.contextPath}/add-to-cart?type=tour&itemId=${product.id}" 
+                                       class="btn btn-sm btn-outline-primary px-3">
+                                        <i class="fa fa-shopping-cart"></i>
                                     </a>
-                                    <a href="${pageContext.request.contextPath}/booking?productId=${product.id}" 
-                                       class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">
+                                    <a href="${pageContext.request.contextPath}/booking?type=tour&itemId=${product.id}" 
+                                       class="btn btn-sm btn-primary px-3">
                                         Đặt ngay
                                     </a>
                                 </div>
