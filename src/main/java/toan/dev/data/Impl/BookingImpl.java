@@ -39,7 +39,7 @@ public class BookingImpl implements BookingDao {
 
     @Override
     public boolean update(Booking booking) {
-        String sql = "UPDATE bookings SET status=?, updated_at=? WHERE id=?";
+        String sql = "UPDATE bookings SET status=?, updated_at=? WHERE booking_id=?";
         try (Connection conn = DatabaseDao.getDriver().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, booking.getStatus());
@@ -55,7 +55,7 @@ public class BookingImpl implements BookingDao {
 
     @Override
     public boolean delete(int id) {
-        String sql = "DELETE FROM bookings WHERE id=?";
+        String sql = "DELETE FROM bookings WHERE booking_id=?";
         try (Connection conn = DatabaseDao.getDriver().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
@@ -69,7 +69,7 @@ public class BookingImpl implements BookingDao {
 
     @Override
     public Booking find(int id) {
-        String sql = "SELECT * FROM bookings WHERE id=?";
+        String sql = "SELECT * FROM bookings WHERE booking_id=?";
         try (Connection conn = DatabaseDao.getDriver().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
@@ -135,7 +135,7 @@ public class BookingImpl implements BookingDao {
 
     private Booking extractBooking(ResultSet rs) throws SQLException {
         Booking booking = new Booking();
-        booking.setId(rs.getInt("id"));
+        booking.setId(rs.getInt("booking_id"));
         booking.setUserId(rs.getInt("user_id"));
         booking.setBookingType(rs.getString("booking_type"));
         booking.setItemId(rs.getInt("item_id"));

@@ -658,6 +658,15 @@
         <url-pattern>/admin/bookings/updateStatus</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ViewBookingServlet</servlet-name>
+        <servlet-class>toan.dev.admin.bookings.ViewBookingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewBookingServlet</servlet-name>
+        <url-pattern>/admin/bookings/view</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>IndexConsultationServlet</servlet-name>
         <url-pattern>/IndexConsultationServlet</url-pattern>

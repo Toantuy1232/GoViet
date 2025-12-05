@@ -77,6 +77,31 @@
     
     <%@include file="./inc/footer.jsp" %>
     
+    <!-- Toast Container -->
+    <div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+        <div id="bookingToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <i class="fas fa-check-circle me-2"></i>
+                <strong class="me-auto">Thành công</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body">
+                Đặt chỗ thành công! Chúng tôi sẽ liên hệ với bạn sớm.
+            </div>
+        </div>
+        
+        <div id="errorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-danger text-white">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                <strong class="me-auto">Lỗi</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body">
+                Có lỗi xảy ra. Vui lòng thử lại!
+            </div>
+        </div>
+    </div>
+    
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -87,6 +112,20 @@
             document.getElementById('totalPrice').textContent = total.toLocaleString('vi-VN');
             document.getElementById('totalPriceInput').value = total;
         });
+        
+        // Show toast if there's a message
+        <c:if test="${not empty message}">
+            const toast = new bootstrap.Toast(document.getElementById('bookingToast'));
+            toast.show();
+            setTimeout(() => {
+                window.location.href = '${pageContext.request.contextPath}/profile.jsp';
+            }, 2000);
+        </c:if>
+        
+        <c:if test="${not empty error}">
+            const errorToast = new bootstrap.Toast(document.getElementById('errorToast'));
+            errorToast.show();
+        </c:if>
     </script>
 </body>
 </html>
