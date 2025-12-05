@@ -113,6 +113,14 @@
                         </div>
                     </div>
 
+                    <div class="nav-item dropdown">
+                        <a href="${pageContext.request.contextPath}/admin/consultations" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fa fa-clipboard-list me-2"></i>Tư vấn
+                        </a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="${pageContext.request.contextPath}/IndexConsultationServlet" class="dropdown-item">Danh sách</a>
+                        </div>
+                    </div>
 
                 </div>
             </nav>

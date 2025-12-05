@@ -196,7 +196,7 @@
                                 <a href="${pageContext.request.contextPath}/404.jsp" class="dropdown-item">404</a>
                             </div>
                         </div>
-                        <a href="${pageContext.request.contextPath}/contact.jsp" class="nav-item nav-link">Liên Hệ</a>
+                        <a href="${pageContext.request.contextPath}/ContactServlet" class="nav-item nav-link">Liên Hệ</a>
                         <%
                         if (currentUser != null) {
                         %>

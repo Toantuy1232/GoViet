@@ -1,4 +1,4 @@
-package toan.dev;
+package toan.dev.admin.hotels;
 
 import toan.dev.data.dao.DatabaseDao;
 import toan.dev.data.dao.HotelsDao;
@@ -12,29 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ServicesServlet", urlPatterns = {"/services", "/ServicesServlet"})
-public class ServicesServlet extends HttpServlet {
+@WebServlet(name = "HotelsListServlet", urlPatterns = {"/admin/hotels"})
+public class HotelsListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         HotelsDao hotelsDao = DatabaseDao.getInstance().getHotelsDao();
-        List<Hotels> hotels = hotelsDao.findAll();
+        List<Hotels> hotelsList = hotelsDao.findAll();
         
-        System.out.println("DEBUG: Found " + (hotels != null ? hotels.size() : 0) + " hotels");
-        
-        // Debug: Print hotel details
-        if (hotels != null && !hotels.isEmpty()) {
-            for (Hotels hotel : hotels) {
-                System.out.println("Hotel: " + hotel.getName() + 
-                    " - Price: " + hotel.getPrice_per_night() + 
-                    " - Image: " + hotel.getImage_url());
-            }
-        }
-        
-        request.setAttribute("hotels", hotels);
-        request.getRequestDispatcher("/services.jsp").forward(request, response);
+        request.setAttribute("hotelsList", hotelsList);
+        request.getRequestDispatcher("/admin/hotels/list.jsp").forward(request, response);
     }
 
     @Override

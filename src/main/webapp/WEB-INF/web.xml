@@ -527,9 +527,78 @@
         <servlet-name>ServicesServlet</servlet-name>
         <url-pattern>/ServicesServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServicesServlet</servlet-name>
+        <url-pattern>/services</url-pattern>
+    </servlet-mapping>
+
+    <!-- Contact Servlet -->
+    <servlet>
+        <servlet-name>ContactServlet</servlet-name>
+        <servlet-class>toan.dev.ContactServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ContactServlet</servlet-name>
+        <url-pattern>/ContactServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ContactServlet</servlet-name>
+        <url-pattern>/contact</url-pattern>
+    </servlet-mapping>
+
+    <!-- Consultation Servlet -->
+    <servlet>
+        <servlet-name>ConsultationServlet</servlet-name>
+        <servlet-class>toan.dev.ConsultationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ConsultationServlet</servlet-name>
+        <url-pattern>/ConsultationServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConsultationServlet</servlet-name>
+        <url-pattern>/consultation</url-pattern>
+    </servlet-mapping>
+
+    <!-- Admin Consultation Servlets -->
+    <servlet>
+        <servlet-name>IndexConsultationServlet</servlet-name>
+        <servlet-class>toan.dev.admin.consultations.IndexConsultationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>IndexConsultationServlet</servlet-name>
+        <url-pattern>/IndexConsultationServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteConsultationServlet</servlet-name>
+        <servlet-class>toan.dev.admin.consultations.DeleteConsultationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteConsultationServlet</servlet-name>
+        <url-pattern>/DeleteConsultationServlet</url-pattern>
+    </servlet-mapping>
 
     <!-- Welcome file (trang mặc định) - redirect to HomeServlet -->
     <welcome-file-list>
         <welcome-file>HomeServlet</welcome-file>
     </welcome-file-list>
 </web-app>
+
+    <servlet>
+        <servlet-name>ViewConsultationServlet</servlet-name>
+        <servlet-class>toan.dev.admin.consultations.ViewConsultationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewConsultationServlet</servlet-name>
+        <url-pattern>/admin/consultations/view</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateConsultationStatusServlet</servlet-name>
+        <servlet-class>toan.dev.admin.consultations.UpdateStatusServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateConsultationStatusServlet</servlet-name>
+        <url-pattern>/admin/consultations/updateStatus</url-pattern>
+    </servlet-mapping>
