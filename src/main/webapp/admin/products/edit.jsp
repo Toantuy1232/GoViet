@@ -31,7 +31,7 @@
 
                             <form method="post" action="${pageContext.request.contextPath}/admin/products/edit" enctype="multipart/form-data">
                                 <input type="hidden" name="id" value="${product.id}">
-                                <input type="hidden" name="oldThumbnail" value="${product.thumbnail}">
+                                <input type="hidden" name="oldThumbnail" value="${product.image_url}">
 
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
@@ -46,14 +46,19 @@
 
                                     <div class="col-md-3 mb-3">
                                         <label class="form-label">Giá cũ</label>
-                                        <input type="number" name="oldPrice" class="form-control" step="0.01" value="${product.oldPrice}">
+                                        <input type="number" name="oldPrice" class="form-control" step="0.01" value="${product.price_old}">
                                     </div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Ảnh đại diện hiện tại</label>
                                     <div>
-                                        <img src="${pageContext.request.contextPath}/${product.thumbnail}" width="150" class="mb-2" alt="Current">
+                                        <c:if test="${not empty product.image_url}">
+                                            <img src="${pageContext.request.contextPath}/${product.image_url}" width="150" class="mb-2" alt="Current">
+                                        </c:if>
+                                        <c:if test="${empty product.image_url}">
+                                            <p class="text-muted">Chưa có ảnh</p>
+                                        </c:if>
                                     </div>
                                     <label class="form-label">Thay đổi ảnh (để trống nếu không đổi)</label>
                                     <input type="file" name="thumbnailFile" class="form-control" accept="image/*">
@@ -66,34 +71,21 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4 mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Số lượng</label>
-                                        <input type="number" name="quantity" class="form-control" value="${product.quantity}" required>
+                                        <input type="number" name="quantity" class="form-control" value="${product.stock}" required>
                                     </div>
 
-                                    <div class="col-md-4 mb-3">
-                                        <label class="form-label">Lượt xem</label>
-                                        <input type="number" name="view" class="form-control" value="${product.view}">
-                                    </div>
-
-                                    <div class="col-md-4 mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Danh mục</label>
                                         <select name="categoryId" class="form-select" required>
                                             <c:forEach items="${categories}" var="cat">
-                                                <option value="${cat.id}" ${cat.id == product.categoryId ? 'selected' : ''}>
+                                                <option value="${cat.id}" ${cat.id == product.category_id ? 'selected' : ''}>
                                                     ${cat.name}
                                                 </option>
                                             </c:forEach>
                                         </select>
                                     </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label">Trạng thái</label>
-                                    <select name="status" class="form-select">
-                                        <option value="Hoạt động" ${product.status == 'Hoạt động' ? 'selected' : ''}>Hoạt động</option>
-                                        <option value="Ngừng bán" ${product.status == 'Ngừng bán' ? 'selected' : ''}>Ngừng bán</option>
-                                    </select>
                                 </div>
 
                                 <div class="d-flex justify-content-end">

@@ -17,7 +17,16 @@ public class Products {
 
     public Products(String name, String description, String thumbnail, double price, int quantity, int categoryId) {
         super();
-
+        this.name = name;
+        this.sku = "PRD-" + System.currentTimeMillis(); // Auto-generate SKU
+        this.description = description;
+        this.image_url = thumbnail;
+        this.price = price;
+        this.price_old = 0; // Default old price
+        this.stock = quantity;
+        this.category_id = categoryId;
+        this.created_at = new Timestamp(System.currentTimeMillis());
+        this.updated_at = new Timestamp(System.currentTimeMillis());
     }
 
     public int getId() {

@@ -118,6 +118,16 @@
         <servlet-name>ProfileServlet</servlet-name>
         <servlet-class>toan.dev.ProfileServlet</servlet-class>
     </servlet>
+    
+    <!-- Account Management Servlets -->
+    <servlet>
+        <servlet-name>EditProfileServlet</servlet-name>
+        <servlet-class>toan.dev.EditProfileServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePasswordServlet</servlet-name>
+        <servlet-class>toan.dev.ChangePasswordServlet</servlet-class>
+    </servlet>
     <!--Cấu hình admin blog-->
     <servlet>
         <servlet-name>IndexBlogServlet</servlet-name>
@@ -254,6 +264,19 @@
         <servlet-name>ProfileServlet</servlet-name>
         <url-pattern>/profile</url-pattern>
         <url-pattern>/ProfileServlet</url-pattern>
+        <url-pattern>/account</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Account Management Mappings -->
+    <servlet-mapping>
+        <servlet-name>EditProfileServlet</servlet-name>
+        <url-pattern>/EditProfileServlet</url-pattern>
+        <url-pattern>/account/edit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePasswordServlet</servlet-name>
+        <url-pattern>/ChangePasswordServlet</url-pattern>
+        <url-pattern>/account/change-password</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
@@ -360,18 +383,22 @@
     <servlet-mapping>
         <servlet-name>IndexProductsServlet</servlet-name>
         <url-pattern>/IndexProductsServlet</url-pattern>
+        <url-pattern>/admin/products</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CreateProductServlet</servlet-name>
         <url-pattern>/CreateProductServlet</url-pattern>
+        <url-pattern>/admin/products/create</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EditProductServlet</servlet-name>
         <url-pattern>/EditProductServlet</url-pattern>
+        <url-pattern>/admin/products/edit</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeleteProductServlet</servlet-name>
         <url-pattern>/DeleteProductServlet</url-pattern>
+        <url-pattern>/admin/products/delete</url-pattern>
     </servlet-mapping>
     <!--Cấu hình admin user-->
     <servlet-mapping>
@@ -532,11 +559,24 @@
         <url-pattern>/services</url-pattern>
     </servlet-mapping>
 
+    <!-- Products By Category Servlet -->
+    <servlet>
+        <servlet-name>ProductsByCategoryServlet</servlet-name>
+        <servlet-class>toan.dev.ProductsByCategoryServlet</servlet-class>
+    </servlet>
+
     <!-- Contact Servlet -->
     <servlet>
         <servlet-name>ContactServlet</servlet-name>
         <servlet-class>toan.dev.ContactServlet</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>ProductsByCategoryServlet</servlet-name>
+        <url-pattern>/ProductsByCategoryServlet</url-pattern>
+        <url-pattern>/products</url-pattern>
+        <url-pattern>/tours</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>ContactServlet</servlet-name>
         <url-pattern>/ContactServlet</url-pattern>

@@ -19,6 +19,8 @@ public class ProfileServlet extends BaseServlet{
             response.sendRedirect("LoginServlet");
             return;
         }
+        // Hide banner on profile page
+        request.setAttribute("hideBanner", true);
         request.getRequestDispatcher("/profile.jsp").forward(request, response);
     }
 

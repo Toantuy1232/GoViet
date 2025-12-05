@@ -6,13 +6,11 @@ import toan.dev.data.dao.ProductsDao;
 import toan.dev.data.model.Products;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "IndexProductsServlet", urlPatterns = {"/admin/products", "/IndexProductsServlet"})
 public class IndexProductsServlet extends BaseAdminServlet {
 
     @Override

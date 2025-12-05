@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -55,11 +56,18 @@
                             <c:forEach items="${products}" var="product">
                                 <tr>
                                     <td>${product.id}</td>
-                                    <td><img src="${pageContext.request.contextPath}/${product.thumbnail}" width="50" alt="${product.name}"></td>
+                                    <td>
+                                        <c:if test="${not empty product.image_url}">
+                                            <img src="${pageContext.request.contextPath}/${product.image_url}" width="50" height="50" style="object-fit: cover;" alt="${product.name}">
+                                        </c:if>
+                                        <c:if test="${empty product.image_url}">
+                                            <img src="${pageContext.request.contextPath}/img/default-product.jpg" width="50" height="50" style="object-fit: cover;" alt="No image">
+                                        </c:if>
+                                    </td>
                                     <td>${product.name}</td>
-                                    <td>${product.price} VNĐ</td>
-                                    <td>${product.quantity}</td>
-                                    <td>${product.categoryId}</td>
+                                    <td><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/> VNĐ</td>
+                                    <td>${product.stock}</td>
+                                    <td>${product.category_id}</td>
                                     <td>
                                         <a href="${pageContext.request.contextPath}/admin/products/edit?id=${product.id}" 
                                            class="btn btn-sm btn-warning">
@@ -73,6 +81,11 @@
                                     </td>
                                 </tr>
                             </c:forEach>
+                            <c:if test="${empty products}">
+                                <tr>
+                                    <td colspan="7" class="text-center">Chưa có sản phẩm nào</td>
+                                </tr>
+                            </c:if>
                         </tbody>
                     </table>
                 </div>
