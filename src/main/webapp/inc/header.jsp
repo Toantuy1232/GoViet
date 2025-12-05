@@ -213,7 +213,7 @@
                         }
                         %>
                     </div>
-                    <a href="" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">Đăng ký tư vấn</a>
+                    <a href="${pageContext.request.contextPath}/consultation" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">Đăng ký tư vấn</a>
                 </div>
             </nav>
 
