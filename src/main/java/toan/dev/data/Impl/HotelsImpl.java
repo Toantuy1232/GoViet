@@ -57,8 +57,8 @@ public class HotelsImpl implements HotelsDao {
             stmt.setDouble(4, hotels.price_per_night);
             stmt.setInt(5, hotels.stars);
             stmt.setString(6, hotels.image_url);
-            stmt.setInt(7, hotels.hotel_id);
-            stmt.setInt(8, hotels.tour_id);
+            stmt.setInt(7, hotels.tour_id);
+            stmt.setInt(8, hotels.hotel_id);
             stmt.executeUpdate();
             return true;
         } catch(SQLException e) {

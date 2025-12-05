@@ -24,6 +24,7 @@ public class DatabaseDao {
     private TourDao tourDao;
     private HotelsDao hotelsDao;
     private ChatMessageDao chatMessageDao;
+    private ConsultationDao consultationDao;
     
     private DatabaseDao() {
         categoryDao = new CategoryImpl();
@@ -36,6 +37,7 @@ public class DatabaseDao {
         categoryGalleryDao = new CategoryGalleryImpl();
         hotelsDao = new HotelsImpl();
         chatMessageDao = new ChatMessageDaoImpl();
+        consultationDao = new ConsultationImpl();
 
         usersDao = new UserImpl() {
 
@@ -184,5 +186,9 @@ public class DatabaseDao {
     
     public ChatMessageDao getChatMessageDao() {
         return chatMessageDao;
+    }
+    
+    public ConsultationDao getConsultationDao() {
+        return consultationDao;
     }
 }

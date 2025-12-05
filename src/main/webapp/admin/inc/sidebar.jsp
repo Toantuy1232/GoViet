@@ -103,6 +103,24 @@
                       </div>
                       </div>
 
+                    <div class="nav-item dropdown">
+                        <a href="${pageContext.request.contextPath}/admin/chat-ai" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fa fa-robot me-2"></i>Chat AI
+                        </a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="${pageContext.request.contextPath}/IndexChatAIServlet" class="dropdown-item">All Messages</a>
+                            <a href="${pageContext.request.contextPath}/CreateChatAIServlet" class="dropdown-item">Add Message</a>
+                        </div>
+                    </div>
+
+                    <div class="nav-item dropdown">
+                        <a href="${pageContext.request.contextPath}/admin/consultations" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fa fa-clipboard-list me-2"></i>Tư vấn
+                        </a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="${pageContext.request.contextPath}/IndexConsultationServlet" class="dropdown-item">Danh sách</a>
+                        </div>
+                    </div>
 
                 </div>
             </nav>

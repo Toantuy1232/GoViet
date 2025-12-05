@@ -15,6 +15,11 @@ public class Products {
     public Timestamp created_at;
     public Timestamp updated_at;
 
+    public Products(String name, String description, String thumbnail, double price, int quantity, int categoryId) {
+        super();
+
+    }
+
     public int getId() {
         return id;
     }
