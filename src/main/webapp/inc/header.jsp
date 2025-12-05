@@ -256,6 +256,7 @@
                 });
             </script>
             
+            <c:if test="${empty hideBanner or !hideBanner}">
             <div class="carousel-header">
                 <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
                     <ol class="carousel-indicators">
@@ -303,9 +304,11 @@
                     </button>
                 </div>
             </div>
+            </c:if>
             <!-- Carousel End -->
         </div>
        <!-- Replace your existing search bar with this one -->
+       <c:if test="${empty hideBanner or !hideBanner}">
        <div class="container-fluid search-bar position-relative" style="top: -50%; transform: translateY(-50%);">
            <div class="container">
                <form action="SearchServlet" method="GET" class="position-relative rounded-pill w-100 mx-auto p-5" style="background: rgba(19, 53, 123, 0.8);">
@@ -322,6 +325,7 @@
                </form>
            </div>
        </div>
+       </c:if>
         <!-- Navbar & Hero End -->
 
 <!-- Toast Notification -->

@@ -11,21 +11,20 @@ import java.util.List;
 public class ProductImpl implements ProductsDao {
     @Override
     public boolean insert(Products products) {
-        String sql = "INSERT INTO products(id, name, sku, description, price, price_old, stock, image_url, category_id, created_at, updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO products(name, sku, description, price, price_old, stock, image_url, category_id, created_at, updated_at) VALUES(?,?,?,?,?,?,?,?,?,?)";
         try (Connection conn = DatabaseDao.getDriver().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
         ){
-            stmt.setInt(1, products.id);
-            stmt.setString(2, products.name);
-            stmt.setString(3, products.sku);
-            stmt.setString(4, products.description);
-            stmt.setDouble(5, products.price);
-            stmt.setDouble(6, products.price_old);
-            stmt.setInt(7, products.stock);
-            stmt.setString(8, products.image_url);
-            stmt.setInt(9, products.category_id);
-            stmt.setTimestamp(10, products.created_at);
-            stmt.setTimestamp(11, products.updated_at);
+            stmt.setString(1, products.name);
+            stmt.setString(2, products.sku);
+            stmt.setString(3, products.description);
+            stmt.setDouble(4, products.price);
+            stmt.setDouble(5, products.price_old);
+            stmt.setInt(6, products.stock);
+            stmt.setString(7, products.image_url);
+            stmt.setInt(8, products.category_id);
+            stmt.setTimestamp(9, products.created_at);
+            stmt.setTimestamp(10, products.updated_at);
             stmt.executeUpdate();
             return true;
 
@@ -144,18 +143,20 @@ public class ProductImpl implements ProductsDao {
         ){
             stmt.setInt(1, categoryId);
             try (ResultSet rs = stmt.executeQuery()){
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-                String sku = rs.getString("sku");
-                String description = rs.getString("description");
-                double price = rs.getDouble("price");
-                double price_old = rs.getDouble("price_old");
-                int stock = rs.getInt("stock");
-                String image_url = rs.getString("image_url");
-                int category_id = rs.getInt("category_id");
-                Timestamp created_at = rs.getTimestamp("created_at");
-                Timestamp updated_at = rs.getTimestamp("updated_at");
-                productsList.add(new Products(id, name, sku, description, price, price_old, stock, image_url, category_id, created_at, updated_at));
+                while (rs.next()) {
+                    int id = rs.getInt("id");
+                    String name = rs.getString("name");
+                    String sku = rs.getString("sku");
+                    String description = rs.getString("description");
+                    double price = rs.getDouble("price");
+                    double price_old = rs.getDouble("price_old");
+                    int stock = rs.getInt("stock");
+                    String image_url = rs.getString("image_url");
+                    int category_id = rs.getInt("category_id");
+                    Timestamp created_at = rs.getTimestamp("created_at");
+                    Timestamp updated_at = rs.getTimestamp("updated_at");
+                    productsList.add(new Products(id, name, sku, description, price, price_old, stock, image_url, category_id, created_at, updated_at));
+                }
             }
 
         }catch (SQLException e) {

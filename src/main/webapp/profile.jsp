@@ -247,22 +247,6 @@
     <!-- Header Start -->
     <%@include file="./inc/header.jsp" %>
     <!-- Header End -->
-    
-    <!-- Page Header Start -->
-    <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s" style="background: #f8f9fa !important;">
-        <div class="container text-center py-5">
-            <h1 class="display-4 fw-bold text-dark mb-4 animated slideInDown">
-                Hồ sơ cá nhân
-            </h1>
-            <nav aria-label="breadcrumb animated slideInDown">
-                <ol class="breadcrumb justify-content-center mb-0">
-                    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/HomeServlet" class="text-decoration-none">Trang chủ</a></li>
-                    <li class="breadcrumb-item active text-dark" aria-current="page">Hồ sơ</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-    <!-- Page Header End -->
 
     <!-- Profile Start -->
     <div class="container-xxl py-5">
@@ -320,13 +304,13 @@
                         <div class="profile-section">
                             <h3 class="section-title">Hành động</h3>
                             <div class="d-grid gap-2">
-                                <a href="EditProfileServlet" class="btn btn-primary btn-edit-profile mb-2">
+                                <a href="${pageContext.request.contextPath}/account/edit" class="btn btn-primary btn-edit-profile mb-2">
                                     <i class="fas fa-user-edit me-2"></i>Chỉnh sửa hồ sơ
                                 </a>
-                                <a href="ChangePasswordServlet" class="btn btn-outline-primary mb-2">
+                                <a href="${pageContext.request.contextPath}/account/change-password" class="btn btn-outline-primary mb-2">
                                     <i class="fas fa-key me-2"></i>Đổi mật khẩu
                                 </a>
-                                <a href="LogoutServlet" class="btn btn-outline-danger">
+                                <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-outline-danger">
                                     <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
                                 </a>
                             </div>
