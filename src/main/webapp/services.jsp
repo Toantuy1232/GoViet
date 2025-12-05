@@ -96,11 +96,16 @@
                                     </p>
                                 </div>
                                 <div class="row bg-primary rounded-bottom mx-0 mt-auto">
-                                    <div class="col-6 text-start px-0">
-                                        <a href="#" class="btn-hover btn text-white py-2 px-4">Chi tiết</a>
+                                    <div class="col-4 text-start px-0">
+                                        <a href="${pageContext.request.contextPath}/add-to-cart?type=hotel&itemId=${hotel.hotel_id}" class="btn-hover btn text-white py-2 px-3">
+                                            <i class="fa fa-shopping-cart"></i>
+                                        </a>
                                     </div>
-                                    <div class="col-6 text-end px-0">
-                                        <a href="#" class="btn-hover btn text-white py-2 px-4">Đặt ngay</a>
+                                    <div class="col-4 text-center px-0">
+                                        <a href="${pageContext.request.contextPath}/hotel-detail?id=${hotel.hotel_id}" class="btn-hover btn text-white py-2 px-3">Chi tiết</a>
+                                    </div>
+                                    <div class="col-4 text-end px-0">
+                                        <a href="${pageContext.request.contextPath}/booking?type=hotel&itemId=${hotel.hotel_id}" class="btn-hover btn text-white py-2 px-3">Đặt</a>
                                     </div>
                                 </div>
                             </div>

@@ -586,11 +586,44 @@
         <url-pattern>/contact</url-pattern>
     </servlet-mapping>
 
+    <!-- Cart Servlets -->
+    <servlet>
+        <servlet-name>AddToCartServlet</servlet-name>
+        <servlet-class>toan.dev.AddToCartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewCartServlet</servlet-name>
+        <servlet-class>toan.dev.ViewCartServlet</servlet-class>
+    </servlet>
+
+    <!-- Booking Servlet -->
+    <servlet>
+        <servlet-name>BookingServlet</servlet-name>
+        <servlet-class>toan.dev.BookingServlet</servlet-class>
+    </servlet>
+
     <!-- Consultation Servlet -->
     <servlet>
         <servlet-name>ConsultationServlet</servlet-name>
         <servlet-class>toan.dev.ConsultationServlet</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>AddToCartServlet</servlet-name>
+        <url-pattern>/AddToCartServlet</url-pattern>
+        <url-pattern>/add-to-cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCartServlet</servlet-name>
+        <url-pattern>/ViewCartServlet</url-pattern>
+        <url-pattern>/cart</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>BookingServlet</servlet-name>
+        <url-pattern>/BookingServlet</url-pattern>
+        <url-pattern>/booking</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>ConsultationServlet</servlet-name>
         <url-pattern>/ConsultationServlet</url-pattern>
@@ -600,11 +633,31 @@
         <url-pattern>/consultation</url-pattern>
     </servlet-mapping>
 
+    <!-- Admin Booking Servlets -->
+    <servlet>
+        <servlet-name>IndexBookingServlet</servlet-name>
+        <servlet-class>toan.dev.admin.bookings.IndexBookingServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateBookingStatusServlet</servlet-name>
+        <servlet-class>toan.dev.admin.bookings.UpdateBookingStatusServlet</servlet-class>
+    </servlet>
+
     <!-- Admin Consultation Servlets -->
     <servlet>
         <servlet-name>IndexConsultationServlet</servlet-name>
         <servlet-class>toan.dev.admin.consultations.IndexConsultationServlet</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>IndexBookingServlet</servlet-name>
+        <url-pattern>/IndexBookingServlet</url-pattern>
+        <url-pattern>/admin/bookings</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateBookingStatusServlet</servlet-name>
+        <url-pattern>/admin/bookings/updateStatus</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>IndexConsultationServlet</servlet-name>
         <url-pattern>/IndexConsultationServlet</url-pattern>
