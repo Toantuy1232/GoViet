@@ -46,7 +46,30 @@
     
     <%@include file="./inc/footer.jsp" %>
     
+    <!-- Toast Container -->
+    <div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+        <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <i class="fas fa-check-circle me-2"></i>
+                <strong class="me-auto">Thành công</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body">
+                ${sessionScope.message}
+            </div>
+        </div>
+    </div>
+    
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Show toast if there's a message
+        <c:if test="${not empty sessionScope.message}">
+            const toast = new bootstrap.Toast(document.getElementById('successToast'));
+            toast.show();
+            // Clear message after showing
+            <% session.removeAttribute("message"); %>
+        </c:if>
+    </script>
 </body>
 </html>

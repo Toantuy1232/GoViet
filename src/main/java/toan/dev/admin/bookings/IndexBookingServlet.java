@@ -17,14 +17,23 @@ public class IndexBookingServlet extends BaseAdminServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        System.out.println("=== IndexBookingServlet DEBUG ===");
+        
         BookingDao bookingDao = new BookingImpl();
         String statusFilter = request.getParameter("status");
+        
+        System.out.println("Status Filter: " + statusFilter);
         
         List<Booking> bookings;
         if (statusFilter != null && !statusFilter.isEmpty()) {
             bookings = bookingDao.findByStatus(statusFilter);
         } else {
             bookings = bookingDao.findAll();
+        }
+        
+        System.out.println("Total bookings found: " + (bookings != null ? bookings.size() : 0));
+        if (bookings != null && !bookings.isEmpty()) {
+            System.out.println("First booking: " + bookings.get(0).getCustomerName());
         }
         
         request.setAttribute("bookings", bookings);

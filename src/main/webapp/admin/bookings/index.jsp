@@ -82,6 +82,10 @@
                                     </td>
                                     <td>
                                         <div class="btn-group">
+                                            <a href="${pageContext.request.contextPath}/admin/bookings/view?id=${booking.id}" 
+                                               class="btn btn-sm btn-primary" title="Xem chi tiết">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
                                             <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-bs-toggle="dropdown">
                                                 <i class="fas fa-edit"></i>
                                             </button>

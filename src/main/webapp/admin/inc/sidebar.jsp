@@ -114,20 +114,20 @@
 
                     <div class="nav-item dropdown">
                         <a href="${pageContext.request.contextPath}/admin/bookings" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-calendar-check me-2"></i>Đặt chỗ
+                            <i class="fa fa-calendar-check me-2"></i>Bookings
                         </a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="${pageContext.request.contextPath}/admin/bookings" class="dropdown-item">Tất cả</a>
-                            <a href="${pageContext.request.contextPath}/admin/bookings?status=pending" class="dropdown-item">Chờ xác nhận</a>
+                            <a href="${pageContext.request.contextPath}/admin/bookings" class="dropdown-item">All</a>
+                            <a href="${pageContext.request.contextPath}/admin/bookings?status=pending" class="dropdown-item">Pending</a>
                         </div>
                     </div>
 
                     <div class="nav-item dropdown">
                         <a href="${pageContext.request.contextPath}/admin/consultations" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-clipboard-list me-2"></i>Tư vấn
+                            <i class="fa fa-clipboard-list me-2"></i>Consultations
                         </a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="${pageContext.request.contextPath}/IndexConsultationServlet" class="dropdown-item">Danh sách</a>
+                            <a href="${pageContext.request.contextPath}/IndexConsultationServlet" class="dropdown-item">All</a>
                         </div>
                     </div>
 

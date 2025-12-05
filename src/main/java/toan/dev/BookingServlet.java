@@ -116,6 +116,7 @@ public class BookingServlet extends BaseServlet {
             System.out.println("===================");
             
             if (success) {
+                session.setAttribute("message", "Đặt chỗ thành công! Chúng tôi sẽ liên hệ với bạn sớm.");
                 response.sendRedirect(request.getContextPath() + "/booking-success.jsp");
             } else {
                 request.setAttribute("error", "Đặt chỗ thất bại. Vui lòng thử lại!");
