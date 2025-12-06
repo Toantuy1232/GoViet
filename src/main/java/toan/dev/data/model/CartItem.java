@@ -1,7 +1,9 @@
 package toan.dev.data.model;
 
 public class CartItem {
-    private String type; // "tour" or "hotel"
+    private int cartId;
+    private int userId;
+    private String type;
     private int itemId;
     private String itemName;
     private double price;
@@ -9,6 +11,15 @@ public class CartItem {
     private String imageUrl;
 
     public CartItem() {
+    }
+
+    public CartItem(int userId, int itemId, String itemName, String imageUrl, double price, int quantity) {
+        this.userId = userId;
+        this.itemId = itemId;
+        this.itemName = itemName;
+        this.imageUrl = imageUrl;
+        this.price = price;
+        this.quantity = quantity;
     }
 
     public CartItem(String type, int itemId, String itemName, double price, int quantity, String imageUrl) {
@@ -19,6 +30,12 @@ public class CartItem {
         this.quantity = quantity;
         this.imageUrl = imageUrl;
     }
+
+    public int getCartId() { return cartId; }
+    public void setCartId(int cartId) { this.cartId = cartId; }
+
+    public int getUserId() { return userId; }
+    public void setUserId(int userId) { this.userId = userId; }
 
     public String getType() { return type; }
     public void setType(String type) { this.type = type; }
@@ -40,5 +57,21 @@ public class CartItem {
     
     public double getTotal() {
         return price * quantity;
+    }
+
+    public double getSubtotal() {
+        return getTotal();
+    }
+    
+    public int getProductId() {
+        return itemId;
+    }
+    
+    public String getProductName() {
+        return itemName;
+    }
+    
+    public String getProductImage() {
+        return imageUrl;
     }
 }

@@ -681,6 +681,52 @@
         <url-pattern>/DeleteConsultationServlet</url-pattern>
     </servlet-mapping>
 
+    <!-- Checkout and Order Servlets -->
+    <servlet>
+        <servlet-name>CheckoutServlet</servlet-name>
+        <servlet-class>toan.dev.CheckoutServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderSuccessServlet</servlet-name>
+        <servlet-class>toan.dev.OrderSuccessServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CheckoutServlet</servlet-name>
+        <url-pattern>/CheckoutServlet</url-pattern>
+        <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderSuccessServlet</servlet-name>
+        <url-pattern>/order-success</url-pattern>
+    </servlet-mapping>
+
+    <!-- Admin Order Servlets -->
+    <servlet>
+        <servlet-name>IndexOrderServlet</servlet-name>
+        <servlet-class>toan.dev.admin.orders.IndexOrderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewOrderServlet</servlet-name>
+        <servlet-class>toan.dev.admin.orders.ViewOrderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateOrderStatusServlet</servlet-name>
+        <servlet-class>toan.dev.admin.orders.UpdateOrderStatusServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>IndexOrderServlet</servlet-name>
+        <url-pattern>/IndexOrderServlet</url-pattern>
+        <url-pattern>/admin/orders</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewOrderServlet</servlet-name>
+        <url-pattern>/admin/orders/view</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateOrderStatusServlet</servlet-name>
+        <url-pattern>/admin/orders/updateStatus</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>ViewConsultationServlet</servlet-name>
         <servlet-class>toan.dev.admin.consultations.ViewConsultationServlet</servlet-class>
