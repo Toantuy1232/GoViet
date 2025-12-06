@@ -2,7 +2,7 @@ package toan.dev.admin.user;
 
 import toan.dev.admin.BaseAdminServlet;
 import toan.dev.data.dao.DatabaseDao;
-import toan.dev.data.dao.OrdersDao;
+import toan.dev.data.dao.OrderDao;
 import toan.dev.data.dao.UsersDao;
 
 import javax.servlet.ServletException;
@@ -28,8 +28,8 @@ public class DeleteUserServlet extends BaseAdminServlet {
 
         try {
             // Kiểm tra xem user có orders không
-            OrdersDao orderDao = DatabaseDao.getInstance().getOrderDao();
-            boolean hasOrders = orderDao.hasOrdersByUserId(userId);
+            OrderDao orderDao = DatabaseDao.getInstance().getOrderDao();
+            boolean hasOrders = !orderDao.findByUserId(userId).isEmpty();
             System.out.println("User " + userId + " has orders: " + hasOrders);
 
             if (hasOrders) {

@@ -1,9 +1,11 @@
 package toan.dev;
 
+import toan.dev.data.dao.CartDao;
 import toan.dev.data.dao.DatabaseDao;
 import toan.dev.data.dao.ProductsDao;
 import toan.dev.data.model.CartItem;
 import toan.dev.data.model.Products;
+import toan.dev.data.model.Users;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,8 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class AddToCartServlet extends HttpServlet {
     
@@ -20,7 +20,16 @@ public class AddToCartServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String type = request.getParameter("type");
+        HttpSession session = request.getSession();
+        Users user = (Users) session.getAttribute("user");
+
+        if (user == null) {
+            session.setAttribute("redirectAfterLogin", request.getRequestURI() + "?" + request.getQueryString());
+            session.setAttribute("errors", "Vui lòng đăng nhập để thêm vào giỏ hàng!");
+            response.sendRedirect(request.getContextPath() + "/LoginServlet");
+            return;
+        }
+        
         String itemIdStr = request.getParameter("itemId");
         
         if (itemIdStr == null || itemIdStr.isEmpty()) {
@@ -30,45 +39,36 @@ public class AddToCartServlet extends HttpServlet {
         
         try {
             int itemId = Integer.parseInt(itemIdStr);
-            HttpSession session = request.getSession();
-            
-            // Get or create cart
-            List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
-            if (cart == null) {
-                cart = new ArrayList<>();
-            }
-            
-            // Get product info
+            int userId = user.getUser_id();
+
             ProductsDao productsDao = DatabaseDao.getInstance().getProductDao();
             Products product = productsDao.find(itemId);
             
-            // Check if item already in cart
-            boolean found = false;
-            for (CartItem item : cart) {
-                if (item.getType().equals(type) && item.getItemId() == itemId) {
-                    item.setQuantity(item.getQuantity() + 1);
-                    found = true;
-                    break;
-                }
+            if (product == null) {
+                response.sendRedirect(request.getContextPath() + "/");
+                return;
             }
             
-            // Add new item if not found
-            if (!found) {
+            CartDao cartDao = DatabaseDao.getInstance().getCartDao();
+
+            CartItem existingItem = cartDao.findByUserAndProduct(userId, itemId);
+            
+            if (existingItem != null) {
+                existingItem.setQuantity(existingItem.getQuantity() + 1);
+                cartDao.update(existingItem);
+            } else {
                 CartItem newItem = new CartItem(
-                    type != null ? type : "tour",
+                    userId,
                     itemId,
                     product.getName(),
+                    product.getImage_url(),
                     product.getPrice(),
-                    1,
-                    product.getImage_url()
+                    1
                 );
-                cart.add(newItem);
+                cartDao.insert(newItem);
             }
             
-            session.setAttribute("cart", cart);
             session.setAttribute("cartMessage", "Đã thêm vào giỏ hàng!");
-            
-            // Redirect back to previous page
             String referer = request.getHeader("Referer");
             response.sendRedirect(referer != null ? referer : request.getContextPath() + "/");
             
