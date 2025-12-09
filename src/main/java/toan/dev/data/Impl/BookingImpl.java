@@ -21,8 +21,8 @@ public class BookingImpl implements BookingDao {
             stmt.setString(4, booking.getCustomerName());
             stmt.setString(5, booking.getCustomerEmail());
             stmt.setString(6, booking.getCustomerPhone());
-            stmt.setString(7, booking.getCheckInDate());
-            stmt.setString(8, booking.getCheckOutDate());
+            stmt.setDate(7, booking.getCheckInDate());
+            stmt.setDate(8, booking.getCheckOutDate());
             stmt.setInt(9, booking.getNumberOfPeople());
             stmt.setDouble(10, booking.getTotalPrice());
             stmt.setString(11, booking.getStatus());
@@ -142,8 +142,8 @@ public class BookingImpl implements BookingDao {
         booking.setCustomerName(rs.getString("customer_name"));
         booking.setCustomerEmail(rs.getString("customer_email"));
         booking.setCustomerPhone(rs.getString("customer_phone"));
-        booking.setCheckInDate(rs.getString("check_in_date"));
-        booking.setCheckOutDate(rs.getString("check_out_date"));
+        booking.setCheckInDate(rs.getDate("check_in_date"));
+        booking.setCheckOutDate(rs.getDate("check_out_date"));
         booking.setNumberOfPeople(rs.getInt("number_of_people"));
         booking.setTotalPrice(rs.getDouble("total_price"));
         booking.setStatus(rs.getString("status"));

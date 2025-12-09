@@ -139,6 +139,7 @@
                                     </li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="#"><i class="fas fa-heart me-2"></i>Danh sách yêu thích</a></li>
+                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/my-bookings"><i class="fas fa-calendar-check me-2"></i>Đơn đặt của tôi</a></li>
                                     <li><a class="dropdown-item" href="${pageContext.request.contextPath}/CartServlet"><i class="fas fa-shopping-cart me-2"></i>Giỏ hàng của tôi</a></li>
                                     <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ProfileServlet"><i class="fas fa-user-cog me-2"></i>Tài khoản của tôi</a></li>
                                     <%

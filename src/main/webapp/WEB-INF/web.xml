@@ -633,6 +633,15 @@
         <url-pattern>/consultation</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>MyBookingsServlet</servlet-name>
+        <servlet-class>toan.dev.MyBookingsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewMyBookingServlet</servlet-name>
+        <servlet-class>toan.dev.ViewMyBookingServlet</servlet-class>
+    </servlet>
+
     <!-- Admin Booking Servlets -->
     <servlet>
         <servlet-name>IndexBookingServlet</servlet-name>
@@ -648,6 +657,17 @@
         <servlet-name>IndexConsultationServlet</servlet-name>
         <servlet-class>toan.dev.admin.consultations.IndexConsultationServlet</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>MyBookingsServlet</servlet-name>
+        <url-pattern>/MyBookingsServlet</url-pattern>
+        <url-pattern>/my-bookings</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMyBookingServlet</servlet-name>
+        <url-pattern>/ViewMyBookingServlet</url-pattern>
+        <url-pattern>/my-bookings/view</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>IndexBookingServlet</servlet-name>
         <url-pattern>/IndexBookingServlet</url-pattern>

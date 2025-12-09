@@ -1,17 +1,18 @@
 package toan.dev.data.model;
 
 import java.sql.Timestamp;
+import java.sql.Date;
 
 public class Booking {
-    private int id;
+    private int bookingId;
     private int userId;
     private String bookingType;
     private int itemId;
     private String customerName;
     private String customerEmail;
     private String customerPhone;
-    private String checkInDate;
-    private String checkOutDate;
+    private Date checkInDate;
+    private Date checkOutDate;
     private int numberOfPeople;
     private double totalPrice;
     private String status;
@@ -23,7 +24,7 @@ public class Booking {
     }
 
     public Booking(int userId, String bookingType, int itemId, String customerName, String customerEmail, 
-                   String customerPhone, String checkInDate, String checkOutDate, int numberOfPeople, 
+                   String customerPhone, Date checkInDate, Date checkOutDate, int numberOfPeople, 
                    double totalPrice, String status, String notes) {
         this.userId = userId;
         this.bookingType = bookingType;
@@ -40,8 +41,12 @@ public class Booking {
         this.createdAt = new Timestamp(System.currentTimeMillis());
         this.updatedAt = new Timestamp(System.currentTimeMillis());
     }
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    
+    public int getBookingId() { return bookingId; }
+    public void setBookingId(int bookingId) { this.bookingId = bookingId; }
+    
+    public int getId() { return bookingId; }
+    public void setId(int id) { this.bookingId = id; }
     
     public int getUserId() { return userId; }
     public void setUserId(int userId) { this.userId = userId; }
@@ -61,11 +66,11 @@ public class Booking {
     public String getCustomerPhone() { return customerPhone; }
     public void setCustomerPhone(String customerPhone) { this.customerPhone = customerPhone; }
     
-    public String getCheckInDate() { return checkInDate; }
-    public void setCheckInDate(String checkInDate) { this.checkInDate = checkInDate; }
+    public Date getCheckInDate() { return checkInDate; }
+    public void setCheckInDate(Date checkInDate) { this.checkInDate = checkInDate; }
     
-    public String getCheckOutDate() { return checkOutDate; }
-    public void setCheckOutDate(String checkOutDate) { this.checkOutDate = checkOutDate; }
+    public Date getCheckOutDate() { return checkOutDate; }
+    public void setCheckOutDate(Date checkOutDate) { this.checkOutDate = checkOutDate; }
     
     public int getNumberOfPeople() { return numberOfPeople; }
     public void setNumberOfPeople(int numberOfPeople) { this.numberOfPeople = numberOfPeople; }
