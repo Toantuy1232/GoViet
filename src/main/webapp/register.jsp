@@ -82,7 +82,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="confirm" class="form-label">Nhập lại mật khẩu</label>
-                             <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Xác nhận mật khẩu" required>
+                             <input type="password" class="form-control" id="confirmPassword" name="confirm" placeholder="Xác nhận mật khẩu" required>
                                 <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword', this)">
                                     <i class="bi bi-eye"></i>
                                 </button>

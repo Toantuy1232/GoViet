@@ -20,6 +20,7 @@ public class DatabaseDao {
     private UsersDao usersDao;
     private OrderDao orderDao;
     private CartDao cartDao;
+    private BookingDao bookingDao;
     private DestinationsDao destinationsDao;
     private CategoryGalleryDao categoryGalleryDao;
     private TourDao tourDao;
@@ -34,6 +35,7 @@ public class DatabaseDao {
         blogDao = new BlogpostsImpl();
         orderDao = new OrderImpl();
         cartDao = new CartImpl();
+        bookingDao = new BookingImpl();
         tourDao = new TourImpl();
         destinationsDao = new DestinationsImpl();
         categoryGalleryDao = new CategoryGalleryImpl();
@@ -196,5 +198,9 @@ public class DatabaseDao {
     
     public CartDao getCartDao() {
         return cartDao;
+    }
+    
+    public BookingDao getBookingDao() {
+        return bookingDao;
     }
 }

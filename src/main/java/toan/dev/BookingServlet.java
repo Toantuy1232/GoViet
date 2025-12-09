@@ -106,8 +106,18 @@ public class BookingServlet extends BaseServlet {
             int numberOfPeople = Integer.parseInt(numberOfPeopleStr);
             double totalPrice = Double.parseDouble(totalPriceStr);
             
+            // Convert String dates to java.sql.Date
+            java.sql.Date sqlCheckInDate = null;
+            java.sql.Date sqlCheckOutDate = null;
+            if (checkInDate != null && !checkInDate.trim().isEmpty()) {
+                sqlCheckInDate = java.sql.Date.valueOf(checkInDate);
+            }
+            if (checkOutDate != null && !checkOutDate.trim().isEmpty()) {
+                sqlCheckOutDate = java.sql.Date.valueOf(checkOutDate);
+            }
+            
             Booking booking = new Booking(userId, bookingType, itemId, customerName, customerEmail,
-                    customerPhone, checkInDate, checkOutDate, numberOfPeople, totalPrice, "pending", notes);
+                    customerPhone, sqlCheckInDate, sqlCheckOutDate, numberOfPeople, totalPrice, "pending", notes);
             
             BookingDao bookingDao = new BookingImpl();
             boolean success = bookingDao.insert(booking);
