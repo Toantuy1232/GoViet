@@ -164,4 +164,38 @@ public class ProductImpl implements ProductsDao {
         }
         return productsList;
     }
+
+    @Override
+    public List<Products> findByCategory(int categoryId) {
+        List<Products> productsList = new ArrayList<>();
+        String sql = "SELECT * FROM `products` WHERE category_id = ? ORDER BY created_at DESC";
+        try (Connection conn = DatabaseDao.getDriver().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, categoryId);
+            
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    int id = rs.getInt("id");
+                    String name = rs.getString("name");
+                    String sku = rs.getString("sku");
+                    String description = rs.getString("description");
+                    double price = rs.getDouble("price");
+                    double price_old = rs.getDouble("price_old");
+                    int stock = rs.getInt("stock");
+                    String image_url = rs.getString("image_url");
+                    int category_id = rs.getInt("category_id");
+                    Timestamp created_at = rs.getTimestamp("created_at");
+                    Timestamp updated_at = rs.getTimestamp("updated_at");
+                    
+                    productsList.add(new Products(id, name, sku, description, price, price_old, 
+                        stock, image_url, category_id, created_at, updated_at));
+                }
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return productsList;
+    }
 }
