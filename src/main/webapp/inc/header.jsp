@@ -194,9 +194,8 @@
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Trang</a>
                             <div class="dropdown-menu m-0">
                                 <a href="${pageContext.request.contextPath}/DestinationServlet" class="dropdown-item">Điểm đến</a>
-                                <a href="${pageContext.request.contextPath}/tour.html" class="dropdown-item">Khám phá chuyến tham quan</a>
                                 <a href="${pageContext.request.contextPath}/booking.jsp" class="dropdown-item">Đặt chỗ du lịch</a>
-                                <a href="${pageContext.request.contextPath}/404.jsp" class="dropdown-item">404</a>
+
                             </div>
                         </div>
                         <a href="${pageContext.request.contextPath}/ContactServlet" class="nav-item nav-link">Liên Hệ</a>
@@ -265,7 +264,7 @@
                 });
             </script>
             
-            <c:if test="${empty hideBanner or !hideBanner}">
+            <c:if test="${not empty showBanner and showBanner}">
             <div class="carousel-header">
                 <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
                     <ol class="carousel-indicators">
@@ -317,7 +316,7 @@
             <!-- Carousel End -->
         </div>
        <!-- Replace your existing search bar with this one -->
-       <c:if test="${empty hideBanner or !hideBanner}">
+       <c:if test="${not empty showBanner and showBanner}">
        <div class="container-fluid search-bar position-relative" style="top: -50%; transform: translateY(-50%);">
            <div class="container">
                <form action="SearchServlet" method="GET" class="position-relative rounded-pill w-100 mx-auto p-5" style="background: rgba(19, 53, 123, 0.8);">

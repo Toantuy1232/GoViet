@@ -61,6 +61,9 @@ public class HomeServlet extends BaseServlet {
         request.setAttribute("categoryGalleryList", categoryGalleryList);
         request.setAttribute("destinationsList", DatabaseDao.getInstance().getDestinationsDao().findAll());
         request.setAttribute("categoryList", DatabaseDao.getInstance().getCategoryDao().findAll());
+        
+        request.setAttribute("showBanner", true);
+        
         // Forward đến index.jsp
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }

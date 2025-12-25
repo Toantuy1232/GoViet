@@ -83,7 +83,7 @@
                                             Admin
                                         </c:if>
                                     </p>
-                                    <a href="#" class="h4">${b.title}</a>
+                                    <a href="${pageContext.request.contextPath}/blog-detail?id=${b.post_id}" class="h4">${b.title}</a>
                                     <p class="my-3">${fn:substring(b.content, 0, 150)}...</p>
                                     <a href="${pageContext.request.contextPath}/blog-detail?id=${b.post_id}" class="btn btn-primary rounded-pill py-2 px-4">Đọc thêm</a>
                                 </div>
