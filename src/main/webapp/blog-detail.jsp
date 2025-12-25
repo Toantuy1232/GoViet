@@ -1,6 +1,7 @@
 <%@page pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +47,7 @@
                 <!-- Blog Detail Start -->
                 <div class="col-lg-8">
                     <div class="mb-5">
-                        <img class="img-fluid w-100 rounded mb-4" src="${pageContext.request.contextPath}/img/${blogPost.cover_image}" alt="${blogPost.title}">
+                        <img class="img-fluid w-100 rounded mb-4" src="${pageContext.request.contextPath}/img/<c:choose><c:when test="${not empty blogPost.cover_image}">${blogPost.cover_image}</c:when><c:otherwise>default-blog.jpg</c:otherwise></c:choose>" alt="${blogPost.title}">
                         <h1 class="mb-4">${blogPost.title}</h1>
                         <div class="d-flex mb-3">
                             <span class="me-3">
@@ -82,10 +83,7 @@
                                 <a class="btn btn-outline-primary btn-square me-2" href="#"><i class="fab fa-linkedin-in"></i></a>
                                 <a class="btn btn-outline-primary btn-square" href="#"><i class="fab fa-pinterest"></i></a>
                             </div>
-                            <div class="d-flex">
-                                <a class="btn btn-outline-primary btn-square me-2" href="#"><i class="far fa-thumbs-up"></i> Thích</a>
-                                <a class="btn btn-outline-primary btn-square" href="#comments"><i class="far fa-comment-dots"></i> Bình luận</a>
-                            </div>
+
                         </div>
                         
                         <!-- Related Posts -->
@@ -97,11 +95,11 @@
                                         <div class="blog-item">
                                             <div class="blog-img">
                                                 <div class="blog-img-inner">
-                                                    <img class="img-fluid w-100 rounded" src="${pageContext.request.contextPath}/img/${relatedPost.cover_image}" alt="${relatedPost.title}">
+                                                    <img class="img-fluid w-100 rounded" src="${pageContext.request.contextPath}/img/<c:choose><c:when test="${not empty relatedPost.cover_image}">${relatedPost.cover_image}</c:when><c:otherwise>default-blog.jpg</c:otherwise></c:choose>" alt="${relatedPost.title}">
                                                 </div>
                                             </div>
                                             <div class="mt-3">
-                                                <a href="${pageContext.request.contextPath}/blog-detail?id=${relatedPost.id}" class="h5">${relatedPost.title}</a>
+                                                <a href="${pageContext.request.contextPath}/blog-detail?id=${relatedPost.post_id}" class="h5">${relatedPost.title}</a>
                                                 <p class="mt-2"><i class="far fa-calendar-alt text-primary me-2"></i> 
                                                     <fmt:formatDate value="${relatedPost.created_at}" pattern="dd/MM/yyyy" />
                                                 </p>
@@ -114,18 +112,23 @@
                         
                         <!-- Comments -->
                         <div id="comments" class="mb-5">
-                            <h4 class="mb-4">Bình luận (${comments.size()})</h4>
+                            <h4 class="mb-4">Bình luận (<c:choose><c:when test="${not empty comments}">${comments.size()}</c:when><c:otherwise>0</c:otherwise></c:choose>)</h4>
                             <div class="mb-5">
-                                <c:forEach var="comment" items="${comments}">
-                                    <div class="d-flex mb-4">
-                                        <img src="${pageContext.request.contextPath}/assets/img/user.jpg" class="img-fluid rounded-circle" style="width: 45px; height: 45px; object-fit: cover;">
-                                        <div class="ps-3">
-                                            <h6>${comment.userName} <small><i>${comment.created_at}</i></small></h6>
-                                            <p>${comment.content}</p>
-                                            <button class="btn btn-sm btn-link">Trả lời</button>
+                                <c:if test="${not empty comments}">
+                                    <c:forEach var="comment" items="${comments}">
+                                        <div class="d-flex mb-4">
+                                            <img src="${pageContext.request.contextPath}/assets/img/user.jpg" class="img-fluid rounded-circle" style="width: 45px; height: 45px; object-fit: cover;">
+                                            <div class="ps-3">
+                                                <h6>${comment.userName} <small><i>${comment.created_at}</i></small></h6>
+                                                <p>${comment.content}</p>
+                                                <button class="btn btn-sm btn-link">Trả lời</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </c:forEach>
+                                    </c:forEach>
+                                </c:if>
+                                <c:if test="${empty comments}">
+                                    <p class="text-muted">Chưa có bình luận nào. Hãy là người đầu tiên bình luận!</p>
+                                </c:if>
                             </div>
                             
                             <!-- Comment Form -->
@@ -133,7 +136,7 @@
                                 <h4 class="mb-4">Để lại bình luận</h4>
                                 <form action="${pageContext.request.contextPath}/CommentServlet" method="post">
                                     <input type="hidden" name="action" value="add">
-                                    <input type="hidden" name="blog_id" value="${blogPost.id}">
+                                    <input type="hidden" name="blog_id" value="${blogPost.post_id}">
                                     <div class="form-group mb-3">
                                         <label for="content">Nội dung bình luận</label>
                                         <textarea class="form-control" id="content" name="content" rows="4" required></textarea>
@@ -164,7 +167,7 @@
                         <div class="d-flex flex-column">
                             <c:forEach var="category" items="${categories}">
                                 <a class="h5 mb-2" href="${pageContext.request.contextPath}/blog?category=${category.id}">
-                                    <i class="fa fa-angle-right me-2"></i>${category.name} (${category.post_count})
+                                    <i class="fa fa-angle-right me-2"></i>${category.name}
                                 </a>
                             </c:forEach>
                         </div>
@@ -175,8 +178,8 @@
                         <h4 class="mb-4">Bài viết gần đây</h4>
                         <c:forEach var="recentPost" items="${recentPosts}" end="3">
                             <div class="d-flex mb-3">
-                                <img src="${pageContext.request.contextPath}/img/${recentPost.cover_image}" class="img-fluid" style="width: 100px; height: 70px; object-fit: cover;" alt="${recentPost.title}">
-                                <a href="${pageContext.request.contextPath}/blog-detail?id=${recentPost.id}" class="h6 d-flex align-items-center bg-white px-3 mb-0">
+                                <img src="${pageContext.request.contextPath}/img/<c:choose><c:when test="${not empty recentPost.cover_image}">${recentPost.cover_image}</c:when><c:otherwise>default-blog.jpg</c:otherwise></c:choose>" class="img-fluid" style="width: 100px; height: 70px; object-fit: cover;" alt="${recentPost.title}">
+                                <a href="${pageContext.request.contextPath}/blog-detail?id=${recentPost.post_id}" class="h6 d-flex align-items-center bg-white px-3 mb-0">
                                     ${recentPost.title}
                                 </a>
                             </div>
@@ -187,9 +190,14 @@
                     <div class="mb-5">
                         <h4 class="mb-4">Tags</h4>
                         <div class="d-flex flex-wrap m-n1">
-                            <c:forTokens items="${blogPost.tags}" delims="," var="tag">
-                                <a href="${pageContext.request.contextPath}/blog?tag=${tag.trim()}" class="btn btn-outline-primary m-1">${tag.trim()}</a>
-                            </c:forTokens>
+                            <c:if test="${not empty blogPost.tags}">
+                                <c:forTokens items="${blogPost.tags}" delims="," var="tag">
+                                    <a href="${pageContext.request.contextPath}/blog?tag=${tag.trim()}" class="btn btn-outline-primary m-1">${tag.trim()}</a>
+                                </c:forTokens>
+                            </c:if>
+                            <c:if test="${empty blogPost.tags}">
+                                <p class="text-muted">Không có tags</p>
+                            </c:if>
                         </div>
                     </div>
                 </div>
