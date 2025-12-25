@@ -200,21 +200,6 @@
                             </div>
                         </div>
                         <a href="${pageContext.request.contextPath}/ContactServlet" class="nav-item nav-link">Liên Hệ</a>
-                        <%
-                        if (currentUser != null) {
-                        %>
-                            <a href="${pageContext.request.contextPath}/chat" class="nav-item nav-link">
-                                <i class="fas fa-robot"></i> Chat AI
-                            </a>
-                        <%
-                        } else {
-                        %>
-                            <a href="#" class="nav-item nav-link" onclick="showLoginToast(); return false;">
-                                <i class="fas fa-robot"></i> Chat AI
-                            </a>
-                        <%
-                        }
-                        %>
                     </div>
                     <div class="d-flex align-items-center ms-lg-4">
                         <a href="${pageContext.request.contextPath}/cart" class="btn btn-outline-primary rounded-circle me-2 position-relative" style="width: 40px; height: 40px; padding: 8px;">
@@ -361,7 +346,7 @@
             <button type="button" class="btn-close btn-close-white" onclick="hideLoginToast()"></button>
         </div>
         <div class="toast-body">
-            Vui lòng <a href="${pageContext.request.contextPath}/LoginServlet" class="text-primary fw-bold">đăng nhập</a> để sử dụng tính năng Chat AI!
+            Vui lòng <a href="${pageContext.request.contextPath}/LoginServlet" class="text-primary fw-bold">đăng nhập</a> để sử dụng các tính năng đặc biệt!
         </div>
     </div>
 </div>
