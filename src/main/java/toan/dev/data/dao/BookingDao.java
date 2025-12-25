@@ -11,4 +11,5 @@ public interface BookingDao {
     List<Booking> findAll();
     List<Booking> findByUserId(int userId);
     List<Booking> findByStatus(String status);
+    Booking findByOrderCode(String orderCode);
 }

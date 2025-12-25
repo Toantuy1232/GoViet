@@ -19,6 +19,23 @@ public class Booking {
     private String notes;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+    
+    // Additional fields for order detail display
+    private String orderCode;
+    private String paymentMethod;
+    private String address;
+    private String specialRequests;
+    private Date bookingDate;
+    private String tourName;
+    private String tourImage;
+    private String destinationName;
+    private String categoryName;
+    private double totalAmount;
+    private String email;
+    private String phone;
+    private Timestamp confirmedAt;
+    private Timestamp completedAt;
+    private Timestamp cancelledAt;
 
     public Booking() {
     }
@@ -42,6 +59,7 @@ public class Booking {
         this.updatedAt = new Timestamp(System.currentTimeMillis());
     }
     
+    // Existing getters and setters
     public int getBookingId() { return bookingId; }
     public void setBookingId(int bookingId) { this.bookingId = bookingId; }
     
@@ -89,4 +107,50 @@ public class Booking {
     
     public Timestamp getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(Timestamp updatedAt) { this.updatedAt = updatedAt; }
+    
+    // New getters and setters for additional fields
+    public String getOrderCode() { return orderCode; }
+    public void setOrderCode(String orderCode) { this.orderCode = orderCode; }
+    
+    public String getPaymentMethod() { return paymentMethod; }
+    public void setPaymentMethod(String paymentMethod) { this.paymentMethod = paymentMethod; }
+    
+    public String getAddress() { return address; }
+    public void setAddress(String address) { this.address = address; }
+    
+    public String getSpecialRequests() { return specialRequests; }
+    public void setSpecialRequests(String specialRequests) { this.specialRequests = specialRequests; }
+    
+    public Date getBookingDate() { return bookingDate; }
+    public void setBookingDate(Date bookingDate) { this.bookingDate = bookingDate; }
+    
+    public String getTourName() { return tourName; }
+    public void setTourName(String tourName) { this.tourName = tourName; }
+    
+    public String getTourImage() { return tourImage; }
+    public void setTourImage(String tourImage) { this.tourImage = tourImage; }
+    
+    public String getDestinationName() { return destinationName; }
+    public void setDestinationName(String destinationName) { this.destinationName = destinationName; }
+    
+    public String getCategoryName() { return categoryName; }
+    public void setCategoryName(String categoryName) { this.categoryName = categoryName; }
+    
+    public double getTotalAmount() { return totalAmount > 0 ? totalAmount : totalPrice; }
+    public void setTotalAmount(double totalAmount) { this.totalAmount = totalAmount; }
+    
+    public String getEmail() { return email != null ? email : customerEmail; }
+    public void setEmail(String email) { this.email = email; }
+    
+    public String getPhone() { return phone != null ? phone : customerPhone; }
+    public void setPhone(String phone) { this.phone = phone; }
+    
+    public Timestamp getConfirmedAt() { return confirmedAt; }
+    public void setConfirmedAt(Timestamp confirmedAt) { this.confirmedAt = confirmedAt; }
+    
+    public Timestamp getCompletedAt() { return completedAt; }
+    public void setCompletedAt(Timestamp completedAt) { this.completedAt = completedAt; }
+    
+    public Timestamp getCancelledAt() { return cancelledAt; }
+    public void setCancelledAt(Timestamp cancelledAt) { this.cancelledAt = cancelledAt; }
 }

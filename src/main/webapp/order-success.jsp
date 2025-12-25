@@ -30,10 +30,15 @@
                         </c:if>
                         <div class="d-flex gap-3 justify-content-center mt-4">
                             <a href="${pageContext.request.contextPath}/" class="btn btn-primary px-4 py-2">
-                                <i class="fas fa-home"></i> Về trang chủ
+                                <i class="fas fa-home me-1"></i>Về trang chủ
                             </a>
-                            <a href="${pageContext.request.contextPath}/profile" class="btn btn-outline-primary px-4 py-2">
-                                <i class="fas fa-list"></i> Xem đơn hàng
+                            <c:if test="${not empty order and not empty order.orderCode}">
+                                <a href="${pageContext.request.contextPath}/order-detail?code=${order.orderCode}" class="btn btn-success px-4 py-2">
+                                    <i class="fas fa-eye me-1"></i>Xem đơn hàng
+                                </a>
+                            </c:if>
+                            <a href="${pageContext.request.contextPath}/my-bookings" class="btn btn-outline-primary px-4 py-2">
+                                <i class="fas fa-list me-1"></i>Tất cả đơn hàng
                             </a>
                         </div>
                     </div>

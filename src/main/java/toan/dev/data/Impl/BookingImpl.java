@@ -133,6 +133,22 @@ public class BookingImpl implements BookingDao {
         return bookings;
     }
 
+    @Override
+    public Booking findByOrderCode(String orderCode) {
+        String sql = "SELECT * FROM bookings WHERE order_code=?";
+        try (Connection conn = DatabaseDao.getDriver().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, orderCode);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return extractBooking(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private Booking extractBooking(ResultSet rs) throws SQLException {
         Booking booking = new Booking();
         booking.setId(rs.getInt("booking_id"));
@@ -150,6 +166,16 @@ public class BookingImpl implements BookingDao {
         booking.setNotes(rs.getString("notes"));
         booking.setCreatedAt(rs.getTimestamp("created_at"));
         booking.setUpdatedAt(rs.getTimestamp("updated_at"));
+        
+        // Try to get order_code if column exists
+        try {
+            String orderCode = rs.getString("order_code");
+            booking.setOrderCode(orderCode);
+        } catch (SQLException e) {
+            // Column doesn't exist, generate one
+            booking.setOrderCode("ORD" + booking.getId());
+        }
+        
         return booking;
     }
 }

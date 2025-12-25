@@ -185,10 +185,16 @@
                                     </h5>
                                 </div>
                                 
-                                <a href="${pageContext.request.contextPath}/ViewMyBookingServlet?id=${booking.bookingId}" 
-                                   class="btn btn-primary w-100 rounded-pill">
-                                    <i class="fas fa-eye me-2"></i>Xem chi tiết
-                                </a>
+                                <div class="d-flex gap-2">
+                                    <a href="${pageContext.request.contextPath}/order-detail?id=${booking.bookingId}" 
+                                       class="btn btn-primary flex-fill rounded-pill">
+                                        <i class="fas fa-eye me-1"></i>Chi tiết
+                                    </a>
+                                    <a href="${pageContext.request.contextPath}/ViewMyBookingServlet?id=${booking.bookingId}" 
+                                       class="btn btn-outline-primary flex-fill rounded-pill">
+                                        <i class="fas fa-info me-1"></i>Xem cũ
+                                    </a>
+                                </div>
                             </div>
                             <div class="card-footer bg-light border-0">
                                 <small class="text-muted">
