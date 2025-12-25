@@ -215,23 +215,6 @@
         <servlet-class>toan.dev.admin.Destinations.DeleteDestinationsServlet</servlet-class>
     </servlet>
     
-    <!--Cấu hình admin chat AI-->
-    <servlet>
-        <servlet-name>IndexChatAIServlet</servlet-name>
-        <servlet-class>toan.dev.admin.ChatAI.IndexChatAIServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CreateChatAIServlet</servlet-name>
-        <servlet-class>toan.dev.admin.ChatAI.CreateChatAIServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>EditChatAIServlet</servlet-name>
-        <servlet-class>toan.dev.admin.ChatAI.EditChatAIServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DeleteChatAIServlet</servlet-name>
-        <servlet-class>toan.dev.admin.ChatAI.DeleteChatAIServlet</servlet-class>
-    </servlet>
     <servlet>
         <servlet-name>DestinationServlet</servlet-name>
         <servlet-class>toan.dev.DestinationServlet</servlet-class>
@@ -452,23 +435,6 @@
         <url-pattern>/DeleteDestinationsServlet</url-pattern>
     </servlet-mapping>
     
-    <!--Cấu hình admin chat AI-->
-    <servlet-mapping>
-        <servlet-name>IndexChatAIServlet</servlet-name>
-        <url-pattern>/IndexChatAIServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CreateChatAIServlet</servlet-name>
-        <url-pattern>/CreateChatAIServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EditChatAIServlet</servlet-name>
-        <url-pattern>/EditChatAIServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DeleteChatAIServlet</servlet-name>
-        <url-pattern>/DeleteChatAIServlet</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DashboardServlet</servlet-name>
         <url-pattern>/DashboardServlet</url-pattern>
@@ -658,38 +624,12 @@
         <servlet-class>toan.dev.admin.consultations.IndexConsultationServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>MyBookingsServlet</servlet-name>
-        <url-pattern>/MyBookingsServlet</url-pattern>
-        <url-pattern>/my-bookings</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewMyBookingServlet</servlet-name>
-        <url-pattern>/ViewMyBookingServlet</url-pattern>
-        <url-pattern>/my-bookings/view</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>IndexBookingServlet</servlet-name>
-        <url-pattern>/IndexBookingServlet</url-pattern>
-        <url-pattern>/admin/bookings</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UpdateBookingStatusServlet</servlet-name>
-        <url-pattern>/admin/bookings/updateStatus</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>ViewBookingServlet</servlet-name>
-        <servlet-class>toan.dev.admin.bookings.ViewBookingServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ViewBookingServlet</servlet-name>
-        <url-pattern>/admin/bookings/view</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
         <servlet-name>IndexConsultationServlet</servlet-name>
         <url-pattern>/IndexConsultationServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IndexConsultationServlet</servlet-name>
+        <url-pattern>/admin/consultations</url-pattern>
     </servlet-mapping>
 
     <servlet>

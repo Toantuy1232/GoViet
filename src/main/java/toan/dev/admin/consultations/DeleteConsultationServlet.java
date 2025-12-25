@@ -14,9 +14,26 @@ public class DeleteConsultationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        handleDelete(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        handleDelete(request, response);
+    }
+    
+    private void handleDelete(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         
         try {
-            int id = Integer.parseInt(request.getParameter("id"));
+            String idParam = request.getParameter("id");
+            if (idParam == null || idParam.trim().isEmpty()) {
+                response.sendRedirect(request.getContextPath() + "/admin/consultations?error=missing_id");
+                return;
+            }
+            
+            int id = Integer.parseInt(idParam);
             
             ConsultationDao consultationDao = DatabaseDao.getInstance().getConsultationDao();
             boolean success = consultationDao.delete(id);
@@ -27,6 +44,8 @@ public class DeleteConsultationServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/admin/consultations?error=delete_failed");
             }
             
+        } catch (NumberFormatException e) {
+            response.sendRedirect(request.getContextPath() + "/admin/consultations?error=invalid_id");
         } catch (Exception e) {
             e.printStackTrace();
             response.sendRedirect(request.getContextPath() + "/admin/consultations?error=exception");
