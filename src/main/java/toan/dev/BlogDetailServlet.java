@@ -22,17 +22,30 @@ public class BlogDetailServlet extends BaseServlet {
             throws ServletException, IOException {
 
         try {
-            int blogId = Integer.parseInt(request.getParameter("id"));
+            String idParam = request.getParameter("id");
+            if (idParam == null || idParam.trim().isEmpty()) {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing blog post ID");
+                return;
+            }
+            
+            int blogId = Integer.parseInt(idParam);
             DatabaseDao db = DatabaseDao.getInstance();
             BlogpostsDao blogPostDao = db.getBlogDao();
             Blogposts blogPost = blogPostDao.find(blogId);
 
             if (blogPost == null) {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Blog post not found");
                 return;
             }
+            
             UsersDao userDao = db.getUserDao();
-            Users author = userDao.find(blogPost.getAuthor_id());
+            Users author = null;
+            try {
+                author = userDao.find(blogPost.getAuthor_id());
+            } catch (Exception e) {
+                System.err.println("Error finding author: " + e.getMessage());
+               
+            }
 
             List<Blogposts> allPosts = blogPostDao.findAll();
             List<Blogposts> relatedPosts = allPosts.stream()
@@ -44,18 +57,31 @@ public class BlogDetailServlet extends BaseServlet {
                     .filter(post -> post.getPost_id() != blogId)
                     .limit(4)
                     .collect(Collectors.toList());
+                    
             CategoryDao categoryDao = db.getCategoryDao();
             List<Category> categories = categoryDao.findAll();
+            
             request.setAttribute("blogPost", blogPost);
             request.setAttribute("author", author);
             request.setAttribute("relatedPosts", relatedPosts);
             request.setAttribute("recentPosts", recentPosts);
             request.setAttribute("categories", categories);
             request.setAttribute("users", db.getUserDao().findAll());
+            
+            // Hide banner on blog detail page
+            request.setAttribute("hideBanner", true);
+            
+            // Set common data attributes for the JSP
+            setDataAttributes(request);
+            
             request.getRequestDispatcher("blog-detail.jsp").forward(request, response);
 
         } catch (NumberFormatException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid blog post ID");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid blog post ID format");
+        } catch (Exception e) {
+            System.err.println("Error in BlogDetailServlet: " + e.getMessage());
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal server error");
         }
     }
 

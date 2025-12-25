@@ -81,14 +81,30 @@ public class BlogpostsImpl implements BlogpostsDao {
                     String content = rs.getString("content");
                     String cover_image = rs.getString("cover_image");
                     Timestamp created_at = rs.getTimestamp("created_at");
-                    return new Blogposts(id, post_id, author_id, title, content, cover_image, created_at);
+                    
+                    Blogposts blog = new Blogposts(post_id, author_id, title, content, cover_image, created_at);
+                  
+                    try {
+                        blog.setViews(rs.getInt("views"));
+                    } catch (SQLException e) {
+                     
+                        blog.setViews(0);
+                    }
+                    try {
+                        blog.setTags(rs.getString("tags"));
+                    } catch (SQLException e) {
+                    
+                        blog.setTags("");
+                    }
+                    
+                    return blog;
                 }
             }
 
         }catch (SQLException e) {
             e.printStackTrace();
         }
-        throw new RuntimeException("Không tìm thấy category với id = " + id);
+        return null; 
     }
 
     @Override
@@ -106,9 +122,24 @@ public class BlogpostsImpl implements BlogpostsDao {
                 String content = rs.getString("content");
                 String cover_image = rs.getString("cover_image");
                 Timestamp created_at = rs.getTimestamp("created_at");
-                blogpostsList.add(new Blogposts(post_id, author_id, title, content, cover_image, created_at));
+                
+                Blogposts blog = new Blogposts(post_id, author_id, title, content, cover_image, created_at);
+           
+                try {
+                    blog.setViews(rs.getInt("views"));
+                } catch (SQLException e) {
+                 
+                    blog.setViews(0);
+              }
+                try {
+                    blog.setTags(rs.getString("tags"));
+                } catch (SQLException e) {
+                
+                    blog.setTags("");
+                }
+                
+                blogpostsList.add(blog);
             }
-
 
         }catch (SQLException e) {
             e.printStackTrace();

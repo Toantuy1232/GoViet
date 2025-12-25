@@ -9,6 +9,8 @@ public class Blogposts {
     public String content;
     public String cover_image;
     public Timestamp created_at;
+    public int views;
+    public String tags;
 
     public Blogposts(int post_id, int author_id, String title, String content, String cover_image, Timestamp created_at) {
         super();
@@ -18,17 +20,20 @@ public class Blogposts {
         this.content = content;
         this.cover_image = cover_image;
         this.created_at = created_at;
+        this.views = 0;
+        this.tags = "";
     }
 
     public Blogposts(int id, int postId, int authorId, String title, String content, String coverImage, Timestamp createdAt) {
         super();
-        this.author_id = id;
         this.post_id = postId;
         this.author_id = authorId;
         this.title = title;
         this.content = content;
         this.cover_image = coverImage;
         this.created_at = createdAt;
+        this.views = 0;
+        this.tags = "";
     }
 
     public int getPost_id() {
@@ -77,5 +82,21 @@ public class Blogposts {
 
     public void setCreated_at(Timestamp created_at) {
         this.created_at = created_at;
+    }
+
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 }

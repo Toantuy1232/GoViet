@@ -270,6 +270,10 @@
         <url-pattern>/BlogDetailServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>BlogDetailServlet</servlet-name>
+        <url-pattern>/blog-detail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>AboutServlet</servlet-name>
         <url-pattern>/AboutServlet</url-pattern>
     </servlet-mapping>
@@ -599,6 +603,32 @@
         <url-pattern>/consultation</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>MyBookingsServlet</servlet-name>
+        <url-pattern>/MyBookingsServlet</url-pattern>
+        <url-pattern>/my-bookings</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMyBookingServlet</servlet-name>
+        <url-pattern>/ViewMyBookingServlet</url-pattern>
+        <url-pattern>/my-booking-detail</url-pattern>
+    </servlet-mapping>
+
+    <!-- Admin Booking Servlet Mappings -->
+    <servlet-mapping>
+        <servlet-name>IndexBookingServlet</servlet-name>
+        <url-pattern>/IndexBookingServlet</url-pattern>
+        <url-pattern>/admin/bookings</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewBookingServlet</servlet-name>
+        <url-pattern>/admin/bookings/view</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateBookingStatusServlet</servlet-name>
+        <url-pattern>/admin/bookings/updateStatus</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>MyBookingsServlet</servlet-name>
         <servlet-class>toan.dev.MyBookingsServlet</servlet-class>
@@ -612,6 +642,10 @@
     <servlet>
         <servlet-name>IndexBookingServlet</servlet-name>
         <servlet-class>toan.dev.admin.bookings.IndexBookingServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewBookingServlet</servlet-name>
+        <servlet-class>toan.dev.admin.bookings.ViewBookingServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UpdateBookingStatusServlet</servlet-name>
