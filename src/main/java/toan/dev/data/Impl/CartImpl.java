@@ -165,4 +165,50 @@ public class CartImpl implements CartDao {
         item.setQuantity(rs.getInt("quantity"));
         return item;
     }
+
+    @Override
+    public boolean updateQuantity(int userId, int itemId, String type, int quantity) {
+        String sql = "UPDATE cart SET quantity=?, updated_at=? WHERE user_id=? AND product_id=?";
+        System.out.println("CartImpl.updateQuantity - SQL: " + sql);
+        System.out.println("Parameters: userId=" + userId + ", itemId=" + itemId + ", type=" + type + ", quantity=" + quantity);
+        
+        try (Connection conn = DatabaseDao.getDriver().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, quantity);
+            stmt.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+            stmt.setInt(3, userId);
+            stmt.setInt(4, itemId);
+            
+            int rowsAffected = stmt.executeUpdate();
+            System.out.println("Rows affected: " + rowsAffected);
+            
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            System.err.println("SQL Error in updateQuantity: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean removeFromCart(int userId, int itemId, String type) {
+        String sql = "DELETE FROM cart WHERE user_id=? AND product_id=?";
+        System.out.println("CartImpl.removeFromCart - SQL: " + sql);
+        System.out.println("Parameters: userId=" + userId + ", itemId=" + itemId + ", type=" + type);
+        
+        try (Connection conn = DatabaseDao.getDriver().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            stmt.setInt(2, itemId);
+            
+            int rowsAffected = stmt.executeUpdate();
+            System.out.println("Rows affected: " + rowsAffected);
+            
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            System.err.println("SQL Error in removeFromCart: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

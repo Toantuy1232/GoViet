@@ -13,4 +13,8 @@ public interface CartDao {
     CartItem findByUserAndProduct(int userId, int productId);
     List<CartItem> findByUserId(int userId);
     int getCartCount(int userId);
+    
+
+    boolean updateQuantity(int userId, int itemId, String type, int quantity);
+    boolean removeFromCart(int userId, int itemId, String type);
 }

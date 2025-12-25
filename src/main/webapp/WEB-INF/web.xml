@@ -565,6 +565,10 @@
         <servlet-name>ViewCartServlet</servlet-name>
         <servlet-class>toan.dev.ViewCartServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateCartServlet</servlet-name>
+        <servlet-class>toan.dev.UpdateCartServlet</servlet-class>
+    </servlet>
 
     <!-- Booking Servlet -->
     <servlet>
@@ -586,6 +590,11 @@
         <servlet-name>ViewCartServlet</servlet-name>
         <url-pattern>/ViewCartServlet</url-pattern>
         <url-pattern>/cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCartServlet</servlet-name>
+        <url-pattern>/UpdateCartServlet</url-pattern>
+        <url-pattern>/update-cart</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
