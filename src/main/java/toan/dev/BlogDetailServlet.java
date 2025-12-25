@@ -68,9 +68,6 @@ public class BlogDetailServlet extends BaseServlet {
             request.setAttribute("categories", categories);
             request.setAttribute("users", db.getUserDao().findAll());
             
-            // Hide banner on blog detail page
-            request.setAttribute("hideBanner", true);
-            
             // Set common data attributes for the JSP
             setDataAttributes(request);
             

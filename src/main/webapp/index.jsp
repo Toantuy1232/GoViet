@@ -672,7 +672,7 @@
                                                     </c:otherwise>
                                                 </c:choose>
                                                 <div class="blog-icon">
-                                                    <a href="${pageContext.request.contextPath}/blog/detail?id=${post.post_id}"
+                                                    <a href="${pageContext.request.contextPath}/blog-detail?id=${post.post_id}"
                                                        class="my-auto">
                                                         <i class="fas fa-link fa-2x text-white"></i>
                                                     </a>
@@ -693,7 +693,7 @@
                                             </div>
                                         </div>
                                         <div class="blog-content border border-top-0 rounded-bottom p-4">
-                                            <a href="${pageContext.request.contextPath}/blog/detail?id=${post.post_id}"
+                                            <a href="${pageContext.request.contextPath}/blog-detail?id=${post.post_id}"
                                                class="h4 d-block mb-3">${post.title}</a>
                                             <p class="my-3">
                                                 <c:choose>
@@ -705,7 +705,7 @@
                                                     </c:otherwise>
                                                 </c:choose>
                                             </p>
-                                            <a href="${pageContext.request.contextPath}/blog/detail?id=${post.post_id}"
+                                            <a href="${pageContext.request.contextPath}/blog-detail?id=${post.post_id}"
                                                class="btn btn-primary rounded-pill py-2 px-4">Đọc thêm</a>
                                         </div>
                                     </div>
