@@ -622,6 +622,11 @@
         <url-pattern>/ViewMyBookingServlet</url-pattern>
         <url-pattern>/my-booking-detail</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderDetailServlet</servlet-name>
+        <url-pattern>/OrderDetailServlet</url-pattern>
+        <url-pattern>/order-detail</url-pattern>
+    </servlet-mapping>
 
     <!-- Admin Booking Servlet Mappings -->
     <servlet-mapping>
@@ -645,6 +650,10 @@
     <servlet>
         <servlet-name>ViewMyBookingServlet</servlet-name>
         <servlet-class>toan.dev.ViewMyBookingServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderDetailServlet</servlet-name>
+        <servlet-class>toan.dev.OrderDetailServlet</servlet-class>
     </servlet>
 
     <!-- Admin Booking Servlets -->
