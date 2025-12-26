@@ -38,6 +38,26 @@
 
         <%@include file="./inc/header.jsp" %>
 
+        <!-- Database Status Check -->
+        <c:if test="${empty categories and empty destinations and empty categoryGalleryList}">
+            <div class="container-fluid" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 60px 0;">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="text-center bg-white p-5 rounded shadow">
+                                <div style="font-size: 4em; margin-bottom: 20px;">🗄️</div>
+                                <h2 class="text-primary mb-4">Database Setup Required</h2>
+                                <p class="mb-4">Chào mừng bạn đến với GoViet! Để website hiển thị đầy đủ nội dung, bạn cần setup database.</p>
+                                <div class="d-flex justify-content-center gap-3">
+                                    <p class="text-muted">Vui lòng setup database MySQL với tên 'goviet' và import dữ liệu mẫu.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </c:if>
+
         <!-- About Start -->
       <div class="container-fluid about py-5">
           <div class="container py-5">

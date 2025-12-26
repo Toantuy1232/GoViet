@@ -135,17 +135,35 @@ public class BookingImpl implements BookingDao {
 
     @Override
     public Booking findByOrderCode(String orderCode) {
-        String sql = "SELECT * FROM bookings WHERE order_code=?";
+        // First try to find by order_code column if it exists
+        String sql1 = "SELECT * FROM bookings WHERE order_code=?";
+        System.out.println("BookingImpl.findByOrderCode - trying SQL: " + sql1 + " with orderCode: " + orderCode);
+        
         try (Connection conn = DatabaseDao.getDriver().getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql1)) {
             stmt.setString(1, orderCode);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
+                System.out.println("Found by order_code column");
                 return extractBooking(rs);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("order_code column doesn't exist or error: " + e.getMessage());
         }
+        
+        // If order_code column doesn't exist, try to extract ID from orderCode and search by ID
+        if (orderCode != null && orderCode.startsWith("ORD")) {
+            try {
+                String idStr = orderCode.substring(3); // Remove "ORD" prefix
+                int id = Integer.parseInt(idStr);
+                System.out.println("Trying to find by ID extracted from orderCode: " + id);
+                return find(id);
+            } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+                System.out.println("Cannot extract ID from orderCode: " + orderCode);
+            }
+        }
+        
+        System.out.println("Order not found with code: " + orderCode);
         return null;
     }
 

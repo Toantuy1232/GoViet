@@ -299,9 +299,12 @@
                         <i class="fas fa-exclamation-triangle fa-5x text-warning mb-3"></i>
                         <h3>Không tìm thấy đơn hàng</h3>
                         <p>Đơn hàng không tồn tại hoặc bạn không có quyền truy cập.</p>
-                        <a href="${pageContext.request.contextPath}/my-bookings" class="btn btn-primary mt-3">
-                            <i class="fas fa-arrow-left me-1"></i>Quay lại danh sách đơn hàng
-                        </a>
+                        
+                        <div class="mt-4">
+                            <a href="${pageContext.request.contextPath}/my-bookings" class="btn btn-primary">
+                                <i class="fas fa-arrow-left me-1"></i>Quay lại danh sách đơn hàng
+                            </a>
+                        </div>
                     </div>
                 </c:otherwise>
             </c:choose>

@@ -144,6 +144,39 @@ public class TourImpl implements TourDao {
     }
 
     @Override
+    public List<Tours> findAllByCategoryId(int categoryId) {
+        List<Tours> toursList = new ArrayList<>();
+        String sql = "SELECT * FROM `tours` WHERE category_id = ?";
+        try (Connection conn = DatabaseDao.getDriver().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+        ){
+            stmt.setInt(1, categoryId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    int tour_id = rs.getInt("tour_id");
+                    int destination_id = rs.getInt("destination_id");
+                    int category_id = rs.getInt("category_id");
+                    String title = rs.getString("title");
+                    String description = rs.getString("description");
+                    double price = rs.getDouble("price");
+                    double price_old = rs.getDouble("price_old");
+                    int duration_days = rs.getInt("duration_days");
+                    Timestamp start_date = rs.getTimestamp("start_date");
+                    Timestamp end_date = rs.getTimestamp("end_date");
+                    int available_slots = rs.getInt("available_slots");
+                    String main_image = rs.getString("main_image");
+                    Timestamp created_at = rs.getTimestamp("created_at");
+                    toursList.add(new Tours(tour_id, destination_id, category_id, title, description, price, price_old, duration_days,
+                            start_date, end_date, available_slots, main_image, created_at));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return toursList;
+    }
+
+    @Override
     public List<Tours> findByCategoryAndSearchTerm(int categoryId, String searchTerm) {
         List<Tours> toursList = new ArrayList<>();
         String sql = "SELECT * FROM `tours` WHERE category_id = ? AND (LOWER(title) LIKE ? OR LOWER(description) LIKE ?)";

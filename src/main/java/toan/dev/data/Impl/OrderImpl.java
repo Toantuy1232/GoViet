@@ -13,12 +13,14 @@ public class OrderImpl implements OrderDao {
 
     @Override
     public boolean insert(Order order) {
+        System.out.println("OrderImpl.insert() called for order: " + order.getOrderCode());
         String orderSql = "INSERT INTO orders(user_id, order_code, customer_name, customer_email, customer_phone, customer_address, total_amount, payment_method, payment_status, order_status, notes, created_at, updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         String itemSql = "INSERT INTO order_items(order_id, product_id, product_name, product_image, quantity, price, subtotal) VALUES(?,?,?,?,?,?,?)";
         
         Connection conn = null;
         try {
             conn = DatabaseDao.getDriver().getConnection();
+            System.out.println("Database connection obtained");
             conn.setAutoCommit(false);
             
             // Insert order
@@ -36,17 +38,25 @@ public class OrderImpl implements OrderDao {
             orderStmt.setString(11, order.getNotes());
             orderStmt.setTimestamp(12, order.getCreatedAt());
             orderStmt.setTimestamp(13, order.getUpdatedAt());
-            orderStmt.executeUpdate();
+            
+            System.out.println("Executing order insert query...");
+            int orderRowsAffected = orderStmt.executeUpdate();
+            System.out.println("Order insert affected rows: " + orderRowsAffected);
             
             // Get generated order ID
             ResultSet rs = orderStmt.getGeneratedKeys();
             int orderId = 0;
             if (rs.next()) {
                 orderId = rs.getInt(1);
+                System.out.println("Generated order ID: " + orderId);
+            } else {
+                System.out.println("No order ID generated!");
+                throw new SQLException("Failed to get generated order ID");
             }
             
             // Insert order items
             PreparedStatement itemStmt = conn.prepareStatement(itemSql);
+            System.out.println("Inserting " + order.getOrderItems().size() + " order items...");
             for (OrderItem item : order.getOrderItems()) {
                 itemStmt.setInt(1, orderId);
                 itemStmt.setInt(2, item.getProductId());
@@ -56,27 +66,35 @@ public class OrderImpl implements OrderDao {
                 itemStmt.setDouble(6, item.getPrice());
                 itemStmt.setDouble(7, item.getSubtotal());
                 itemStmt.addBatch();
+                System.out.println("Added item to batch: " + item.getProductName() + " x" + item.getQuantity());
             }
-            itemStmt.executeBatch();
+            int[] itemResults = itemStmt.executeBatch();
+            System.out.println("Order items batch executed, results: " + itemResults.length);
             
             conn.commit();
+            System.out.println("Transaction committed successfully");
             return true;
         } catch (SQLException e) {
+            System.err.println("SQLException in OrderImpl.insert(): " + e.getMessage());
+            e.printStackTrace();
             if (conn != null) {
                 try {
                     conn.rollback();
+                    System.out.println("Transaction rolled back");
                 } catch (SQLException ex) {
+                    System.err.println("Error rolling back transaction: " + ex.getMessage());
                     ex.printStackTrace();
                 }
             }
-            e.printStackTrace();
             return false;
         } finally {
             if (conn != null) {
                 try {
                     conn.setAutoCommit(true);
                     conn.close();
+                    System.out.println("Database connection closed");
                 } catch (SQLException e) {
+                    System.err.println("Error closing connection: " + e.getMessage());
                     e.printStackTrace();
                 }
             }
