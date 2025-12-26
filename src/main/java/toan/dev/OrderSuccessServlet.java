@@ -1,6 +1,6 @@
 package toan.dev;
 
-import toan.dev.data.Impl.OrderImpl;
+import toan.dev.data.dao.DatabaseDao;
 import toan.dev.data.dao.OrderDao;
 import toan.dev.data.model.Order;
 
@@ -17,10 +17,15 @@ public class OrderSuccessServlet extends BaseServlet {
         setDataAttributes(request);
         
         String orderCode = request.getParameter("code");
+        System.out.println("OrderSuccessServlet - Order code: " + orderCode);
         
         if (orderCode != null && !orderCode.isEmpty()) {
-            OrderDao orderDao = new OrderImpl();
+            OrderDao orderDao = DatabaseDao.getInstance().getOrderDao();
             Order order = orderDao.findByOrderCode(orderCode);
+            System.out.println("Order found: " + (order != null));
+            if (order != null) {
+                System.out.println("Order ID: " + order.getOrderId() + ", Total: " + order.getTotalAmount());
+            }
             request.setAttribute("order", order);
         }
         

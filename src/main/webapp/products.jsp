@@ -65,61 +65,88 @@
                 <h1 class="mb-5">Các Tour Du Lịch Hấp Dẫn</h1>
             </div>
             
-            <div class="row g-4">
-                <c:forEach items="${products}" var="product">
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="package-item">
-                            <div class="overflow-hidden">
-                                <img class="img-fluid" src="${pageContext.request.contextPath}/${product.image_url}" 
-                                     alt="${product.name}" style="height: 250px; width: 100%; object-fit: cover;">
-                            </div>
-                            <div class="d-flex border-bottom">
-                                <small class="flex-fill text-center border-end py-2">
-                                    <i class="fa fa-map-marker-alt text-primary me-2"></i>Tour
-                                </small>
-                                <small class="flex-fill text-center border-end py-2">
-                                    <i class="fa fa-calendar-alt text-primary me-2"></i>Linh hoạt
-                                </small>
-                                <small class="flex-fill text-center py-2">
-                                    <i class="fa fa-user text-primary me-2"></i>Còn ${product.stock} chỗ
-                                </small>
-                            </div>
-                            <div class="text-center p-4">
-                                <h3 class="mb-0">
-                                    <fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫
-                                </h3>
-                                <div class="mb-3">
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                </div>
-                                <p class="text-truncate" style="height: 48px;">${product.name}</p>
-                                <div class="d-flex justify-content-center mb-2">
-                                    <a href="${pageContext.request.contextPath}/product-detail?id=${product.id}" 
-                                       class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">
-                                        Xem chi tiết
-                                    </a>
-                                    <a href="${pageContext.request.contextPath}/booking?productId=${product.id}" 
-                                       class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">
-                                        Đặt ngay
-                                    </a>
-                                </div>
-                            </div>
+            <div class="row">
+                <!-- Sidebar Danh mục -->
+                <div class="col-lg-3 col-md-4 mb-4">
+                    <div class="bg-light rounded p-4">
+                        <h4 class="mb-4">Danh mục</h4>
+                        <div class="d-flex flex-column">
+                            <!-- Tất cả tour -->
+                            <a href="${pageContext.request.contextPath}/products" 
+                               class="h5 mb-2 ${empty selectedCategory ? 'text-primary fw-bold' : 'text-dark'}">
+                                <i class="fa fa-angle-right me-2"></i>Tất cả Tour
+                            </a>
+                            
+                            <!-- Danh sách danh mục từ database -->
+                            <c:forEach var="category" items="${categories}">
+                                <a href="${pageContext.request.contextPath}/products?categoryId=${category.id}" 
+                                   class="h5 mb-2 ${selectedCategory != null && selectedCategory.id == category.id ? 'text-primary fw-bold' : 'text-dark'}">
+                                    <i class="fa fa-angle-right me-2"></i>${category.name}
+                                </a>
+                            </c:forEach>
                         </div>
                     </div>
-                </c:forEach>
+                </div>
                 
-                <c:if test="${empty products}">
-                    <div class="col-12">
-                        <div class="alert alert-info text-center">
-                            <i class="fas fa-info-circle fa-3x mb-3"></i>
-                            <h4>Hiện chưa có điểm đến nào</h4>
-                            <p>Vui lòng quay lại sau hoặc chọn danh mục khác</p>
-                        </div>
+                <!-- Danh sách tour -->
+                <div class="col-lg-9 col-md-8">
+                    <div class="row g-4">
+                        <c:forEach items="${products}" var="product">
+                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                                <div class="package-item">
+                                    <div class="overflow-hidden">
+                                        <img class="img-fluid" src="${pageContext.request.contextPath}/${product.image_url}" 
+                                             alt="${product.name}" style="height: 250px; width: 100%; object-fit: cover;">
+                                    </div>
+                                    <div class="d-flex border-bottom">
+                                        <small class="flex-fill text-center border-end py-2">
+                                            <i class="fa fa-map-marker-alt text-primary me-2"></i>Tour
+                                        </small>
+                                        <small class="flex-fill text-center border-end py-2">
+                                            <i class="fa fa-calendar-alt text-primary me-2"></i>Linh hoạt
+                                        </small>
+                                        <small class="flex-fill text-center py-2">
+                                            <i class="fa fa-user text-primary me-2"></i>Còn ${product.stock} chỗ
+                                        </small>
+                                    </div>
+                                    <div class="text-center p-4">
+                                        <h3 class="mb-0">
+                                            <fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫
+                                        </h3>
+                                        <div class="mb-3">
+                                            <small class="fa fa-star text-primary"></small>
+                                            <small class="fa fa-star text-primary"></small>
+                                            <small class="fa fa-star text-primary"></small>
+                                            <small class="fa fa-star text-primary"></small>
+                                            <small class="fa fa-star text-primary"></small>
+                                        </div>
+                                        <p class="text-truncate" style="height: 48px;">${product.name}</p>
+                                        <div class="d-flex justify-content-center mb-2">
+                                            <a href="${pageContext.request.contextPath}/product-detail?id=${product.id}" 
+                                               class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">
+                                                Xem chi tiết
+                                            </a>
+                                            <a href="${pageContext.request.contextPath}/booking?productId=${product.id}" 
+                                               class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">
+                                                Đặt ngay
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                        
+                        <c:if test="${empty products}">
+                            <div class="col-12">
+                                <div class="alert alert-info text-center">
+                                    <i class="fas fa-info-circle fa-3x mb-3"></i>
+                                    <h4>Hiện chưa có tour nào</h4>
+                                    <p>Vui lòng quay lại sau hoặc chọn danh mục khác</p>
+                                </div>
+                            </div>
+                        </c:if>
                     </div>
-                </c:if>
+                </div>
             </div>
         </div>
     </div>

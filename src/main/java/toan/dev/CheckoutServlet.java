@@ -1,6 +1,5 @@
 package toan.dev;
 
-import toan.dev.data.Impl.OrderImpl;
 import toan.dev.data.dao.CartDao;
 import toan.dev.data.dao.DatabaseDao;
 import toan.dev.data.dao.OrderDao;
@@ -99,15 +98,21 @@ public class CheckoutServlet extends BaseServlet {
             }
             
             // Lưu order
-            OrderDao orderDao = new OrderImpl();
+            OrderDao orderDao = DatabaseDao.getInstance().getOrderDao();
+            System.out.println("Attempting to save order with code: " + orderCode);
+            System.out.println("Order details - User: " + user.getUser_id() + ", Total: " + totalAmount + ", Items: " + cart.size());
+            
             boolean success = orderDao.insert(order);
+            System.out.println("Order save result: " + success);
             
             if (success) {
+                System.out.println("Order saved successfully, clearing cart for user: " + user.getUser_id());
                 // xoá giỏ hàng trong database
                 cartDao.clearCart(user.getUser_id());
                 session.setAttribute("message", "Đặt hàng thành công! Mã đơn hàng: " + orderCode);
                 response.sendRedirect(request.getContextPath() + "/order-success?code=" + orderCode);
             } else {
+                System.out.println("Failed to save order");
                 request.setAttribute("error", "Đặt hàng thất bại. Vui lòng thử lại!");
                 doGet(request, response);
             }

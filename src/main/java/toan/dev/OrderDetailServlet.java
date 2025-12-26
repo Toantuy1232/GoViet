@@ -1,13 +1,16 @@
 package toan.dev;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import toan.dev.data.dao.BookingDao;
+import toan.dev.data.dao.OrderDao;
 import toan.dev.data.dao.DatabaseDao;
 import toan.dev.data.model.Booking;
+import toan.dev.data.model.Order;
 import toan.dev.data.model.Users;
 
 public class OrderDetailServlet extends BaseServlet {
@@ -43,49 +46,79 @@ public class OrderDetailServlet extends BaseServlet {
         
         try {
             BookingDao bookingDao = DatabaseDao.getInstance().getBookingDao();
+            OrderDao orderDao = DatabaseDao.getInstance().getOrderDao();
             Booking order = null;
+            Order orderObj = null;
             
             if (orderCode != null && !orderCode.trim().isEmpty()) {
                 System.out.println("Finding by order code: " + orderCode);
-                order = bookingDao.findByOrderCode(orderCode);
-                System.out.println("Found by code: " + (order != null));
+                
+                orderObj = orderDao.findByOrderCode(orderCode);
+                if (orderObj != null) {
+                    System.out.println("Found in Order system: " + orderObj.getOrderId());
+        
+                    order = convertOrderToBooking(orderObj);
+                } else {
+                 
+                    order = bookingDao.findByOrderCode(orderCode);
+                    System.out.println("Found in Booking system: " + (order != null));
+                }
             } else if (orderIdStr != null && !orderIdStr.trim().isEmpty()) {
                 System.out.println("Finding by ID: " + orderIdStr);
                 int orderId = Integer.parseInt(orderIdStr);
-                order = bookingDao.find(orderId);
-                System.out.println("Found by ID: " + (order != null));
+                
+         
+                orderObj = orderDao.find(orderId);
+                if (orderObj != null) {
+                    System.out.println("Found in Order system by ID: " + orderObj.getOrderId());
+                    order = convertOrderToBooking(orderObj);
+                } else {
+                    order = bookingDao.find(orderId);
+                    System.out.println("Found in Booking system by ID: " + (order != null));
+                }
             }
             
             if (order == null) {
-                System.out.println("Order not found");
+                System.out.println("Order not found in both systems");
+                
+                BookingDao bookingDao2 = DatabaseDao.getInstance().getBookingDao();
+                OrderDao orderDao2 = DatabaseDao.getInstance().getOrderDao();
+                
+                List<Booking> userBookings = bookingDao2.findByUserId(user.getUser_id());
+                List<Order> userOrders = orderDao2.findByUserId(user.getUser_id());
+                
                 request.setAttribute("errorMessage", "Không tìm thấy đơn hàng");
+                request.setAttribute("debugInfo", "User có " + userBookings.size() + " booking và " + userOrders.size() + " order");
+                request.setAttribute("userBookings", userBookings);
+                request.setAttribute("userOrders", userOrders);
+                request.setAttribute("searchCode", orderCode);
+                request.setAttribute("searchId", orderIdStr);
+                
                 request.getRequestDispatcher("order-detail.jsp").forward(request, response);
                 return;
             }
             
             System.out.println("Order found - ID: " + order.getId() + ", User: " + order.getUserId());
             
-            // Check if user owns this order
+        
             if (order.getUserId() != user.getUser_id()) {
                 System.out.println("User doesn't own this order");
                 response.sendError(HttpServletResponse.SC_FORBIDDEN, "Bạn không có quyền xem đơn hàng này");
                 return;
             }
             
-            // Set additional order information for display
             if (order.getOrderCode() == null || order.getOrderCode().isEmpty()) {
                 order.setOrderCode("ORD" + order.getId());
             }
             
-            // Set default values if missing
+        
             if (order.getPaymentMethod() == null) {
                 order.setPaymentMethod("Chuyển khoản");
             }
             
-            // Set order information
+       
             request.setAttribute("order", order);
-            
-            // Set common data attributes
+    
             setDataAttributes(request);
             
             System.out.println("Forwarding to order-detail.jsp");
@@ -105,5 +138,28 @@ public class OrderDetailServlet extends BaseServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         doGet(request, response);
+    }
+    
+    private Booking convertOrderToBooking(Order orderObj) {
+        Booking booking = new Booking();
+        booking.setId(orderObj.getOrderId());
+        booking.setUserId(orderObj.getUserId());
+        booking.setOrderCode(orderObj.getOrderCode());
+        booking.setCustomerName(orderObj.getCustomerName());
+        booking.setCustomerEmail(orderObj.getCustomerEmail());
+        booking.setCustomerPhone(orderObj.getCustomerPhone());
+        booking.setAddress(orderObj.getCustomerAddress());
+        booking.setTotalPrice(orderObj.getTotalAmount());
+        booking.setTotalAmount(orderObj.getTotalAmount());
+        booking.setPaymentMethod(orderObj.getPaymentMethod());
+        booking.setSpecialRequests(orderObj.getNotes());
+        booking.setStatus(orderObj.getOrderStatus());
+        booking.setCreatedAt(orderObj.getCreatedAt());
+        booking.setUpdatedAt(orderObj.getUpdatedAt());
+        
+        booking.setBookingType("product");
+        booking.setNumberOfPeople(1);
+        
+        return booking;
     }
 }

@@ -544,7 +544,6 @@
         <servlet-name>ProductsByCategoryServlet</servlet-name>
         <url-pattern>/ProductsByCategoryServlet</url-pattern>
         <url-pattern>/products</url-pattern>
-        <url-pattern>/tours</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
@@ -784,8 +783,17 @@
         <url-pattern>/api/products</url-pattern>
     </servlet-mapping>
 
-    <welcome-file-list>
-        <welcome-file>HomeServlet</welcome-file>
-    </welcome-file-list>
+    <!-- Tours By Category Servlet -->
+    <servlet>
+        <servlet-name>ToursByCategoryServlet</servlet-name>
+        <servlet-class>toan.dev.ToursByCategoryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ToursByCategoryServlet</servlet-name>
+        <url-pattern>/ToursByCategoryServlet</url-pattern>
+        <url-pattern>/tours</url-pattern>
+    </servlet-mapping>
+
+    <!-- Remove welcome-file-list to let HomeServlet handle root URL -->
 </web-app>
 
