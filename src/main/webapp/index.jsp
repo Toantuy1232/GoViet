@@ -3,6 +3,15 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<%
+// Check if data has been loaded by HomeServlet
+// If not, redirect to HomeServlet to load data
+if (request.getAttribute("categories") == null) {
+    response.sendRedirect(request.getContextPath() + "/HomeServlet");
+    return;
+}
+%>
+
 <!DOCTYPE html>
 <html lang="vi">
 
