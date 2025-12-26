@@ -20,70 +20,81 @@ public class HomeServlet extends BaseServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        System.out.println("HomeServlet.doGet() called");
+        System.out.println("=== HomeServlet.doGet() called ===");
         
         try {
             // Test database connection first
             System.out.println("Testing database connection...");
             Connection testConn = DatabaseDao.getDriver().getConnection();
             if (testConn != null) {
-                System.out.println("Database connection successful!");
+                System.out.println("✅ Database connection successful!");
                 testConn.close();
             } else {
-                System.err.println("Database connection failed!");
+                System.err.println("❌ Database connection failed!");
+                throw new RuntimeException("Database connection is null");
             }
             
             // Sử dụng interface DataProvider để truyền dữ liệu
+            System.out.println("Calling setDataAttributes...");
             setDataAttributes(request);
-            System.out.println("setDataAttributes completed");
+            System.out.println("✅ setDataAttributes completed");
             
             request.setAttribute("showBanner", true);
-            System.out.println("showBanner set to true");
+            System.out.println("✅ showBanner set to true");
             
-            // Try to get data from database with fallbacks
+            // Try to get data from database with detailed error logging
+            System.out.println("=== Loading CategoryGallery ===");
             List<CategoryGallery> categoryGalleryList = null;
-            List<Blogposts> blogPosts = null;
-            List<Users> allUsers = null;
-            List<Destinations> destinations = null;
-            List<Category> categories = null;
-            
             try {
                 categoryGalleryList = DatabaseDao.getInstance().getCategoryGalleryDao().findAll();
-                System.out.println("CategoryGallery list size: " + (categoryGalleryList != null ? categoryGalleryList.size() : "null"));
+                System.out.println("✅ CategoryGallery loaded: " + (categoryGalleryList != null ? categoryGalleryList.size() : "null") + " items");
             } catch (Exception e) {
-                System.err.println("Error loading CategoryGallery: " + e.getMessage());
+                System.err.println("❌ Error loading CategoryGallery: " + e.getMessage());
+                e.printStackTrace();
                 categoryGalleryList = new ArrayList<>();
             }
             
+            System.out.println("=== Loading BlogPosts ===");
+            List<Blogposts> blogPosts = null;
             try {
                 blogPosts = DatabaseDao.getInstance().getBlogDao().findAll();
-                System.out.println("Blog posts size: " + (blogPosts != null ? blogPosts.size() : "null"));
+                System.out.println("✅ BlogPosts loaded: " + (blogPosts != null ? blogPosts.size() : "null") + " items");
             } catch (Exception e) {
-                System.err.println("Error loading BlogPosts: " + e.getMessage());
+                System.err.println("❌ Error loading BlogPosts: " + e.getMessage());
+                e.printStackTrace();
                 blogPosts = new ArrayList<>();
             }
             
+            System.out.println("=== Loading Users ===");
+            List<Users> allUsers = null;
             try {
                 allUsers = DatabaseDao.getInstance().getUserDao().findAll();
-                System.out.println("All users size: " + (allUsers != null ? allUsers.size() : "null"));
+                System.out.println("✅ Users loaded: " + (allUsers != null ? allUsers.size() : "null") + " items");
             } catch (Exception e) {
-                System.err.println("Error loading Users: " + e.getMessage());
+                System.err.println("❌ Error loading Users: " + e.getMessage());
+                e.printStackTrace();
                 allUsers = new ArrayList<>();
             }
             
+            System.out.println("=== Loading Destinations ===");
+            List<Destinations> destinations = null;
             try {
                 destinations = DatabaseDao.getInstance().getDestinationsDao().findAll();
-                System.out.println("Destinations size: " + (destinations != null ? destinations.size() : "null"));
+                System.out.println("✅ Destinations loaded: " + (destinations != null ? destinations.size() : "null") + " items");
             } catch (Exception e) {
-                System.err.println("Error loading Destinations: " + e.getMessage());
+                System.err.println("❌ Error loading Destinations: " + e.getMessage());
+                e.printStackTrace();
                 destinations = new ArrayList<>();
             }
             
+            System.out.println("=== Loading Categories ===");
+            List<Category> categories = null;
             try {
                 categories = DatabaseDao.getInstance().getCategoryDao().findAll();
-                System.out.println("Categories size: " + (categories != null ? categories.size() : "null"));
+                System.out.println("✅ Categories loaded: " + (categories != null ? categories.size() : "null") + " items");
             } catch (Exception e) {
-                System.err.println("Error loading Categories: " + e.getMessage());
+                System.err.println("❌ Error loading Categories: " + e.getMessage());
+                e.printStackTrace();
                 categories = new ArrayList<>();
             }
             
@@ -92,7 +103,9 @@ public class HomeServlet extends BaseServlet {
                 int randomIndex = (int) (Math.random() * categoryGalleryList.size());
                 CategoryGallery randomImage = categoryGalleryList.get(randomIndex);
                 request.setAttribute("randomGalleryImage", randomImage);
-                System.out.println("Random gallery image set");
+                System.out.println("✅ Random gallery image set");
+            } else {
+                System.out.println("⚠️ No gallery images available");
             }
             
             // Set random blog posts if available
@@ -101,7 +114,9 @@ public class HomeServlet extends BaseServlet {
                 int count = Math.min(blogPosts.size(), 3);
                 List<Blogposts> randomBlogPosts = blogPosts.subList(0, count);
                 request.setAttribute("randomBlogPosts", randomBlogPosts);
-                System.out.println("Random blog posts set: " + count);
+                System.out.println("✅ Random blog posts set: " + count + " items");
+            } else {
+                System.out.println("⚠️ No blog posts available");
             }
             
             // Process guides
@@ -123,7 +138,9 @@ public class HomeServlet extends BaseServlet {
                 sampleGuide.setFullname("Nguyễn Bá Toàn");
                 sampleGuide.setAvatar_url("/assets/images/avatars/default-avatar.jpg");
                 guides.add(sampleGuide);
-                System.out.println("Added sample guide");
+                System.out.println("✅ Added sample guide (no guides in database)");
+            } else {
+                System.out.println("✅ Found " + guides.size() + " guides in database");
             }
             
             // Ensure all lists are not null
@@ -139,13 +156,20 @@ public class HomeServlet extends BaseServlet {
             request.setAttribute("destinationsList", destinations);
             request.setAttribute("categoryList", categories);
             
-            System.out.println("All attributes set, forwarding to index.jsp");
+            System.out.println("=== Summary ===");
+            System.out.println("Categories: " + categories.size());
+            System.out.println("Destinations: " + destinations.size());
+            System.out.println("Gallery: " + categoryGalleryList.size());
+            System.out.println("Guides: " + guides.size());
+            System.out.println("Blog posts: " + (blogPosts != null ? blogPosts.size() : 0));
+            
+            System.out.println("✅ All attributes set, forwarding to index.jsp");
             
             // Forward đến index.jsp
             request.getRequestDispatcher("/index.jsp").forward(request, response);
             
         } catch (Exception e) {
-            System.err.println("Error in HomeServlet: " + e.getMessage());
+            System.err.println("❌ CRITICAL ERROR in HomeServlet: " + e.getMessage());
             e.printStackTrace();
             
             // Fallback - create minimal data and continue
@@ -157,7 +181,7 @@ public class HomeServlet extends BaseServlet {
             request.setAttribute("destinationsList", new ArrayList<>());
             request.setAttribute("categoryList", new ArrayList<>());
             
-            System.out.println("Using fallback data, forwarding to index.jsp");
+            System.out.println("⚠️ Using fallback data, forwarding to index.jsp");
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
     }
